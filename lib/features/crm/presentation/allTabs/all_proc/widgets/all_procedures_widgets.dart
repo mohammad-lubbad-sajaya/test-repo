@@ -9,7 +9,7 @@ import '../../../../../../core/utils/app_widgets/list_view_container_builder.dar
 import '../../../../../../core/utils/app_widgets/no_data_view.dart';
 import '../../../../../../core/utils/app_widgets/slidable_app_card.dart';
 import '../../../../../../core/utils/common_widgets/no_connection_widget.dart';
-import '../../../maintenance/delivery_and_receive/delivery_and_receive._screen.dart';
+import '../../../../../maintenance/presentation/delivery_and_receive/delivery_and_receive._screen.dart';
 import '../../../procedure_information/procedure_information_view_model.dart';
 import '../../../tab_bar/tab_bar_screen.dart';
 import '../../home/home_screen.dart';

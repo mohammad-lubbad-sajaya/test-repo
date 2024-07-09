@@ -16,6 +16,7 @@ Widget appTitle({
         customTextApp(
           color:isDark?lineColor:Colors.black ,
           text: text,
+          size: 18,
           fontWeight: FontWeight.w500,
         ),
       ],

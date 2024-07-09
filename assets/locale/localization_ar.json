@@ -198,7 +198,10 @@
     "alternate item":"القطع البديلة",
     "start date":"تاريخ البدء",
     "finish date":"تاريخ الإنتهاء",
-    "details":"تفاصيل"
+    "details":"تفاصيل",
+    "open sign":"فتح التوقيع",
+    "close sign":"إغلاق التوقيع"
+
 
 
 }

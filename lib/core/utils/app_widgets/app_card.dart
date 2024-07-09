@@ -43,13 +43,13 @@ appCard({
                           //text: "12/09/2022",
                           color: isDark ? backGroundColor : Colors.black,
                           text: servObj.bondNo.toString(),
-
+      
                           size: 15,
                           fontWeight: FontWeight.w500,
                         ),
                         InkWell(
                           onTap: () {
-//TODO:edit when api is here
+      //TODO:edit when api is here
                             sl<NavigationService>().navigateTo(checkAndRepair);
                           },
                           child: Image.asset(
@@ -73,7 +73,7 @@ appCard({
                         text: servObj?.date.toStringFormat("dd/MM/yyyy") ??
                             obj?.eventDate?.toStringFormat("dd/MM/yyyy") ??
                             "",
-
+      
                         size: 15,
                         fontWeight: FontWeight.w500,
                       ),
@@ -95,7 +95,7 @@ appCard({
                     ],
                   ),
                   //const SizedBox(height: 10),
-
+      
                   Row(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -133,17 +133,33 @@ appCard({
                   ),
                   const SizedBox(height: 10),
                   if (isTimerIcon == false) ...[
-                    customTextApp(
-                      color: isDark
-                          ? backGroundColor
-                          : servObj != null
-                              ? Colors.grey
-                              : Colors.black,
-                      text: servObj?.serviceStatus ??
-                          "${"Address".localized()}(${obj?.addressId}): ${isEnglish() ? obj?.addressNameE ?? "" : obj?.addressNameA}",
-                      size: 15,
-                      maxLine: null,
-                      fontWeight: FontWeight.w500,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        customTextApp(
+                          color: isDark
+                              ? backGroundColor
+                              : servObj != null
+                                  ? Colors.grey
+                                  : Colors.black,
+                          text: servObj?.serviceStatus ??
+                              "${"Address".localized()}(${obj?.addressId}): ${isEnglish() ? obj?.addressNameE ?? "" : obj?.addressNameA}",
+                          size: 15,
+                          maxLine: null,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        if(servObj!=null)...[
+                          const SizedBox(width: 6,),
+                          Container(
+                            height: 15,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                              color: Colors.green
+                            ),
+                          )
+                        ]
+
+                      ],
                     ),
                     const SizedBox(height: 10),
                   ],

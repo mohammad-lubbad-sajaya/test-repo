@@ -198,7 +198,9 @@
   "alternate item":"Alternate item",
   "start date":"Start date",
   "finish date":"Finish date",
-  "details":"Details"
+  "details":"Details",
+  "open sign":"Open signature",
+  "close sign":"Close signature"
 
 
 }

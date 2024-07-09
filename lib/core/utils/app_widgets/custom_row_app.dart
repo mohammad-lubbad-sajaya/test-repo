@@ -10,6 +10,7 @@ Widget customRowApp({
   bool isBold = false,
   bool isDark = false,
   String? subText,
+  double fontSize=16,
   IconData? icon,
   String? image,
   double? imageWidth,
@@ -39,7 +40,7 @@ Widget customRowApp({
                     color: isDark ? backGroundColor : Colors.black,
                     text: text,
                     maxLine: null,
-                    size: 16,
+                    size: fontSize,
                     fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
@@ -74,7 +75,7 @@ Widget customRowApp({
                             : Expanded(
                                 child: customTextApp(
                                   text: subText ?? "",
-                                  size: 14,
+                                  size: fontSize,
                                   maxLine: null,
                                   align: isEnglish()
                                       ? TextAlign.right

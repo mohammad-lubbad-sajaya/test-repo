@@ -7,7 +7,7 @@ import '../../../features/crm/presentation/allTabs/home/home_screen.dart';
 import '../../../features/crm/presentation/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
 import '../../../features/crm/presentation/allTabs/inquiry/inquiry_screen.dart';
 import '../../../features/crm/presentation/allTabs/settings/settings_screen.dart';
-import '../../../features/crm/presentation/maintenance/check_and_repair/check_and_repair_screen.dart';
+import '../../../features/maintenance/presentation/check_and_repair/check_and_repair_screen.dart';
 import '../../../features/crm/presentation/pre_app/pre_app_screen.dart';
 import '../../../features/crm/presentation/procedure_information/procedure_information_screen.dart';
 import '../../../features/crm/presentation/procedure_information/vouchers/vouchers_screen.dart';

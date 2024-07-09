@@ -12,11 +12,11 @@ maintenanceDropDown(String label, String? value, List<String> items,void Functio
         child: DropdownButtonFormField<String>(
           decoration: const InputDecoration.collapsed(hintText: ''),
           value: value,
-          hint: Text(label,style:const  TextStyle(fontSize: 15),),
+          hint: Text(label,style:const  TextStyle(fontSize: 13),),
           items: items.map((String item) {
             return DropdownMenuItem<String>(
               value: item,
-              child: Text(item,style:const  TextStyle(fontSize: 15)),
+              child: Text(item,style:const  TextStyle(fontSize: 13)),
             );
           }).toList(),
           onChanged:onChanged
