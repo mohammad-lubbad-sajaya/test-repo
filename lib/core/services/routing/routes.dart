@@ -1,0 +1,13 @@
+const String preAppScreen = 'pre_app_screen';
+const String loginScreen = 'login_screen';
+const String signupScreen = 'signup_screen';
+const String tabBarScreen = 'tab_bar_screen';
+const String homeScreen = 'home_screen';
+const String allProcScreen = 'all_proc_screen';
+const String procedureInformationScreen = 'procedure_information_screen';
+const String vouchersScreen = 'vouchers_screen';
+const String inquiryScreen = 'inquiry_screen';
+const String filterInquiryScreen = 'filter_inquiry';
+const String procedurePlaceScreen = 'procedure_place_screen';
+const String settingsScreen = 'settings_screen';
+const String checkAndRepair = 'check_repair_screen';
