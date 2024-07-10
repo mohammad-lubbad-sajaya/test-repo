@@ -130,7 +130,8 @@ class HomeWidgets {
               ontap: () {},
               deliveryAndCollectionFun: (p0) {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const DeliveryFormScreen(),
+                  builder: (context) => 
+                  const DeliveryFormScreen(),
                 ));
               },
               editFunc: (context) {},

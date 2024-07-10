@@ -210,7 +210,7 @@ appCard({
                             height: 15,
                             width: 40,
                             decoration:
-                                const BoxDecoration(color: Colors.green),
+                                 BoxDecoration(color:getStatusColor(servObj.serviceStatus)),
                           )
                         ]
                       ],
@@ -239,3 +239,20 @@ appCard({
         ),
       ),
     );
+  getStatusColor(String status) {
+    Color color;
+    switch (status) {
+      case 'جاهز للتسليم':
+        color = Colors.green;
+        break;
+      case 'غير جاهز':
+        color = Colors.yellow;
+        break;
+      case 'به مشاكل':
+        color = Colors.red;
+        break;
+      default:
+        color = Colors.grey;
+    }
+    return color;
+  }

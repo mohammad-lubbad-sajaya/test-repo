@@ -21,7 +21,8 @@ import 'view_models/delivery_and_receive_view_model.dart';
 import 'widgets/sing_widget.dart';
 
 class DeliveryFormScreen extends StatefulWidget {
-  const DeliveryFormScreen({super.key});
+  const DeliveryFormScreen({super.key,this.isReceived=false});
+final bool isReceived;
 
   @override
   _DeliveryFormScreenState createState() => _DeliveryFormScreenState();
@@ -33,8 +34,12 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
 
   @override
   void initState() {
-    final _viewModel = context.read(deliveryAndReceiveViewModel);
-    _viewModel.initTabController(this);
+    WidgetsBinding.instance.addPostFrameCallback((_)async {
+  final _viewModel = context.read(deliveryAndReceiveViewModel);
+  await  _viewModel.initTabController(this,widget.isReceived?1:0);
+     });
+  
+    
     super.initState();
   }
 
@@ -54,7 +59,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
           ),
           body: Consumer(builder: (context, ref, child) {
             final _viewModel = ref.watch(deliveryAndReceiveViewModel);
-            return SingleChildScrollView(
+            return _viewModel.tabController==null?Container(): SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Form(
@@ -152,21 +157,21 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         tabs: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            decoration: _viewModel.tabController.index == 0
+            decoration: _viewModel.tabController!.index == 0
                 ? _getSelectedDecoration()
                 : null,
             child: Tab(
               child: Text("Receive".localized(),
                   style: TextStyle(
                     fontSize: 13,
-                      color: _viewModel.tabController.index == 0
+                      color: _viewModel.tabController!.index == 0
                           ? Colors.white
                           : Colors.black)),
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            decoration: _viewModel.tabController.index == 1
+            decoration: _viewModel.tabController!.index == 1
                 ? _getSelectedDecoration()
                 : null,
             child: Tab(
@@ -174,7 +179,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                 "Deliver".localized(),
                 style: TextStyle(
                   fontSize: 13,
-                    color: _viewModel.tabController.index == 1
+                    color: _viewModel.tabController!.index == 1
                         ? Colors.white
                         : Colors.black),
               ),
@@ -245,3 +250,9 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
     ];
   }
 }
+
+
+
+
+
+

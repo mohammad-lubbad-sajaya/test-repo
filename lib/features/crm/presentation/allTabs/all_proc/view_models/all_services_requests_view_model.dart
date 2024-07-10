@@ -11,7 +11,8 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
   List<ServiceRequest> filteredServicesRequestsList = [];
   late BuildContext context;
   final textController = TextEditingController();
-
+  List<String> statuses = ['الكل', 'جاهز للتسليم', 'غير جاهز', 'به مشاكل'];
+  Set<String> selectedStatuses = {'الكل'};
   initServices() {
     servicesRequestsList = [
       ServiceRequest(
@@ -26,14 +27,14 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
           address: "ضاحية الرشيد",
           clientName: "شركة المستقبل",
           date: DateTime.now(),
-          serviceStatus: "جاهز للتسليم",
+          serviceStatus: "غير جاهز",
           serviceType: "طلب صيانة"),
       ServiceRequest(
           bondNo: 965,
           address: "خلدا",
           clientName: "عملاء مركز الصيانة",
           date: DateTime.now(),
-          serviceStatus: "جاهز للتسليم",
+          serviceStatus: "به مشاكل",
           serviceType: "طلب صيانة"),
     ];
     filteredServicesRequestsList = servicesRequestsList;
@@ -55,9 +56,41 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void Function(bool)? onSelected(String status, bool selected) {
+    if (status == 'الكل') {
+      selectedStatuses.clear();
+      selectedStatuses.add('الكل');
+      filteredServicesRequestsList = servicesRequestsList;
+    } else {
+      selectedStatuses.remove('الكل');
+      if (selected) {
+        selectedStatuses.add(status);
+        _filterStatus();
+      } else {
+        selectedStatuses.remove(status);
+        _filterStatus();
+      }
+      if (selectedStatuses.isEmpty) {
+        selectedStatuses.add('الكل');
+        filteredServicesRequestsList = servicesRequestsList;
+      }
+    }
+
+    notifyListeners();
+    return null;
+  }
+
   clearSearch() {
     textController.text = "";
     filteredServicesRequestsList = servicesRequestsList;
     notifyListeners();
+  }
+
+  void _filterStatus() {
+    filteredServicesRequestsList = [];
+    for (var element in selectedStatuses) {
+      filteredServicesRequestsList.add(
+          servicesRequestsList.firstWhere((e) => e.serviceStatus == element));
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sajaya_general_app/core/utils/theme/app_colors.dart';
 
 import '../../../../../../core/services/extentions.dart';
 import '../../../../../../core/services/routing/navigation_service.dart';
@@ -106,6 +107,22 @@ class AllProcedurWidgets {
         ),
       ]
       else...[
+       Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Wrap(
+                spacing: 8.0,
+                children:  allServicesRequestviewModel.statuses.map((status) {
+                  return FilterChip(
+                    backgroundColor: primaryColor,
+                    selectedColor: primaryColor,
+                    checkmarkColor: secondaryColor,
+                    label: Text(status,style: const TextStyle(color: secondaryColor),),
+                    selected: allServicesRequestviewModel.selectedStatuses.contains(status),
+                    onSelected:(value) => allServicesRequestviewModel.onSelected(status,value )
+                  );
+                }).toList(),
+              ),
+            ),
    listViewContainerBuilder(
           context: context,
           minHeight: 160,
@@ -119,7 +136,9 @@ class AllProcedurWidgets {
               
               },
             deliveryAndCollectionFun: (p0) {
-              Navigator.of(context).push(MaterialPageRoute(builder:(context) =>  const DeliveryFormScreen(),));
+              Navigator.of(context).push(MaterialPageRoute(builder:(context) => 
+                DeliveryFormScreen(isReceived: index==1,),
+                ));
             },
               editFunc: (context) {
              

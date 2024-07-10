@@ -13,7 +13,7 @@ final deliveryAndReceiveViewModel =
     ChangeNotifierProvider.autoDispose((ref) => DeliveryAndReceiveViewModel());
 
 class DeliveryAndReceiveViewModel extends ChangeNotifier {
-  late TabController tabController;
+   TabController ?tabController;
   final pieceTextController = TextEditingController();
   final serialNumTextController = TextEditingController();
   final nameTextController = TextEditingController();
@@ -38,8 +38,9 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
     penStrokeWidth: 3,
     penColor: Colors.black,
   );
-  initTabController(TickerProvider tickerProvider) {
-    tabController = TabController(length: 2, vsync: tickerProvider);
+  initTabController(TickerProvider tickerProvider,int initialIndex) {
+    tabController = TabController(length: 2, vsync: tickerProvider,initialIndex: initialIndex);
+    changeTabIndex(initialIndex);
   }
 changeLoadingState(){
   isLoading=!isLoading;
