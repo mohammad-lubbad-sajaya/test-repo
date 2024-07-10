@@ -176,7 +176,7 @@
   "device timing": "Device timing",
   "counter timing": "Counter Timing",
   "you arrived": "You Arrived !!",
-  "service request": "Service Request",
+  "all service request": "All Service Request",
   "Delivery and Receive": "Delivery and receive",
   "Deliver": "Deliver",
   "Receive": "Receive",
@@ -200,7 +200,8 @@
   "finish date":"Finish date",
   "details":"Details",
   "open sign":"Open signature",
-  "close sign":"Close signature"
+  "close sign":"Close signature",
+  "daily services":"Daily Services"
 
 
 }

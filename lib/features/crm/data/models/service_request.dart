@@ -4,9 +4,11 @@ class ServiceRequest{
   String clientName;
   String serviceType;
   String serviceStatus;
+  String address;
 
   ServiceRequest({
     required this.bondNo,
+    required this.address,
     required this.clientName,
     required this.date,
     required this.serviceStatus,

@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../../core/utils/app_widgets/floating_action_button.dart';
+import 'widgets/home_widgets.dart';
+import '../../tab_bar/tab_bar_view_model.dart';
 import '../../../../../core/services/extentions.dart';
 
 import '../../../../../core/services/configrations/general_configrations.dart';
@@ -11,10 +14,8 @@ import '../../../../../core/services/routing/routes.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/app_widgets/drop_down_button.dart';
-import '../../../../../core/utils/app_widgets/list_view_container_builder.dart';
-import '../../../../../core/utils/app_widgets/no_data_view.dart';
+
 import '../../../../../core/utils/app_widgets/search_procedures.dart';
-import '../../../../../core/utils/app_widgets/slidable_app_card.dart';
 import '../../../../../core/utils/common_widgets/no_connection_widget.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
@@ -23,9 +24,7 @@ import '../../main_app_bar.dart';
 import '../../procedure_information/procedure_information_view_model.dart';
 import '../../procedure_place/procedure_place_view_model.dart';
 import '../../tab_bar/tab_bar_screen.dart';
-import '../settings/settings_view_model.dart';
 import 'home_view_model.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,9 +39,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final viewModel = context.read(homeViewModelProvider);
-      viewModel.context = context;
-      viewModel.getMain();
+      if (!context.read(tabBarViewModelProvider.notifier).isMaintenance) {
+        final viewModel = context.read(homeViewModelProvider);
+        viewModel.context = context;
+        viewModel.getMain();
+      }
     });
   }
 
@@ -55,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // Handle app lifecycle changes here
-     if(GeneralConfigurations().isDebug){
-    log("App lifecycle state changed: $state");
-     }
+    if (GeneralConfigurations().isDebug) {
+      log("App lifecycle state changed: $state");
+    }
     super.didChangeAppLifecycleState(state);
 
     if (state == AppLifecycleState.resumed) {
@@ -85,36 +86,33 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     var procInfoViewModel = context.read(procInfoViewModelProvider);
+    final _isMaintenance = context.read(tabBarViewModelProvider).isMaintenance;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: mainAppbar(text: "Open daily procedures".localized(),context: context),
-        floatingActionButton: SizedBox(
-          width: 60.0,
-          height: 60.0,
-          child: FloatingActionButton(
-            backgroundColor: secondaryColor,
-            onPressed: () {
-              sl<NavigationService>().navigateTo(procedureInformationScreen);
-              context.read(procInfoViewModel.procedureObj.state).state = null;
-              context.read(procInfoViewModel.isEdit.state).state =
-                  ProcInfoStatusTypes.addNew;
-            },
-            child: const Icon(Icons.add),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              side: BorderSide(color: Colors.white, width: 5),
-            ),
-            splashColor: primaryColor,
-            elevation: 3.0,
-          ),
-        ),
+        appBar: mainAppbar(
+            text: _isMaintenance
+                ? "daily services".localized()
+                : "Open daily procedures".localized(),
+            context: context),
+        floatingActionButton: _isMaintenance
+            ? Container()
+            : floatingActionButton(
+                onPressed: () {
+                  sl<NavigationService>()
+                      .navigateTo(procedureInformationScreen);
+                  context.read(procInfoViewModel.procedureObj.state).state =
+                      null;
+                  context.read(procInfoViewModel.isEdit.state).state =
+                      ProcInfoStatusTypes.addNew;
+                },
+              ),
         body: Consumer(
           builder: (context, ref, _) {
             final homeViewModel = ref.watch(homeViewModelProvider);
-          //  final isDark=ref.watch(settingsViewModelProvider).isDark;
+            //  final isDark=ref.watch(settingsViewModelProvider).isDark;
 
             return Column(
               children: [
@@ -134,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ),
                           ],
                           showSearchProcedures(
-
                             textController: homeViewModel.textController,
                             onChanged: homeViewModel.filterList,
                             suffixIcon:
@@ -150,74 +147,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           const SizedBox(height: 16),
                           if (ref.watch(connectionProvider) ==
                               ConnectivityResult.none.name) ...[
-                          const NoConnectionWidget()
+                            const NoConnectionWidget()
                           ],
-                          if (homeViewModel.proceduresList.isEmpty) ...[
-                            showNoDataView(context: context, minHeight: 300),
-                          ] else ...[
-                         context.read(connectionProvider.notifier).state==ConnectivityResult.none.name?Padding(
-                           padding: const EdgeInsets.only(top: 100),
-                           child: Center(
-                            child: Icon(Icons.wifi_off,color: Colors.grey[400],size: 80,),
-                           ),
-                         ):   listViewContainerBuilder(
-                              context: context,
-                              minHeight: 300,
-                              itemCount:
-                                  homeViewModel.filteredProcedures.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return slidable(
-                                  isDark:context.read(settingsViewModelProvider).isDark,
-                                  obj: homeViewModel.filteredProcedures[index],
-                                  ontap: () {
-                                    goTopProcedureInformationScreen(
-                                      context,
-                                      procInfoViewModel,
-                                      homeViewModel,
-                                      index,
-                                      ProcInfoStatusTypes.show,
-                                    );
-                                  },
-                                  onTimerTap: () {
-                                    goTopProcedurePlaceScreen(
-                                      context,
-                                      homeViewModel.filteredProcedures[index],
-                                    );
-                                  },
-                                  editFunc: (context) {
-                                    goTopProcedureInformationScreen(
-                                      context,
-                                      procInfoViewModel,
-                                      homeViewModel,
-                                      index,
-                                      ProcInfoStatusTypes.editing,
-                                      action: 0,
-                                    );
-                                  },
-                                  closeFunc: (context) {
-                                    goTopProcedureInformationScreen(
-                                      context,
-                                      procInfoViewModel,
-                                      homeViewModel,
-                                      index,
-                                      ProcInfoStatusTypes.close,
-                                      action: 2, // cancel
-                                    );
-                                  },
-                                  confirmFunc: (context) {
-                                    goTopProcedureInformationScreen(
-                                      context,
-                                      procInfoViewModel,
-                                      homeViewModel,
-                                      index,
-                                      ProcInfoStatusTypes.close,
-                                      action: 1, // close
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ],
+                          if (_isMaintenance)
+                            ...HomeWidgets().getMaintenanceContent(
+                                context: context, ref: ref)
+                          else
+                            ...HomeWidgets()
+                                .getCrmContent(ref: ref, context: context)
                         ],
                       ),
                     ),

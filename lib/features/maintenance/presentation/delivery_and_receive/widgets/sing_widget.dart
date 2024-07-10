@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sajaya_general_app/core/services/extentions.dart';
+import '../../../../../core/services/extentions.dart';
 import 'package:sizer/sizer.dart';
 import 'package:signature/signature.dart';
 

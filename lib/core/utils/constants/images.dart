@@ -43,3 +43,4 @@ const String warningIcon = '${base}warningIcon.png';
 const String watchIcon = '${base}watchIcon.png';
 const String serviceRequestIcon="${maintenanceBase}service.png";
 const String tools="${maintenanceBase}tools.png";
+const String filledTools="${maintenanceBase}filled-tools.png";

@@ -1,14 +1,13 @@
 import 'dart:developer';
 
-import 'package:geolocator/geolocator.dart';
-import '../../services/extentions.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import"package:flutter/material.dart";
+import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../features/crm/presentation/tab_bar/tab_bar_view_model.dart';
 import '../../services/configrations/general_configrations.dart';
 import '../../services/device_info_manager.dart';
+import '../../services/extentions.dart';
 import '../../services/location_manager.dart';
 import '../../services/service_locator/dependency_injection.dart';
 

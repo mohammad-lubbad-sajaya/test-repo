@@ -1,7 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../../core/services/extentions.dart';
 
+import '../../../../../../core/services/extentions.dart';
 import '../../../../../../core/services/routing/navigation_service.dart';
 import '../../../../../../core/services/routing/routes.dart';
 import '../../../../../../core/services/service_locator/dependency_injection.dart';
@@ -13,8 +14,6 @@ import '../../../../../maintenance/presentation/delivery_and_receive/delivery_an
 import '../../../procedure_information/procedure_information_view_model.dart';
 import '../../../tab_bar/tab_bar_screen.dart';
 import '../../home/home_screen.dart';
-import 'package:flutter/material.dart';
-
 import '../../settings/settings_view_model.dart';
 import '../view_models/all_proc_view_model.dart';
 import '../view_models/all_services_requests_view_model.dart';
@@ -113,6 +112,7 @@ class AllProcedurWidgets {
           itemCount: allServicesRequestviewModel.filteredServicesRequestsList .length,
           itemBuilder: (BuildContext context, int index) {
             return serviceRequestSlidable(
+              context: context,
               isDark: context.read(settingsViewModelProvider).isDark,
               obj:  allServicesRequestviewModel.filteredServicesRequestsList[index],
               ontap: () {

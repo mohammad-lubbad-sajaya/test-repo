@@ -12,7 +12,6 @@ import '../../data/models/representative.dart';
 import '../../data/models/user_company.dart';
 import '../../data/models/user_token.dart';
 import '../../data/models/vouchers.dart';
-
 import '../repository interfaces/repo_interface.dart';
 
 class AddNewAddressOrEditUseCase {

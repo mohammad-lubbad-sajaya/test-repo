@@ -102,6 +102,7 @@ Widget slidable({
   ServiceRequest? obj,
   bool isSelected = false,
   required bool isDark,
+  required BuildContext context,
   double horizontal = 20.0,
   Function()? ontap,
   Function()? onRepairTap,
@@ -142,6 +143,7 @@ Widget slidable({
       child:
        appCard(
         servObj: obj,
+        context: context,
         isDark: isDark,
         horizontal: horizontal,
         isSelected: false,

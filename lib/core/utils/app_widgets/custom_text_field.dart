@@ -4,7 +4,7 @@ import "../theme/app_colors.dart";
 
 Widget customTextField(
     String label, void Function(String)? onChanged,
-    {int maxLines = 1, FocusNode? focusNode, FocusNode? nextFocusNode,BuildContext ?context,TextEditingController ?controller}) {
+    {int maxLines = 1, FocusNode? focusNode,FocusNode? nextFocusNode,BuildContext ?context,TextEditingController ?controller,bool enabled=true}) {
   return Container(
     margin: const EdgeInsets.symmetric(vertical: 5),
     padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
@@ -13,6 +13,7 @@ Widget customTextField(
       borderRadius: BorderRadius.circular(8),
     ),
     child: TextFormField(
+      enabled:enabled ,
       controller: controller,
       focusNode:focusNode,
       onFieldSubmitted: (value) {

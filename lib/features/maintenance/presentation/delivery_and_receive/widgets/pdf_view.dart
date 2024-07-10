@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:sajaya_general_app/core/utils/theme/app_colors.dart';
+import '../../../../../core/utils/theme/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PdfViewScreen extends StatefulWidget {

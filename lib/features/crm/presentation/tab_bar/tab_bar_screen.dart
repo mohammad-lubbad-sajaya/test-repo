@@ -5,8 +5,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../../../../core/services/extentions.dart';
-
 
 import '../../../../core/services/configrations/general_configrations.dart';
 import '../../../../core/utils/app_widgets/custom_app_text.dart';
@@ -26,7 +26,9 @@ final connectionProvider =
     StateProvider<String>((ref) => ConnectivityResult.wifi.name);
 
 class TabBarScreen extends StatefulWidget {
-  const TabBarScreen({super.key,});
+  const TabBarScreen({
+    super.key,
+  });
 
   @override
   State<TabBarScreen> createState() => _TabBarScreenState();
@@ -44,33 +46,50 @@ class _TabBarScreenState extends State<TabBarScreen>
     SharedMethods().checkLocationMocking(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance) {
+      if (!context
+          .read<TabBarViewModel>(tabBarViewModelProvider)
+          .isMaintenance) {
         _connectionListener();
 
         context
             .read(settingsViewModelProvider)
             .getCachedDistanceAndRemindMinures();
       }
+              context.read(checkAndRepairViewModel).fillCheckAndRepairsList();
+
     });
-    items = 
-      context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance  ? [
-           BottomNavigationBarItem(
-              icon: SizedBox(
-                height: 25,
-                width: 25,
-                child: Image.asset(serviceRequestIcon,color:placeHolderColor )),
-              activeIcon: SizedBox(
-                height: 25,
-                width: 25,
-                child: Image.asset(serviceRequestIcon, color: secondaryColor,)),
-              label: 'service request'.localized(),
+    items = context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance
+        ? [
+            BottomNavigationBarItem(
+              icon: Image.asset(dailyPrec),
+              activeIcon: Image.asset(dailyPrec, color: secondaryColor),
+              label: context
+                      .read<TabBarViewModel>(tabBarViewModelProvider)
+                      .isMaintenance
+                  ? "daily services".localized()
+                  : 'Daily Proc.'.localized(),
             ),
-              BottomNavigationBarItem(
+            BottomNavigationBarItem(
+              icon: SizedBox(
+                  height: 25,
+                  width: 25,
+                  child:
+                      Image.asset(serviceRequestIcon, color: placeHolderColor)),
+              activeIcon: SizedBox(
+                  height: 25,
+                  width: 25,
+                  child: Image.asset(
+                    serviceRequestIcon,
+                    color: secondaryColor,
+                  )),
+              label: 'all service request'.localized(),
+            ),
+            BottomNavigationBarItem(
               icon: Image.asset(settings),
               activeIcon: Image.asset(settings, color: secondaryColor),
               label: 'Settings'.localized(),
             ),
-        ]
+          ]
         : [
             BottomNavigationBarItem(
               icon: Image.asset(dailyPrec),
@@ -224,11 +243,15 @@ class _TabBarScreenState extends State<TabBarScreen>
   Widget _getChild(int index) {
     switch (index) {
       case 0:
-        return context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance? const AllProcScreen(): const HomeScreen();
+        return const HomeScreen();
       case 1:
-        return context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance?const SettingsScreen(): const AllProcScreen();
+        return const AllProcScreen();
       case 2:
-        return const PreInquiryScreen();
+        return context
+                .read<TabBarViewModel>(tabBarViewModelProvider)
+                .isMaintenance
+            ? const SettingsScreen()
+            : const PreInquiryScreen();
       case 3:
         return const SettingsScreen();
       default:

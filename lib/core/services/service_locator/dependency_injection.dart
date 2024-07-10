@@ -2,17 +2,16 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../extentions.dart';
-import '../../utils/constants/endpoints.dart';
+import '../../../features/crm/data/data source/remote_data_source_interface.dart';
 import '../../../features/crm/data/data%20source/remote_data_source_implementation.dart';
 import '../../../features/crm/data/repositories/repo_implementation.dart';
 import '../../../features/crm/domain/repository%20interfaces/repo_interface.dart';
 import '../../../features/crm/domain/usecases/crm_usecases.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../features/crm/data/data source/remote_data_source_interface.dart';
 import '../../utils/common_widgets/error_dialog.dart';
+import '../../utils/constants/endpoints.dart';
+import '../extentions.dart';
 import '../local_repo/local_lists_repository.dart';
 import '../local_repo/local_repository.dart';
 import '../local_repo/local_user_repository.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../crm/data/models/check_repair_model.dart';
+
 final checkAndRepairViewModel =
     ChangeNotifierProvider((ref) => CheckAndRepairViewModel());
 
@@ -13,6 +15,8 @@ class CheckAndRepairViewModel extends ChangeNotifier {
   String? selectedCorruptedItem;
   String? selectedAlternateItem;
   DateTime bondDate = DateTime.now();
+  bool isNotEditiable = false;
+
   final List<String> serviceTypes = [
     "فحص و إصلاح",
     "فحص",
@@ -24,22 +28,22 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     "عن بعد ",
   ];
   final List<String> caseList = [
-    "os error",
-    "os error",
-    "os error",
-    "os error",
+    "os error1",
+    "os error2",
+    "os error3",
+    "os error4",
   ];
   final List<String> actionList = [
-    "os error",
-    "os error",
-    "os error",
-    "os error",
+    "os error1",
+    "os error2",
+    "os error3",
+    "os error4",
   ];
   final List<String> causeList = [
-    "os error",
-    "os error",
-    "os error",
-    "os error",
+    "os error1",
+    "os error2",
+    "os error3",
+    "os error4",
   ];
   final List<String> corruptedItemList = [
     "mouse",
@@ -51,6 +55,8 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     "keyboared",
     "graphic card",
   ];
+  List<CheckRepairModel> checkRepairList = [];
+  int currentBondNumber = 0;
   final caseDetailTextCtrl = TextEditingController();
   final actionDetailTextCtrl = TextEditingController();
   final causeDetailTextCtrl = TextEditingController();
@@ -58,37 +64,77 @@ class CheckAndRepairViewModel extends ChangeNotifier {
   final alternateItemDetailTextCtrl = TextEditingController();
   final notesTextCtrl = TextEditingController();
 
-  changeServiceType(String value) {
+  changeServiceType(String? value) {
     selectedServiceType = value;
     notifyListeners();
   }
 
-  changeServiceLocation(String value) {
+  changeEditablity(bool val) {
+    isNotEditiable = val;
+    notifyListeners();
+  }
+
+  changeServiceLocation(String? value) {
     selectedServiceLocation = value;
     notifyListeners();
   }
 
-  changeCase(String val) {
+  fillCheckAndRepairsList() {
+    checkRepairList = [
+      CheckRepairModel(
+          action: actionList.first,
+          alternateItem: alternateItemList.first,
+          bondNumber: 542,
+          cause: causeList.first,
+          corruptedItem: corruptedItemList.first,
+          cuse: caseList.first,
+          endDate: DateTime.now(),
+          notes: "",
+          serviceLocation: serviceLocations.first,
+          serviceType: serviceTypes.first,
+          startDate: DateTime.now()),
+      CheckRepairModel(
+          action: actionList.first,
+          alternateItem: alternateItemList.first,
+          bondNumber: 542,
+          cause: causeList.first,
+          corruptedItem: corruptedItemList.first,
+          cuse: caseList.first,
+          endDate: DateTime.now(),
+          notes: "",
+          serviceLocation: serviceLocations.first,
+          serviceType: serviceTypes.first,
+          startDate: DateTime.now()),
+    ];
+    notifyListeners();
+  }
+
+  changeBondNumber(int? newValue) {
+    currentBondNumber = newValue ?? 0;
+    notifyListeners();
+  }
+
+  changeCase(String? val) {
     selectedCase = val;
     notifyListeners();
   }
 
-  changeAction(String val) {
+  changeAction(String? val) {
     selectedAction = val;
     notifyListeners();
   }
 
-  changeCause(String val) {
+  changeCause(String? val) {
     selectedCause = val;
     notifyListeners();
   }
 
-  changeCorruptedItem(String val) {
+  changeCorruptedItem(String? val) {
     selectedCorruptedItem = val;
     notifyListeners();
   }
 
-  changeAlternateItem(String val) {
+  changeAlternateItem(String? val) {
     selectedAlternateItem = val;
     notifyListeners();
   }

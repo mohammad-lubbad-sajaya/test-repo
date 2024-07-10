@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../../core/utils/app_widgets/floating_action_button.dart';
 import '../../../../../core/services/extentions.dart';
 
 import '../../../../../core/services/routing/navigation_service.dart';
@@ -7,7 +8,6 @@ import '../../../../../core/services/routing/routes.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../../core/utils/app_widgets/search_procedures.dart';
 import '../../../../../core/utils/constants/images.dart';
-import '../../../../../core/utils/theme/app_colors.dart';
 import '../../main_app_bar.dart';
 import '../../procedure_information/procedure_information_view_model.dart';
 import '../../tab_bar/tab_bar_view_model.dart';
@@ -26,7 +26,7 @@ class AllProcScreen extends StatefulWidget {
 
 class _AllProcScreenState extends State<AllProcScreen> {
   bool _isMaintenance = false;
-  AllServicesRequestsViewModel ?viewModel;
+  AllServicesRequestsViewModel? viewModel;
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,7 @@ class _AllProcScreenState extends State<AllProcScreen> {
         viewModel.getMain();
       });
     } else {
-       viewModel = context.read(allServicesRequestviewModel);
+      viewModel = context.read(allServicesRequestviewModel);
       viewModel?.context = context;
       viewModel?.initServices();
     }
@@ -67,28 +67,15 @@ class _AllProcScreenState extends State<AllProcScreen> {
                 context: context),
             floatingActionButton: _isMaintenance
                 ? Container()
-                : SizedBox(
-                    width: 60.0,
-                    height: 60.0,
-                    child: FloatingActionButton(
-                      backgroundColor: secondaryColor,
-                      onPressed: () {
-                        sl<NavigationService>()
-                            .navigateTo(procedureInformationScreen);
-                        context
-                            .read(procInfoViewModel.procedureObj.state)
-                            .state = null;
-                        context.read(procInfoViewModel.isEdit.state).state =
-                            ProcInfoStatusTypes.addNew;
-                      },
-                      child: const Icon(Icons.add),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        side: BorderSide(color: Colors.white, width: 5),
-                      ),
-                      splashColor: primaryColor,
-                      elevation: 3.0,
-                    ),
+                : floatingActionButton(
+                    onPressed: () {
+                      sl<NavigationService>()
+                          .navigateTo(procedureInformationScreen);
+                      context.read(procInfoViewModel.procedureObj.state).state =
+                          null;
+                      context.read(procInfoViewModel.isEdit.state).state =
+                          ProcInfoStatusTypes.addNew;
+                    },
                   ),
             body: Column(
               children: [
@@ -108,14 +95,20 @@ class _AllProcScreenState extends State<AllProcScreen> {
                             ),
                           ],
                           showSearchProcedures(
-                            onChanged:_isMaintenance?viewModel?.filterList :allProcViewModel.filterList,
-                            textController:_isMaintenance?viewModel?.textController :allProcViewModel.textController,
+                            onChanged: _isMaintenance
+                                ? viewModel?.filterList
+                                : allProcViewModel.filterList,
+                            textController: _isMaintenance
+                                ? viewModel?.textController
+                                : allProcViewModel.textController,
                             suffixIcon:
                                 (allProcViewModel.textController.text.isEmpty)
                                     ? null
                                     : Image.asset(claerIcon),
                             suffixIconAction: () {
-                            _isMaintenance?viewModel?.clearSearch():  allProcViewModel.clearSearch();
+                              _isMaintenance
+                                  ? viewModel?.clearSearch()
+                                  : allProcViewModel.clearSearch();
                             },
                           ),
                           if (_isMaintenance)

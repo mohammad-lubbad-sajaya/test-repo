@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/foundation.dart';
+import '../../../../core/utils/app_widgets/floating_action_button.dart';
 import '../../../../core/services/extentions.dart';
 
 
@@ -75,27 +76,13 @@ class _ProcedurePlaceScreenState extends State<ProcedurePlaceScreen>
                   tabBarViewModel.isEmulator
               ? const SizedBox()
               : viewModel.selectedTab == 3
-                  ? SizedBox(
-                      width: 60.0,
-                      height: 60.0,
-                      child: FloatingActionButton(
-                        backgroundColor: secondaryColor.withOpacity(0.9),
-                        onPressed: () {
+                  ? floatingActionButton(onPressed:  () {
                           viewModel.isEditAdressLocation = true;
                           viewModel.nameA = "";
                           viewModel.nameE = "";
                           viewModel.selectedArea = null;
                           viewModel.didSelectAddAddress(isEdit: false);
-                        },
-                        child: const Icon(Icons.add),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                          side: BorderSide(color: Colors.white, width: 5),
-                        ),
-                        splashColor: primaryColor,
-                        elevation: 3.0,
-                      ),
-                    )
+                        },)
                   : const SizedBox(),
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(0.0),

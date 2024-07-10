@@ -612,14 +612,14 @@ class ProcedurePlaceViewModel extends ChangeNotifier {
     durationValue = text;
   }
 
-  double? getDistance() {
-    final lat1 =
+  double? getDistance({double? custlat,double ?custlong,double? currentLat,double ?currentLong}) {
+    final lat1 =custlat??
         double.tryParse(selectedCustomerAddress?.locationNorth ?? "0") ?? 0.0;
-    final lon1 =
+    final lon1 =custlong??
         double.tryParse(selectedCustomerAddress?.locationEast ?? "0") ?? 0.0;
 
-    final lat2 = currentLocation?.latitude ?? 0.0;
-    final lon2 = currentLocation?.longitude ?? 0.0;
+    final lat2 =currentLat?? currentLocation?.latitude ?? 0.0;
+    final lon2 =currentLong?? currentLocation?.longitude ?? 0.0;
 
     final distance =
         DistanceCalculator.calculateDistance(lat1, lon1, lat2, lon2);

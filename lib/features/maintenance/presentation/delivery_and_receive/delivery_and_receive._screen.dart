@@ -74,6 +74,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                         'device type'.localized(),
                         _viewModel.selectedEquipmentType,
                         _viewModel.equipments,
+                        
                         (String? newValue) {
                           _viewModel.changeSelectedEquipmentType(newValue!);
                         },

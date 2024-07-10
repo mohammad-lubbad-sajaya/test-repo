@@ -19,6 +19,7 @@ Widget customRowApp({
   Color? separatorColor,
   bool hideSeparator = false,
   bool isTextField = false,
+  bool isReadOnly=false,
   int flex = 2,
   TextInputType? keyboardType = TextInputType.text,
   final VoidCallback? onTap,
@@ -37,7 +38,7 @@ Widget customRowApp({
               children: [
                 Expanded(
                   child: customTextApp(
-                    color: isDark ? backGroundColor : Colors.black,
+                    color: isDark ? backGroundColor :isReadOnly?Colors.grey: Colors.black,
                     text: text,
                     maxLine: null,
                     size: fontSize,

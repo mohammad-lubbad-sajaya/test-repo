@@ -176,7 +176,7 @@
     "device timing": "توقيت الجهاز",
     "counter timing": "توقيت العداد",
     "you arrived": "لقد وصلت وجهتك !!",
-    "service request": "طلب خدمة",
+    "all service request": "كل طلبات الخدمة",
     "Delivery and Receive": "تسليم و استلام",
     "Deliver": "تسليم",
     "Receive": "استلام",
@@ -200,7 +200,10 @@
     "finish date":"تاريخ الإنتهاء",
     "details":"تفاصيل",
     "open sign":"فتح التوقيع",
-    "close sign":"إغلاق التوقيع"
+    "close sign":"إغلاق التوقيع",
+    "daily services":"الخدمات اليومية"
+
+
 
 
 

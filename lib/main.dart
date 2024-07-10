@@ -8,11 +8,11 @@ import 'core/services/app_translations/app_translations.dart';
 import 'core/services/local_repo/local_repository.dart';
 import 'core/services/notifications/notifications_manager.dart';
 import 'core/services/routing/navigation_service.dart';
+import 'core/services/routing/router.dart' as router;
 import 'core/services/routing/routes.dart';
 import 'core/services/service_locator/dependency_injection.dart';
 import 'core/utils/theme/app_colors.dart';
 import 'features/crm/presentation/allTabs/settings/settings_view_model.dart';
-import 'core/services/routing/router.dart' as router;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
