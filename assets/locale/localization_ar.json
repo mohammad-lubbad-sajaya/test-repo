@@ -203,7 +203,10 @@
     "close sign":"إغلاق التوقيع",
     "daily services":"الخدمات اليومية",
     "service info":"معلومات طلب الخدمة",
-    "service request details":"تفاصيل طلب الخدمة"
+    "service request details":"تفاصيل طلب الخدمة",
+    "piece num":"رقم القطعة",
+    "piece name":"إسم القطعة",
+    "required service":"الخدمة المطلوبة"
 
 
 
