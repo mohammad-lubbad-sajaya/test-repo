@@ -29,7 +29,7 @@ class ServiceDetailsCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               _buildDetailRow("piece num".localized(), '12345'),
-              _buildDetailRow("piece name".localized(), "HP-VECTOS"),
+              _buildDetailRow("piece name".localized(), "HP-VICTUS"),
               _buildDetailRow("serial number".localized(), 'SN78901234'),
               _buildDetailRow("Customer".localized(), 'محمد أحمد'),
               _buildDetailRow("Address".localized(), 'شارع عبدالله غوشه'),
