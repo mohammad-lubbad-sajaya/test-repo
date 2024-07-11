@@ -5,7 +5,7 @@ import '../../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../../core/utils/app_widgets/drop_horizontal_down_button.dart';
 import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
-import '../../allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
+import '../../../../shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
 import '../procedure_place_view_model.dart';
 
 addAddressView({

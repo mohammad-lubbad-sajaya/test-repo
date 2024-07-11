@@ -12,11 +12,11 @@ import '../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../core/utils/constants/images.dart';
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../data/models/check_user.dart';
-import '../allTabs/all_proc/view_models/all_proc_view_model.dart';
-import '../allTabs/home/home_view_model.dart';
-import '../allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
+import '../../../shared_screens/allTabs/home/home_view_model.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../procedure_place/procedure_place_view_model.dart';
-import '../tab_bar/tab_bar_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_view_model.dart';
 
 import 'procedure_information_view_model.dart';
 import 'proceduser_cards/show_close_proceduser_card.dart';

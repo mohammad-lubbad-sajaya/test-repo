@@ -148,6 +148,6 @@ Widget slidable({
         horizontal: horizontal,
         isSelected: false,
         isTimerIcon: false,
-        ontap: (){},
+        ontap: ontap,
       ),
     );

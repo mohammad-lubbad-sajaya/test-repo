@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../services/extentions.dart';
 import '../theme/app_colors.dart';
 
-import '../../../features/crm/presentation/allTabs/settings/settings_view_model.dart';
+import '../../../features/shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../services/app_translations/app_translations.dart';
 import '../app_widgets/custom_app_text.dart';
 import '../constants/images.dart';

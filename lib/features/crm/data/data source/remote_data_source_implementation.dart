@@ -4,44 +4,30 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import '../../../../core/services/extentions.dart';
-import '../../../../core/services/service_locator/dependency_injection.dart';
-import '../models/check_user.dart';
-
-import '../models/client_information.dart';
-
-import '../models/country.dart';
-
-import '../models/customer_address.dart';
-
-import '../models/customer_specification.dart';
-
-import '../models/entered_users.dart';
-
-import '../models/event_count.dart';
-
-import '../models/file_response.dart';
-
-import '../models/nearby_customers.dart';
-
-import '../models/procedure.dart';
-
-import '../models/representative.dart';
-
-import '../models/user_company.dart';
-
-import '../models/user_token.dart';
-
-import '../models/vouchers.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/services/configrations/general_configrations.dart';
+import '../../../../core/services/extentions.dart';
 import '../../../../core/services/notifications/notifications_manager.dart';
+import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/constants/cache_keys.dart';
 import '../../../../core/utils/constants/dio_error_printer.dart';
 import '../../../../core/utils/constants/endpoints.dart';
 import '../../../../core/utils/methods/shared_methods.dart';
+import '../models/check_user.dart';
+import '../models/client_information.dart';
+import '../models/country.dart';
+import '../models/customer_address.dart';
+import '../models/customer_specification.dart';
+import '../models/entered_users.dart';
+import '../models/event_count.dart';
+import '../models/file_response.dart';
+import '../models/nearby_customers.dart';
+import '../models/procedure.dart';
+import '../models/representative.dart';
+import '../models/user_company.dart';
+import '../models/user_token.dart';
+import '../models/vouchers.dart';
 import 'remote_data_source_interface.dart';
 
 class RemoteDataSourceImplementation extends RemoteDataSourceInterFace {

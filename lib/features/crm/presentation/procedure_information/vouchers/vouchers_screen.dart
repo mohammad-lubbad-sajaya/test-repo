@@ -8,7 +8,7 @@ import '../../../../../core/utils/app_widgets/list_view_container_builder.dart';
 import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../../core/utils/app_widgets/voucher_card.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
-import '../../allTabs/settings/settings_view_model.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../procedure_information_view_model.dart';
 import 'vouchers_view_model.dart';
 

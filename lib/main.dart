@@ -12,7 +12,7 @@ import 'core/services/routing/router.dart' as router;
 import 'core/services/routing/routes.dart';
 import 'core/services/service_locator/dependency_injection.dart';
 import 'core/utils/theme/app_colors.dart';
-import 'features/crm/presentation/allTabs/settings/settings_view_model.dart';
+import 'features/shared_screens/allTabs/settings/settings_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

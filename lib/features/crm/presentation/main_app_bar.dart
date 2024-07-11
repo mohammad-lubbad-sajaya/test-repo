@@ -10,10 +10,10 @@ import '../../../core/services/local_repo/local_repository.dart';
 import '../../../core/services/service_locator/dependency_injection.dart';
 import '../../../core/utils/constants/images.dart';
 import '../data/models/entered_users.dart';
-import 'allTabs/all_proc/view_models/all_proc_view_model.dart';
-import 'allTabs/home/home_view_model.dart';
-import 'allTabs/settings/settings_view_model.dart';
-import 'tab_bar/tab_bar_view_model.dart';
+import '../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
+import '../../shared_screens/allTabs/home/home_view_model.dart';
+import '../../shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../shared_screens/tab_bar/tab_bar_view_model.dart';
 
 
 mainAppbar({

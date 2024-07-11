@@ -10,8 +10,8 @@ import '../../../../core/services/extentions.dart';
 
 import '../../../../core/services/configrations/general_configrations.dart';
 import '../../../../core/utils/theme/app_colors.dart';
-import '../allTabs/settings/settings_view_model.dart';
-import '../tab_bar/tab_bar_view_model.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_view_model.dart';
 import 'procedure_place_view_model.dart';
 import 'widgets/add_address_view.dart';
 import 'widgets/all_customer_address.dart';

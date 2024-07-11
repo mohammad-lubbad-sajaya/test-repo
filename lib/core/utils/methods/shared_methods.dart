@@ -4,7 +4,7 @@ import"package:flutter/material.dart";
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../features/crm/presentation/tab_bar/tab_bar_view_model.dart';
+import '../../../features/shared_screens/tab_bar/tab_bar_view_model.dart';
 import '../../services/configrations/general_configrations.dart';
 import '../../services/device_info_manager.dart';
 import '../../services/extentions.dart';

@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import '../../services/extentions.dart';
 
 import '../../services/configrations/general_configrations.dart';
+import '../../services/extentions.dart';
 import '../../services/routing/navigation_service.dart';
 import '../../services/service_locator/dependency_injection.dart';
 import '../common_widgets/error_dialog.dart';

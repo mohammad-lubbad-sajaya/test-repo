@@ -13,7 +13,7 @@ import '../../../../../core/utils/common_widgets/custom_app_text_field.dart';
 import '../../../../../core/utils/common_widgets/show_confirmation_dialog.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../data/models/procedure.dart';
-import '../../allTabs/settings/settings_view_model.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../bottom_sheet_search/bottom_sheet_search.dart';
 import '../../bottom_sheet_search/bottom_sheet_search_view_model.dart';
 import '../procedure_information_view_model.dart';

@@ -5,7 +5,7 @@ import '../../../../../core/services/app_translations/app_translations.dart';
 import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
-import '../../allTabs/settings/settings_view_model.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../procedure_place_view_model.dart';
 
 

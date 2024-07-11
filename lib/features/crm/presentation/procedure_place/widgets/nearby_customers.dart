@@ -6,7 +6,7 @@ import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/app_widgets/list_view_container_builder.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
 import '../../../data/models/nearby_customers.dart';
-import '../../allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
+import '../../../../shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
 import '../procedure_place_view_model.dart';
 
 nearbyCustomers({

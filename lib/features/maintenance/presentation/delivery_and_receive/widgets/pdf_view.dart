@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import '../../../../../core/utils/theme/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../../../../../core/utils/theme/app_colors.dart';
 
 class PdfViewScreen extends StatefulWidget {
   const PdfViewScreen({Key? key, required this.file}) : super(key: key);
@@ -23,6 +24,7 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
       ),
       body: PDFView(
         filePath: widget.file.path,
+        
         onViewCreated: (controller) {
           widget.file.readAsBytes();
         },
@@ -36,8 +38,11 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
           ),
         ),
         onPressed: () {
-          Share.shareXFiles([XFile.fromData(widget.file.readAsBytesSync())],
-              text: 'Check out this PDF!');
+         
+          Share.shareXFiles([XFile(widget.file.path, name: "Receipt.pdf")],
+        
+           
+              );
         },
       ),
     );

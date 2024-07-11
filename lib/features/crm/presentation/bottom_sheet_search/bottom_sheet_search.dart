@@ -9,11 +9,11 @@ import '../../../../core/utils/app_widgets/search_procedures.dart';
 import '../../../../core/utils/common_widgets/bottom_loader.dart';
 import '../../../../core/utils/constants/images.dart';
 import '../../../../core/utils/theme/app_colors.dart';
+import '../../../shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_view_model.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_view_model.dart';
 import '../../data/models/customer_specification.dart';
-import '../allTabs/inquiry/filter_inquiry/filter_inquiry_view_model.dart';
-import '../allTabs/settings/settings_view_model.dart';
 import '../procedure_information/procedure_information_view_model.dart';
-import '../tab_bar/tab_bar_view_model.dart';
 import 'bottom_sheet_search_view_model.dart';
 
 class BottomSheetSearch extends StatefulWidget {

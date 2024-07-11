@@ -32,6 +32,7 @@ Widget customTextField(
           labelStyle: const TextStyle(fontSize: 13),
           //labelStyle:  const TextStyle(color: Colors.grey),
           border: InputBorder.none,
+          disabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)) ,
           enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:  const OutlineInputBorder(borderSide: BorderSide(color: secondaryColor))
         ),

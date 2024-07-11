@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/auth/login/login_screen.dart';
-import '../../../features/auth/signup/signup_screen.dart';
-import '../../../features/crm/presentation/allTabs/all_proc/all_proc_screen.dart';
-import '../../../features/crm/presentation/allTabs/home/home_screen.dart';
-import '../../../features/crm/presentation/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
-import '../../../features/crm/presentation/allTabs/inquiry/inquiry_screen.dart';
-import '../../../features/crm/presentation/allTabs/settings/settings_screen.dart';
-import '../../../features/maintenance/presentation/check_and_repair/check_and_repair_screen.dart';
 import '../../../features/crm/presentation/pre_app/pre_app_screen.dart';
 import '../../../features/crm/presentation/procedure_information/procedure_information_screen.dart';
 import '../../../features/crm/presentation/procedure_information/vouchers/vouchers_screen.dart';
 import '../../../features/crm/presentation/procedure_place/procedure_place_screen.dart';
-import '../../../features/crm/presentation/tab_bar/tab_bar_screen.dart';
+import '../../../features/maintenance/presentation/check_and_repair/check_and_repair_screen.dart';
+import '../../../features/maintenance/presentation/service_details/service_info_screen.dart';
+import '../../../features/shared_screens/allTabs/all_proc/all_proc_screen.dart';
+import '../../../features/shared_screens/allTabs/home/home_screen.dart';
+import '../../../features/shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
+import '../../../features/shared_screens/allTabs/inquiry/inquiry_screen.dart';
+import '../../../features/shared_screens/allTabs/settings/settings_screen.dart';
+import '../../../features/shared_screens/auth/login/login_screen.dart';
+import '../../../features/shared_screens/auth/signup/signup_screen.dart';
+import '../../../features/shared_screens/tab_bar/tab_bar_screen.dart';
 import 'routes.dart';
 /*
   class provides a central location for defining and generating routes in a Flutter application.
@@ -95,6 +96,10 @@ return  MaterialPageRoute(
         case checkAndRepair:return  MaterialPageRoute(
           settings: const RouteSettings(name: inquiryScreen),
           builder: (_) => const CheckAndRepairScreen(),
+        );
+         case serviceInfoScreen:return  MaterialPageRoute(
+          settings: const RouteSettings(name: serviceInfoScreen),
+          builder: (_) => const ServiceInfoScreen(),
         );
 
       default:

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_widgets/floating_action_button.dart';
-import 'view_model/check_repair_view_model.dart';
-import 'widget/check_repairs_viewer.dart';
 import '../../../../core/services/extentions.dart';
-
+import '../../../../core/utils/app_widgets/floating_action_button.dart';
 import '../../../crm/presentation/main_app_bar.dart';
-
+import 'view_model/check_repair_view_model.dart';
 import 'widget/add_repair_procedure_view.dart';
+import 'widget/check_repairs_viewer.dart';
 
 class CheckAndRepairScreen extends StatefulWidget {
   const CheckAndRepairScreen({super.key, this.isShowPrevProcedure = false});

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
 
-import '../../../features/crm/presentation/allTabs/inquiry/filter_inquiry/filter_inquiry_view_model.dart';
+import '../../../features/shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_view_model.dart';
 import '../../utils/constants/cache_keys.dart';
 import '../routing/navigation_service.dart';
 import '../routing/routes.dart';

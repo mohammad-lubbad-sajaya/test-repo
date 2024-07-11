@@ -91,7 +91,7 @@ changeLoadingState(){
     );
 
     final output = await getTemporaryDirectory();
-    pdfFile = File("${output.path}/example.pdf");
+    pdfFile = File("${output.path}/Receipt.pdf");
     await pdfFile?.writeAsBytes(await pdf.save()).then((value) {
       changeLoadingState();
       Navigator.push(

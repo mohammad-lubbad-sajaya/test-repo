@@ -3,7 +3,7 @@ import '../../../../../core/services/extentions.dart';
 
 import '../../../../../core/utils/theme/app_colors.dart';
 import '../../../data/models/procedure.dart';
-import '../../allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
+import '../../../../shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
 import '../../procedure_information/proceduser_cards/show_proceduser_card.dart';
 
 procedureInfoCard({required Procedure? obj,required bool isDark}) => Container(

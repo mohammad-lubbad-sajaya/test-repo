@@ -201,7 +201,12 @@
   "details":"Details",
   "open sign":"Open signature",
   "close sign":"Close signature",
-  "daily services":"Daily Services"
+  "daily services":"Daily Services",
+  "service info":"Service Information",
+  "piece num":"Piece number",
+  "piece name":"Piece name",
+  "required service":"Required service",
+  "service request details":"Service request details"
 
 
 }

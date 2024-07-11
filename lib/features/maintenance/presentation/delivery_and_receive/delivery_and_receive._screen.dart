@@ -4,14 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:sajaya_general_app/core/services/extentions.dart';
 
-
 import '../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../core/utils/app_widgets/custom_text_field.dart';
 import '../../../../core/utils/app_widgets/maintenance_dropdown.dart';
 import '../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../core/utils/constants/images.dart';
 import '../../../../core/utils/theme/app_colors.dart';
-import '../../../crm/presentation/allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../../crm/presentation/main_app_bar.dart';
 import '../../../crm/presentation/procedure_information/procedure_information_view_model.dart';
 import '../../../crm/presentation/procedure_place/procedure_place_view_model.dart';
@@ -21,8 +20,8 @@ import 'view_models/delivery_and_receive_view_model.dart';
 import 'widgets/sing_widget.dart';
 
 class DeliveryFormScreen extends StatefulWidget {
-  const DeliveryFormScreen({super.key,this.isReceived=false});
-final bool isReceived;
+  const DeliveryFormScreen({super.key, this.isReceived = false});
+  final bool isReceived;
 
   @override
   _DeliveryFormScreenState createState() => _DeliveryFormScreenState();
@@ -34,12 +33,19 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_)async {
-  final _viewModel = context.read(deliveryAndReceiveViewModel);
-  await  _viewModel.initTabController(this,widget.isReceived?1:0);
-     });
-  
-    
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final _viewModel = context.read(deliveryAndReceiveViewModel);
+      await _viewModel.initTabController(this, widget.isReceived ? 1 : 0);
+      if (widget.isReceived) {
+        _viewModel.changeSelectedEquipmentType(_viewModel.equipments.first);
+        _viewModel.changeSelectedAccessory1(_viewModel.accessory.first);
+        _viewModel.changeWorkerName(_viewModel.workers.first);
+        _viewModel.pieceTextController.text = "keyboared";
+        _viewModel.noteTextControllere.text = "no notes for now";
+        _viewModel.serialNumTextController.text = "55-78444-45455";
+      }
+    });
+
     super.initState();
   }
 
@@ -59,90 +65,114 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
           ),
           body: Consumer(builder: (context, ref, child) {
             final _viewModel = ref.watch(deliveryAndReceiveViewModel);
-            return _viewModel.tabController==null?Container(): SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 20,
+            return _viewModel.tabController == null
+                ? Container()
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            _buildTabBar(_viewModel),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            _buildDatePicker(ref,(widget.isReceived&&_viewModel.tabIndex==0)),
+                            maintenanceDropDown(
+                              isIgnore:
+                                  widget.isReceived && _viewModel.tabIndex == 0,
+                              'device type'.localized(),
+                              _viewModel.selectedEquipmentType,
+                              _viewModel.equipments,
+                              (String? newValue) {
+                                _viewModel
+                                    .changeSelectedEquipmentType(newValue!);
+                              },
+                            ),
+                            maintenanceDropDown(
+                                isIgnore: widget.isReceived &&
+                                    _viewModel.tabIndex == 0,
+                                'Supplement'.localized(),
+                                _viewModel.selectedAccessory1,
+                                _viewModel.accessory, (String? newValue) {
+                              _viewModel.changeSelectedAccessory1(newValue!);
+                            }),
+                            maintenanceDropDown(
+                                isIgnore: widget.isReceived &&
+                                    _viewModel.tabIndex == 0,
+                                _viewModel.tabIndex == 0
+                                    ? "Receive it".localized()
+                                    : 'hand it over'.localized(),
+                                _viewModel.workerName,
+                                _viewModel.workers, (String? newValue) {
+                              _viewModel.changeWorkerName(newValue!);
+                            }),
+                            customTextField('piece'.localized(), (p0) {},
+                                focusNode: _viewModel.pieceFocusNode,
+                                nextFocusNode: _viewModel.serialNumFocusNode,
+                                context: context,
+                                enabled: !(widget.isReceived &&
+                                    _viewModel.tabIndex == 0),
+                                controller: _viewModel.pieceTextController),
+                            customTextField(
+                                'serial number'.localized(), (p0) {},
+                                focusNode: _viewModel.serialNumFocusNode,
+                                nextFocusNode: _viewModel.nameFocusNode,
+                                enabled: !(widget.isReceived &&
+                                    _viewModel.tabIndex == 0),
+                                context: context,
+                                controller: _viewModel.serialNumTextController),
+                            if (_viewModel.tabIndex == 1) ...[
+                              customTextField(
+                                  'The recipient'.localized(), (p0) {},
+                                  focusNode: _viewModel.nameFocusNode,
+                                  nextFocusNode: _viewModel.notesFocusNode,
+                                  enabled: !(widget.isReceived &&
+                                      _viewModel.tabIndex == 0),
+                                  context: context,
+                                  controller: _viewModel.nameTextController),
+                            ],
+                            if (_viewModel.tabIndex == 0) ...[
+                              ..._getImageView(),
+                              customTextField('Notes '.localized(), (p0) {},
+                                  maxLines: 3,
+                                  focusNode: _viewModel.notesFocusNode,
+                                  enabled: !(widget.isReceived &&
+                                      _viewModel.tabIndex == 0),
+                                  context: context,
+                                  controller: _viewModel.noteTextControllere),
+                            ],
+                            if (_viewModel.tabIndex == 1) ...[
+                              const SizedBox(height: 20),
+                              const SignatureScreen(),
+                            ],
+                            const SizedBox(height: 20),
+
+                            //  _buildSubmitButton(),
+                          if(!(widget.isReceived&&_viewModel.tabIndex==0))
+                            saveAndCancelButtons(
+                              context,
+                              _viewModel.isLoading,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onSave: () async {
+                                final _signeture = await _viewModel
+                                    .signatureController
+                                    .toPngBytes();
+                                _viewModel.generatePDF(_signeture!, context);
+                              },
+                            )
+                          ],
+                        ),
                       ),
-                      _buildTabBar(_viewModel),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buildDatePicker(ref),
-                      maintenanceDropDown(
-                        'device type'.localized(),
-                        _viewModel.selectedEquipmentType,
-                        _viewModel.equipments,
-                        
-                        (String? newValue) {
-                          _viewModel.changeSelectedEquipmentType(newValue!);
-                        },
-                      ),
-                      maintenanceDropDown('Supplement'.localized(), _viewModel.selectedAccessory1,
-                          _viewModel.accessory, (String? newValue) {
-                        _viewModel.changeSelectedAccessory1(newValue!);
-                      }),
-                      maintenanceDropDown(
-                          _viewModel.tabIndex == 0 ? "Receive it".localized() : 'hand it over'.localized(),
-                          _viewModel.workerName,
-                          _viewModel.workers, (String? newValue) {
-                        _viewModel.changeWorkerName(newValue!);
-                      }),
-                      customTextField('piece'.localized(), (p0) {},
-                          focusNode: _viewModel.pieceFocusNode,
-                          nextFocusNode: _viewModel.serialNumFocusNode,
-                          context: context,
-                          controller: _viewModel.pieceTextController),
-                      customTextField('serial number'.localized(), (p0) {},
-                          focusNode: _viewModel.serialNumFocusNode,
-                          nextFocusNode: _viewModel.nameFocusNode,
-                          context: context,
-                          controller: _viewModel.serialNumTextController),
-                      if (_viewModel.tabIndex == 1) ...[
-                        customTextField('The recipient'.localized(), (p0) {},
-                            focusNode: _viewModel.nameFocusNode,
-                            nextFocusNode: _viewModel.notesFocusNode,
-                            context: context,
-                            controller: _viewModel.nameTextController),
-                      ],
-                      if (_viewModel.tabIndex == 0) ...[
-                        ..._getImageView(),
-                        customTextField('Notes '.localized(), (p0) {},
-                            maxLines: 3,
-                            focusNode: _viewModel.notesFocusNode,
-                            context: context,
-                            controller: _viewModel.noteTextControllere),
-                      ],
-                      if (_viewModel.tabIndex == 1) ...[
-                        const SizedBox(height: 20),
-                        const SignatureScreen(),
-                      ],
-                      const SizedBox(height: 20),
-        
-                      //  _buildSubmitButton(),
-                      saveAndCancelButtons(
-                        context,
-                        _viewModel.isLoading,
-                        onCancel: () {
-                          Navigator.pop(context);
-                        },
-                        onSave: () async {
-                          final _signeture =
-                              await _viewModel.signatureController.toPngBytes();
-                          _viewModel.generatePDF(_signeture!, context);
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
+                    ),
+                  );
           }),
         ),
       ),
@@ -163,7 +193,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
             child: Tab(
               child: Text("Receive".localized(),
                   style: TextStyle(
-                    fontSize: 13,
+                      fontSize: 13,
                       color: _viewModel.tabController!.index == 0
                           ? Colors.white
                           : Colors.black)),
@@ -178,7 +208,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
               child: Text(
                 "Deliver".localized(),
                 style: TextStyle(
-                  fontSize: 13,
+                    fontSize: 13,
                     color: _viewModel.tabController!.index == 1
                         ? Colors.white
                         : Colors.black),
@@ -202,11 +232,14 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         borderRadius: BorderRadius.circular(20), color: secondaryColor);
   }
 
-  Widget _buildDatePicker(WidgetRef ref) {
+  Widget _buildDatePicker(WidgetRef ref,bool isReadOnly) {
     final viewModel = ref.watch(procInfoViewModelProvider);
     final isDark = ref.watch(settingsViewModelProvider).isDark;
     return InkWell(
       onTap: () {
+        if(isReadOnly){
+          return;
+        }
         viewModel.selectDateTime(context);
       },
       child: customRowApp(
@@ -215,7 +248,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         text: "Date and time".localized(),
         subText:
             viewModel.selectedDateTime.toStringFormat("hh:mm:ss dd/MM/yyyy"),
-        subTitleTextColor: isDark ? backGroundColor : Colors.black,
+        subTitleTextColor: isDark ? backGroundColor :isReadOnly?Colors.grey: Colors.black,
         image: downArrow,
         imageWidth: 9,
       ),
@@ -250,9 +283,3 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
     ];
   }
 }
-
-
-
-
-
-

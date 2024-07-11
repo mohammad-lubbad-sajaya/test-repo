@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/crm/presentation/allTabs/settings/settings_view_model.dart';
+import '../../../features/shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../services/extentions.dart';
 import '../theme/app_colors.dart';
 

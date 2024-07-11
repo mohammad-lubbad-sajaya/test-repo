@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../../../core/services/extentions.dart';
 import '../../../../../core/utils/app_widgets/custom_app_text.dart';
-import '../../../../crm/presentation/allTabs/settings/settings_view_model.dart';
-import '../view_model/check_repair_view_model.dart';
-
 import '../../../../../core/utils/theme/app_colors.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../check_and_repair_screen.dart';
+import '../view_model/check_repair_view_model.dart';
 
 class CheckRepairViewer extends StatelessWidget {
   const CheckRepairViewer({super.key});

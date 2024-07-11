@@ -4,8 +4,8 @@ import '../../../../../core/services/extentions.dart';
 import '../../../../../core/utils/app_widgets/app_card.dart';
 import '../../../../../core/utils/app_widgets/list_view_container_builder.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
-import '../../allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
-import '../../allTabs/settings/settings_view_model.dart';
+import '../../../../shared_screens/allTabs/inquiry/filter_inquiry/filter_inquiry_screen.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../procedure_place_view_model.dart';
 
 customerProcedures({

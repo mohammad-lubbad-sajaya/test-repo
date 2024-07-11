@@ -11,3 +11,4 @@ const String filterInquiryScreen = 'filter_inquiry';
 const String procedurePlaceScreen = 'procedure_place_screen';
 const String settingsScreen = 'settings_screen';
 const String checkAndRepair = 'check_repair_screen';
+const String serviceInfoScreen = 'service_info_screen';

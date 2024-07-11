@@ -24,8 +24,8 @@ import '../../data/models/customer_specification.dart';
 import '../../data/models/drop_down_obj.dart';
 import '../../data/models/procedure.dart';
 import '../../data/models/representative.dart';
-import '../allTabs/settings/settings_view_model.dart';
-import '../tab_bar/tab_bar_screen.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_screen.dart';
 
 
 

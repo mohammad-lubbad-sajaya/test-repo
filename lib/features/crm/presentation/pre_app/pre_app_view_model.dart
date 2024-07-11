@@ -24,8 +24,8 @@ import '../../../../core/utils/methods/shared_methods.dart';
 import '../../data/models/error_res.dart';
 import '../../data/models/procedure.dart';
 import '../../data/models/user_token.dart';
-import '../allTabs/all_proc/view_models/all_proc_view_model.dart';
-import '../allTabs/home/home_view_model.dart';
+import '../../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
+import '../../../shared_screens/allTabs/home/home_view_model.dart';
 import '../procedure_information/procedure_information_view_model.dart';
 import '../procedure_place/procedure_place_view_model.dart';
 

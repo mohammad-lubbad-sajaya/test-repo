@@ -16,7 +16,7 @@ import '../../../../../core/utils/constants/cls_crypto.dart';
 import '../../../data/models/check_user.dart';
 import '../../../data/models/procedure.dart';
 import '../../../data/models/vouchers.dart';
-import '../../allTabs/home/home_view_model.dart';
+import '../../../../shared_screens/allTabs/home/home_view_model.dart';
 import '../procedure_information_view_model.dart';
 
 final vouchersViewModelProvider =
