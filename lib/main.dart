@@ -122,12 +122,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initLocale() {
+
     String? lang = sl<LocalRepo>().getLanguage();
     _appTranslationsDelegate = AppTranslationsDelegate(
       locale: lang == null ? null : Locale(lang, ''),
     );
     application.onLocaleChanged = onLocaleChange;
-  }
+  } 
 
   void onLocaleChange(Locale locale) {
     sl<Dio>().options.headers.addAll({'lang': locale.languageCode});

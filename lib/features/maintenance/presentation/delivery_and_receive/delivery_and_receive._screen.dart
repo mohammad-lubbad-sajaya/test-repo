@@ -17,7 +17,6 @@ import '../../../crm/presentation/procedure_place/procedure_place_view_model.dar
 import '../../../crm/presentation/procedure_place/widgets/meeting_view.dart';
 
 import 'view_models/delivery_and_receive_view_model.dart';
-import 'widgets/sing_widget.dart';
 
 class DeliveryFormScreen extends StatefulWidget {
   const DeliveryFormScreen({super.key, this.isReceived = false});
@@ -147,10 +146,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                                   context: context,
                                   controller: _viewModel.noteTextControllere),
                             ],
-                            if (_viewModel.tabIndex == 1) ...[
-                              const SizedBox(height: 20),
-                              const SignatureScreen(),
-                            ],
+                           
                             const SizedBox(height: 20),
 
                             //  _buildSubmitButton(),

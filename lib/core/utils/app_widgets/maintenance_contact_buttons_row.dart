@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme/app_colors.dart';
 import 'package:trust_location/trust_location.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +33,7 @@ class MaintenanceContactButtonsRow {
             () => _openGoogleMaps(
                 latitude: double.parse(latLongPosition.latitude ?? ""),
                 longitude: double.parse(latLongPosition.longitude ?? ""))),
-        _buildContactbutton(Icons.chat_rounded, () => _openWhatsApp(phone)),
+        _buildContactbutton( FontAwesomeIcons.whatsapp, () => _openWhatsApp(phone)),
       ],
     );
   }
