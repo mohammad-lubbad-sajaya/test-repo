@@ -16,7 +16,8 @@ class CheckAndRepairViewModel extends ChangeNotifier {
   String? selectedAlternateItem;
   DateTime bondDate = DateTime.now();
   bool isNotEditiable = false;
-
+  DateTime? checkInTime;
+  int minutesSpent = 0;
   final List<String> serviceTypes = [
     "فحص و إصلاح",
     "فحص",
@@ -109,6 +110,19 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  checkIn() {
+    checkInTime = DateTime.now();
+    notifyListeners();
+  }
+
+  checkOut() {
+    if (checkInTime == null) {
+      return;
+    }
+    minutesSpent = DateTime.now().difference(checkInTime!).inMinutes;
+    notifyListeners();
+  }
+
   changeBondNumber(int? newValue) {
     currentBondNumber = newValue ?? 0;
     notifyListeners();
@@ -136,6 +150,20 @@ class CheckAndRepairViewModel extends ChangeNotifier {
 
   changeAlternateItem(String? val) {
     selectedAlternateItem = val;
+    notifyListeners();
+  }
+
+  disposeData() {
+    checkInTime = null;
+    minutesSpent = 0;
+    changeEditablity(false);
+    changeAction(null);
+    changeAlternateItem(null);
+    changeCase(null);
+    changeCause(null);
+    changeCorruptedItem(null);
+    changeServiceLocation(null);
+    changeServiceType(null);
     notifyListeners();
   }
 }

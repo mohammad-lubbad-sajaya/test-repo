@@ -15,8 +15,6 @@ import '../../../crm/data/models/check_user.dart';
 import '../../../crm/data/models/drop_down_obj.dart';
 import '../../../crm/data/models/user_company.dart';
 
-
-
 final settingsViewModelProvider =
     ChangeNotifierProvider((ref) => SettingsViewModel());
 

@@ -63,13 +63,6 @@ class _CheckAndRepairScreenState extends State<CheckAndRepairScreen> {
   }
 
   _onPopScreen(bool didPop) {
-    context.read(checkAndRepairViewModel).changeEditablity(false);
-    context.read(checkAndRepairViewModel).changeAction(null);
-    context.read(checkAndRepairViewModel).changeAlternateItem(null);
-    context.read(checkAndRepairViewModel).changeCase(null);
-    context.read(checkAndRepairViewModel).changeCause(null);
-    context.read(checkAndRepairViewModel).changeCorruptedItem(null);
-    context.read(checkAndRepairViewModel).changeServiceLocation(null);
-    context.read(checkAndRepairViewModel).changeServiceType(null);
+    context.read(checkAndRepairViewModel).disposeData();
   }
 }

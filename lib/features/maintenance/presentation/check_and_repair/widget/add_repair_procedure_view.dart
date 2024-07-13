@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sajaya_general_app/core/utils/common_widgets/show_confirmation_dialog.dart';
 
 import '../../../../../core/services/extentions.dart';
 import '../../../../../core/services/routing/navigation_service.dart';
@@ -144,7 +145,20 @@ class AddRepairProcedureView extends StatelessWidget {
               context
                   .read(procedurePlaceViewModelProvider)
                   .changeIsFromCheckAndRepair(true);
-              sl<NavigationService>().navigateTo(procedurePlaceScreen);
+              _viewModel.checkOut();
+              showConfirmationDialog(
+                  context: context,
+                  title: "time spent".localized(),
+                  content: (_viewModel.minutesSpent/60).toString(),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                           sl<NavigationService>().navigateTo(procedurePlaceScreen);
+                        },
+                        child: Text("ok".localized()))
+                  ]);
+             
             },
           ),
           const SizedBox(
