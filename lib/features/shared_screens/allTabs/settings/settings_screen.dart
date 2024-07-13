@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:numberpicker/numberpicker.dart';
-import '../../../../core/services/extentions.dart';
-import '../../../../core/utils/constants/endpoints.dart';
-
 import 'package:wheel_slider/wheel_slider.dart';
 
 import '../../../../core/services/app_translations/app_translations.dart';
+import '../../../../core/services/extentions.dart';
 import '../../../../core/services/local_repo/local_repository.dart';
 import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/app_widgets/app_circular_progress.dart';
 import '../../../../core/utils/app_widgets/app_title.dart';
 import '../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../core/utils/app_widgets/drop_vertical_down_button.dart';
-import '../../../../core/utils/methods/change_language_state.dart';
+import '../../../../core/utils/constants/endpoints.dart';
 import '../../../../core/utils/constants/images.dart';
+import '../../../../core/utils/methods/change_language_state.dart';
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../tab_bar/tab_bar_view_model.dart';
 import '../home/home_view_model.dart';

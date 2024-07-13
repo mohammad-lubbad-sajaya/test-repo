@@ -15,73 +15,77 @@ import '../../shared_screens/allTabs/home/home_view_model.dart';
 import '../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../shared_screens/tab_bar/tab_bar_view_model.dart';
 
-
-mainAppbar({
-  String? text,
-  BuildContext ?context,
-  bool isHideLogOut=false
-}) =>
+mainAppbar({String? text, BuildContext? context, bool isHideLogOut = false}) =>
     AppBar(
-      backgroundColor: context!.read(settingsViewModelProvider).isDark?darkModeBackGround:Colors.white,
-      title: appTitle(text: text ?? "",isDark:context.read(settingsViewModelProvider).isDark ),
-      actions:isHideLogOut?[]: [
-        Consumer(
-          builder: (context, ref, child) {
-            final homeViewModel = ref.watch(homeViewModelProvider);
-            final allProcViewModel = ref.watch(allProcModelProvider);
-            homeViewModel.context = context;
-            if (homeViewModel.isAdmin ?? false) {
-              return PopupMenuButton<String>(
-                enableFeedback: true,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                elevation: 12,
-                color: Colors.white,
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height / 1.5,
-                ),
-                onSelected: (value) {
-                  homeViewModel.setSelectedEnteredUser(value);
-                  reloadHomeData(context, allProcViewModel, homeViewModel);
-                },
-                itemBuilder: (BuildContext context) {
-                  return homeViewModel.enteredUsersList.map((EnteredUsers obj) {
-                    return PopupMenuItem<String>(
-                      value: obj.enteredByUser,
-                      child: customTextApp(
-                          text: isEnglish()
-                              ? obj.userNameE ?? ""
-                              : obj.userNameA ?? "",
-                          fontWeight:
-                              homeViewModel.isUserIDSelected(obj.enteredByUser)
-                                  ? FontWeight.bold
-                                  : FontWeight.normal),
+      backgroundColor: context!.read(settingsViewModelProvider).isDark
+          ? darkModeBackGround
+          : Colors.white,
+      title: appTitle(
+          text: text ?? "",
+          isDark: context.read(settingsViewModelProvider).isDark),
+      actions: isHideLogOut
+          ? []
+          : [
+              Consumer(
+                builder: (context, ref, child) {
+                  final homeViewModel = ref.watch(homeViewModelProvider);
+                  final allProcViewModel = ref.watch(allProcModelProvider);
+                  homeViewModel.context = context;
+                  if (homeViewModel.isAdmin ?? false) {
+                    return PopupMenuButton<String>(
+                      enableFeedback: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      elevation: 12,
+                      color: Colors.white,
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height / 1.5,
+                      ),
+                      onSelected: (value) {
+                        homeViewModel.setSelectedEnteredUser(value);
+                        reloadHomeData(
+                            context, allProcViewModel, homeViewModel);
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return homeViewModel.enteredUsersList
+                            .map((EnteredUsers obj) {
+                          return PopupMenuItem<String>(
+                            value: obj.enteredByUser,
+                            child: customTextApp(
+                                text: isEnglish()
+                                    ? obj.userNameE ?? ""
+                                    : obj.userNameA ?? "",
+                                fontWeight: homeViewModel
+                                        .isUserIDSelected(obj.enteredByUser)
+                                    ? FontWeight.bold
+                                    : FontWeight.normal),
+                          );
+                        }).toList();
+                      },
+                      icon: Image.asset(profile),
                     );
-                  }).toList();
+                  } else {
+                    return Container();
+                  }
                 },
-                icon: Image.asset(profile),
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-        Transform.scale(
-          scaleX: -1,
-          child: IconButton(
-            icon: Image.asset(
-              logout,
-              matchTextDirection: true,
-            ),
-            onPressed: () {
-                                                    context.read(homeViewModelProvider).resetProcedures();
+              ),
+              Transform.scale(
+                scaleX: -1,
+                child: IconButton(
+                  icon: Image.asset(
+                    logout,
+                    matchTextDirection: true,
+                  ),
+                  onPressed: () {
+                    context.read(homeViewModelProvider).resetProcedures();
 
-              sl<LocalRepo>().logout();
-            },
-          ),
-        )
-      ],
+                    sl<LocalRepo>().logout();
+                  },
+                ),
+              ),
+            
+            ],
     );
 
 reloadHomeData(BuildContext context, AllProcViewModel allProcViewModel,

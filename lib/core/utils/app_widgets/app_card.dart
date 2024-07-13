@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'maintenance_contact_buttons_row.dart';
-import '../../../features/crm/presentation/procedure_place/procedure_place_view_model.dart';
-import '../../../features/maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import 'package:trust_location/trust_location.dart';
-import '../../services/extentions.dart';
 
 import '../../../features/crm/data/models/procedure.dart';
 import '../../../features/crm/data/models/service_request.dart';
+import '../../../features/crm/presentation/procedure_place/procedure_place_view_model.dart';
+import '../../../features/maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../../services/app_translations/app_translations.dart';
+import '../../services/extentions.dart';
 import '../../services/routing/navigation_service.dart';
 import '../../services/routing/routes.dart';
 import '../../services/service_locator/dependency_injection.dart';
 import '../constants/images.dart';
 import '../theme/app_colors.dart';
 import 'custom_app_text.dart';
+import 'maintenance_contact_buttons_row.dart';
 
 appCard({
   Procedure? obj,
@@ -186,7 +186,7 @@ appCard({
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(height: servObj != null ? 5 : 10),
-                  if (isTimerIcon == false) ...[
+                  if (isTimerIcon == false&&servObj==null) ...[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -202,17 +202,7 @@ appCard({
                           maxLine: null,
                           fontWeight: FontWeight.w500,
                         ),
-                        if (servObj != null) ...[
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Container(
-                            height: 15,
-                            width: 40,
-                            decoration:
-                                 BoxDecoration(color:getStatusColor(servObj.serviceStatus)),
-                          )
-                        ]
+                       
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -239,20 +229,4 @@ appCard({
         ),
       ),
     );
-  getStatusColor(String status) {
-    Color color;
-    switch (status) {
-      case 'جاهز للتسليم':
-        color = Colors.green;
-        break;
-      case 'غير جاهز':
-        color = Colors.yellow;
-        break;
-      case 'به مشاكل':
-        color = Colors.red;
-        break;
-      default:
-        color = Colors.grey;
-    }
-    return color;
-  }
+  

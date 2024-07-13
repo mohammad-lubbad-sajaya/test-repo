@@ -9,25 +9,24 @@ final allServicesRequestviewModel =
 class AllServicesRequestsViewModel extends ChangeNotifier {
   List<ServiceRequest> servicesRequestsList = [];
   List<ServiceRequest> filteredServicesRequestsList = [];
+  List<String> filters = ["طلباتي", "مواعيدي"];
+  int filterIndex = 0;
   late BuildContext context;
   final textController = TextEditingController();
-  List<String> statuses = ['الكل', 'جاهز للتسليم', 'غير جاهز', 'به مشاكل'];
-  Set<String> selectedStatuses = {'الكل'};
-  initServices() {
-    
+  void initServices() {
     servicesRequestsList = [
       ServiceRequest(
           bondNo: 655,
           clientName: "عملاء مركز الصيانة",
           address: "العبدلي",
-          date: DateTime.now(),
+          date: DateTime(2024, 7, 5),
           serviceStatus: "جاهز للتسليم",
           serviceType: "طلب صيانة"),
       ServiceRequest(
           bondNo: 542,
           address: "ضاحية الرشيد",
           clientName: "شركة المستقبل",
-          date: DateTime.now(),
+          date: DateTime(2024, 7, 10),
           serviceStatus: "غير جاهز",
           serviceType: "طلب صيانة"),
       ServiceRequest(
@@ -57,41 +56,43 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void Function(bool)? onSelected(String status, bool selected) {
-    if (status == 'الكل') {
-      selectedStatuses.clear();
-      selectedStatuses.add('الكل');
-      filteredServicesRequestsList = servicesRequestsList;
-    } else {
-      selectedStatuses.remove('الكل');
-      if (selected) {
-        selectedStatuses.add(status);
-        _filterStatus();
-      } else {
-        selectedStatuses.remove(status);
-        _filterStatus();
-      }
-      if (selectedStatuses.isEmpty) {
-        selectedStatuses.add('الكل');
-        filteredServicesRequestsList = servicesRequestsList;
-      }
-    }
-
-    notifyListeners();
-    return null;
-  }
-
-  clearSearch() {
+  void clearSearch() {
     textController.text = "";
     filteredServicesRequestsList = servicesRequestsList;
     notifyListeners();
   }
 
-  void _filterStatus() {
-    filteredServicesRequestsList = [];
-    for (var element in selectedStatuses) {
-      filteredServicesRequestsList.add(
-          servicesRequestsList.firstWhere((e) => e.serviceStatus == element));
-    }
+  void changeFilterIndex(int index) {
+    filterIndex = index;
+    notifyListeners();
+  }
+
+  bool isSameDate(
+    DateTime date1,
+  ) {
+    // to check if a data is today or not
+    final date2 = DateTime.now();
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
+  int getServicesRequestLength() {
+    //this is to get services request  length based on the filter choosed (طلباتي و مواعيدي)
+
+    return filterIndex == 0
+        ? filteredServicesRequestsList.length
+        : filteredServicesRequestsList
+            .where((element) => isSameDate(element.date))
+            .length;
+  }
+
+  ServiceRequest getServiceRequestObject(int index) {
+    //this is to get services based on the filter choosed (طلباتي و مواعيدي)
+    return filterIndex == 0
+        ? filteredServicesRequestsList[index]
+        : filteredServicesRequestsList
+            .where((element) => isSameDate(element.date))
+            .toList()[index];
   }
 }

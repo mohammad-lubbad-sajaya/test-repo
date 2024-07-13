@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/extentions.dart';
 
+import '../../services/extentions.dart';
 import '../common_widgets/custom_raised_button.dart';
 import '../theme/app_colors.dart';
 import 'custom_app_text.dart';
@@ -8,6 +8,8 @@ import 'custom_app_text.dart';
 saveAndCancelButtons(
   BuildContext context,
   bool isLoading, {
+      String ?secondButtonName,
+
   Function()? onSave,
   Function()? onCancel,
 }) =>
@@ -56,7 +58,7 @@ saveAndCancelButtons(
                 ),
                 const SizedBox(width: 5),
                 customTextApp(
-                  text: 'Cancel'.localized(),
+                  text:secondButtonName?? 'Cancel'.localized(),
                   color: Colors.white,
                   size: 14,
                   fontWeight: FontWeight.w600,

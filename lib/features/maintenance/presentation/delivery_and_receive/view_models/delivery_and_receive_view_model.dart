@@ -13,7 +13,7 @@ final deliveryAndReceiveViewModel =
     ChangeNotifierProvider.autoDispose((ref) => DeliveryAndReceiveViewModel());
 
 class DeliveryAndReceiveViewModel extends ChangeNotifier {
-   TabController ?tabController;
+  TabController? tabController;
   final pieceTextController = TextEditingController();
   final serialNumTextController = TextEditingController();
   final nameTextController = TextEditingController();
@@ -33,19 +33,23 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
   String receivedBy = '';
   int tabIndex = 0;
   File? pdfFile;
-  bool isLoading=false;
+  bool isLoading = false;
+  bool isChecked = false;
   final SignatureController signatureController = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.black,
   );
-  initTabController(TickerProvider tickerProvider,int initialIndex) {
-    tabController = TabController(length: 2, vsync: tickerProvider,initialIndex: initialIndex);
+  initTabController(TickerProvider tickerProvider, int initialIndex) {
+    tabController = TabController(
+        length: 2, vsync: tickerProvider, initialIndex: initialIndex);
     changeTabIndex(initialIndex);
   }
-changeLoadingState(){
-  isLoading=!isLoading;
-  notifyListeners();
-}
+
+  changeLoadingState() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
+
   changeTabIndex(int val) {
     tabIndex = val;
     notifyListeners();
@@ -66,7 +70,12 @@ changeLoadingState(){
     notifyListeners();
   }
 
-  generatePDF(Uint8List signature, BuildContext context) async {
+  onCheck(bool val) {
+    isChecked = val;
+    notifyListeners();
+  }
+
+  generatePDF(Uint8List ?signature, BuildContext context) async {
     changeLoadingState();
     final pdf = pw.Document();
 
@@ -83,7 +92,7 @@ changeLoadingState(){
               pw.SizedBox(height: 50),
               pw.Text(nameTextController.text),
               pw.SizedBox(height: 20),
-              pw.Image(pw.MemoryImage(signature), width: 200, height: 100),
+            signature==null?pw.Container():  pw.Image(pw.MemoryImage(signature), width: 200, height: 100),
             ],
           );
         },

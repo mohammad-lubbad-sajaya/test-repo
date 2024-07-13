@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../services/extentions.dart';
-import '../theme/app_colors.dart';
 
 import '../../../features/shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../services/app_translations/app_translations.dart';
+import '../../services/extentions.dart';
 import '../app_widgets/custom_app_text.dart';
 import '../constants/images.dart';
 import '../methods/change_language_state.dart';
+import '../theme/app_colors.dart';
 
 
 class ChangeLanguageView extends StatefulWidget {

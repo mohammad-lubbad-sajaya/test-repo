@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/services/extentions.dart';
-import '../../domain/usecases/crm_usecases.dart';
 
 import '../../../../core/services/app_translations/app_translations.dart';
+import '../../../../core/services/extentions.dart';
 import '../../../../core/services/local_repo/local_user_repository.dart';
 import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/common_widgets/loading_dialog.dart';
 import '../../../../core/utils/constants/cls_crypto.dart';
 import '../../data/models/check_user.dart';
 import '../../data/models/customer_specification.dart';
+import '../../domain/usecases/crm_usecases.dart';
 
 
 final bottomSheetSearchViewModelProvider =

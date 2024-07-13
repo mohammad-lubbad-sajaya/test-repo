@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../services/extentions.dart';
-import '../theme/app_colors.dart';
 
 import '../../../features/shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../services/extentions.dart';
+import '../theme/app_colors.dart';
 import 'custom_app_text.dart';
 
 Widget showNoDataView({

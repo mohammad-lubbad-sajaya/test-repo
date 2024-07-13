@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/material.dart';
 
 import '../utils/common_widgets/loading_dialog.dart';
 import '../utils/common_widgets/show_confirmation_dialog.dart';

@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
-import '../../../features/crm/data/models/check_user.dart';
-import '../../../features/crm/data/models/user_token.dart';
-import '../extentions.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../features/crm/data/models/check_user.dart';
+import '../../../features/crm/data/models/user_token.dart';
 import '../configrations/general_configrations.dart';
+import '../extentions.dart';
 
 // this class is used to all genral user funsctions in app and store all data in shared preferences
 class LocalUserRepo {

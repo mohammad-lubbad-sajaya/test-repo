@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../core/services/extentions.dart';
 
+import '../../../../../core/services/extentions.dart';
 import '../../../../../core/services/routing/navigation_service.dart';
 import '../../../../../core/services/routing/routes.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
@@ -11,9 +11,9 @@ import '../../../../../core/utils/app_widgets/maintenance_dropdown.dart';
 import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
-import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../../../crm/presentation/procedure_information/procedure_information_view_model.dart';
 import '../../../../crm/presentation/procedure_place/procedure_place_view_model.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../view_model/check_repair_view_model.dart';
 
 class AddRepairProcedureView extends StatelessWidget {

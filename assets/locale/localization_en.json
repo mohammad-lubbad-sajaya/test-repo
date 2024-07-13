@@ -176,7 +176,7 @@
   "device timing": "Device timing",
   "counter timing": "Counter Timing",
   "you arrived": "You Arrived !!",
-  "all service request": "All Service Request",
+  "service request": "Service requests",
   "Delivery and Receive": "Delivery and receive",
   "Deliver": "Deliver",
   "Receive": "Receive",
@@ -206,7 +206,11 @@
   "piece num":"Piece number",
   "piece name":"Piece name",
   "required service":"Required service",
-  "service request details":"Service request details"
+  "service request details":"Service request details",
+  "sign empty":"Customer signature is empty please fill it or check refusing checkbox",
+  "refuse to sign":"Refuse to sign",
+  "Daily appointments":"Daily appointments"
+
 
 
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../core/services/extentions.dart';
-import 'package:sizer/sizer.dart';
 import 'package:signature/signature.dart';
+import 'package:sizer/sizer.dart';
 
-import '../../../../../core/utils/theme/app_colors.dart';
+import '../../../../../core/services/extentions.dart';
+import '../../../../../core/utils/app_widgets/check_box.dart';
+import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
+import '../../../../../core/utils/common_widgets/error_dialog.dart';
+import '../../../../crm/presentation/main_app_bar.dart';
+import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../view_models/delivery_and_receive_view_model.dart';
 
 class SignatureScreen extends StatefulWidget {
@@ -47,63 +51,64 @@ class _SignatureScreenState extends State<SignatureScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, child) {
-      final _viewModel = ref.watch(deliveryAndReceiveViewModel);
-      return Column(
-        children: [
-          GestureDetector(
-            onTap: toggleSwitch,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      appBar: mainAppbar(
+        context: context,
+        isHideLogOut: true,
+        text: "Delivery and Receive".localized(),
+      ),
+      body: Consumer(builder: (context, ref, child) {
+        final _viewModel = ref.watch(deliveryAndReceiveViewModel);
+        final _isDark=ref.watch(settingsViewModelProvider).isDark;
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                Text(
-               isOpen?"close sign".localized():"open sign".localized(),
-                  style:const TextStyle(fontSize: 13)
+                SizedBox(
+                  height: 10.h,
                 ),
-                Icon(
-                  isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                  color: Colors.black,
+                Signature(
+                  controller: _viewModel.signatureController,
+                  height: 50.h,
+                  width: 100.w,
+                  backgroundColor: Colors.grey[400]!,
                 ),
+                const SizedBox(
+                  height: 30,
+                ),
+                buildCheckBoxView(
+                  isDark:_isDark ,
+                  value:_viewModel.isChecked ,
+                  onTap: ()=>_viewModel.onCheck(!_viewModel.isChecked),
+                  title:"refuse to sign".localized() 
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                saveAndCancelButtons(
+                  context,
+                  secondButtonName: "clear".localized(),
+                  _viewModel.isLoading,
+                  onCancel: () {
+                    _viewModel.signatureController.clear();
+                  },
+                  onSave: () async {
+                    if (_viewModel.signatureController.isEmpty&&!_viewModel.isChecked) {
+                      showErrorDialog(message: "sign empty".localized());
+                    } else {
+                      final _signeture =
+                          await _viewModel.signatureController.toPngBytes();
+                      _viewModel.generatePDF(_signeture, context);
+                    }
+                  },
+                ),
+               
               ],
             ),
           ),
-          if(isOpen)...[
-            const SizedBox(height: 6,)
-          ],
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: isOpen ? 300 : 0, // Adjust height as needed
-            curve: Curves.easeInOut,
-            child: isOpen
-                ? Stack(
-                    children: [
-                      Signature(
-                        controller: _viewModel.signatureController,
-                        height: 300,
-                        width: 80.w,
-                        backgroundColor: Colors.grey[400]!,
-                      ),
-                      Positioned(
-                        top: 10,
-                        right: -15,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: secondaryColor,
-                          ),
-                          onPressed: () =>
-                              _viewModel.signatureController.clear(),
-                        ),
-                      ),
-                    ],
-                  )
-                : null,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      );
-    });
+        );
+      }),
+    );
   }
 }

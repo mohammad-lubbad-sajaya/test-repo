@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
-import 'package:sajaya_general_app/core/services/extentions.dart';
+
+import '../../../../core/services/extentions.dart';
+import '../../../../core/services/routing/navigation_service.dart';
+import '../../../../core/services/routing/routes.dart';
+import '../../../../core/services/service_locator/dependency_injection.dart';
 
 import '../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../core/utils/app_widgets/custom_text_field.dart';
@@ -81,7 +83,10 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                             const SizedBox(
                               height: 20,
                             ),
-                            _buildDatePicker(ref,(widget.isReceived&&_viewModel.tabIndex==0)),
+                            _buildDatePicker(
+                                ref,
+                                (widget.isReceived &&
+                                    _viewModel.tabIndex == 0)),
                             maintenanceDropDown(
                               isIgnore:
                                   widget.isReceived && _viewModel.tabIndex == 0,
@@ -136,8 +141,8 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                                   context: context,
                                   controller: _viewModel.nameTextController),
                             ],
+                            ..._getImageView(),
                             if (_viewModel.tabIndex == 0) ...[
-                              ..._getImageView(),
                               customTextField('Notes '.localized(), (p0) {},
                                   maxLines: 3,
                                   focusNode: _viewModel.notesFocusNode,
@@ -146,24 +151,27 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                                   context: context,
                                   controller: _viewModel.noteTextControllere),
                             ],
-                           
+
                             const SizedBox(height: 20),
 
                             //  _buildSubmitButton(),
-                          if(!(widget.isReceived&&_viewModel.tabIndex==0))
-                            saveAndCancelButtons(
-                              context,
-                              _viewModel.isLoading,
-                              onCancel: () {
-                                Navigator.pop(context);
-                              },
-                              onSave: () async {
-                                final _signeture = await _viewModel
-                                    .signatureController
-                                    .toPngBytes();
-                                _viewModel.generatePDF(_signeture!, context);
-                              },
-                            )
+                            if (!(widget.isReceived &&
+                                _viewModel.tabIndex == 0))
+                              saveAndCancelButtons(
+                                context,
+                                _viewModel.isLoading,
+                                onCancel: () {
+                                  Navigator.pop(context);
+                                },
+                                onSave: () async {
+                                  if (_viewModel.tabIndex == 0) {
+                                    Navigator.pop(context);
+                                  } else {
+                                    sl<NavigationService>()
+                                        .navigateTo(signatureScreen);
+                                  }
+                                },
+                              )
                           ],
                         ),
                       ),
@@ -228,12 +236,12 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         borderRadius: BorderRadius.circular(20), color: secondaryColor);
   }
 
-  Widget _buildDatePicker(WidgetRef ref,bool isReadOnly) {
+  Widget _buildDatePicker(WidgetRef ref, bool isReadOnly) {
     final viewModel = ref.watch(procInfoViewModelProvider);
     final isDark = ref.watch(settingsViewModelProvider).isDark;
     return InkWell(
       onTap: () {
-        if(isReadOnly){
+        if (isReadOnly) {
           return;
         }
         viewModel.selectDateTime(context);
@@ -244,7 +252,11 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         text: "Date and time".localized(),
         subText:
             viewModel.selectedDateTime.toStringFormat("hh:mm:ss dd/MM/yyyy"),
-        subTitleTextColor: isDark ? backGroundColor :isReadOnly?Colors.grey: Colors.black,
+        subTitleTextColor: isDark
+            ? backGroundColor
+            : isReadOnly
+                ? Colors.grey
+                : Colors.black,
         image: downArrow,
         imageWidth: 9,
       ),

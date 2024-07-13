@@ -4,14 +4,11 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/services/extentions.dart';
-import '../../../../core/utils/theme/app_colors.dart';
-import '../../domain/usecases/crm_usecases.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/services/app_translations/app_translations.dart';
 import '../../../../core/services/configrations/general_configrations.dart';
+import '../../../../core/services/extentions.dart';
 import '../../../../core/services/local_repo/local_user_repository.dart';
 import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/common_widgets/error_dialog.dart';
@@ -19,13 +16,15 @@ import '../../../../core/utils/common_widgets/loading_dialog.dart';
 import '../../../../core/utils/common_widgets/show_snack_bar.dart';
 import '../../../../core/utils/constants/cache_keys.dart';
 import '../../../../core/utils/constants/cls_crypto.dart';
+import '../../../../core/utils/theme/app_colors.dart';
+import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_screen.dart';
 import '../../data/models/check_user.dart';
 import '../../data/models/customer_specification.dart';
 import '../../data/models/drop_down_obj.dart';
 import '../../data/models/procedure.dart';
 import '../../data/models/representative.dart';
-import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
-import '../../../shared_screens/tab_bar/tab_bar_screen.dart';
+import '../../domain/usecases/crm_usecases.dart';
 
 
 

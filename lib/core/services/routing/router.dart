@@ -5,6 +5,7 @@ import '../../../features/crm/presentation/procedure_information/procedure_infor
 import '../../../features/crm/presentation/procedure_information/vouchers/vouchers_screen.dart';
 import '../../../features/crm/presentation/procedure_place/procedure_place_screen.dart';
 import '../../../features/maintenance/presentation/check_and_repair/check_and_repair_screen.dart';
+import '../../../features/maintenance/presentation/delivery_and_receive/widgets/signature_screen.dart';
 import '../../../features/maintenance/presentation/service_details/service_info_screen.dart';
 import '../../../features/shared_screens/allTabs/all_proc/all_proc_screen.dart';
 import '../../../features/shared_screens/allTabs/home/home_screen.dart';
@@ -100,6 +101,10 @@ return  MaterialPageRoute(
          case serviceInfoScreen:return  MaterialPageRoute(
           settings: const RouteSettings(name: serviceInfoScreen),
           builder: (_) => const ServiceInfoScreen(),
+        );
+           case signatureScreen:return  MaterialPageRoute(
+          settings: const RouteSettings(name: signatureScreen),
+          builder: (_) => const SignatureScreen(),
         );
 
       default:

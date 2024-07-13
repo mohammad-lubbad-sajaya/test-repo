@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../core/services/extentions.dart';
-import '../../../../crm/domain/usecases/crm_usecases.dart';
 
 import '../../../../../core/services/app_translations/app_translations.dart';
+import '../../../../../core/services/extentions.dart';
 import '../../../../../core/services/local_repo/local_user_repository.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../../core/utils/common_widgets/loading_dialog.dart';
@@ -14,6 +13,7 @@ import '../../../../crm/data/models/customer_specification.dart';
 import '../../../../crm/data/models/drop_down_obj.dart';
 import '../../../../crm/data/models/entered_users.dart';
 import '../../../../crm/data/models/representative.dart';
+import '../../../../crm/domain/usecases/crm_usecases.dart';
 
 
 final filterInquiryViewModelProvider =

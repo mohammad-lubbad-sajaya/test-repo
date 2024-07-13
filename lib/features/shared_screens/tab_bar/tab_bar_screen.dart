@@ -5,21 +5,21 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
-import '../../../core/services/extentions.dart';
 
 import '../../../core/services/configrations/general_configrations.dart';
+import '../../../core/services/extentions.dart';
 import '../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../core/utils/common_widgets/show_snack_bar.dart';
 import '../../../core/utils/constants/images.dart';
 import '../../../core/utils/methods/shared_methods.dart';
 import '../../../core/utils/theme/app_colors.dart';
+import '../../crm/presentation/pre_app/pre_app_view_model.dart';
+import '../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../allTabs/all_proc/all_proc_screen.dart';
 import '../allTabs/home/home_screen.dart';
 import '../allTabs/inquiry/pre_inquiry_screen/pre_inquiry_screen.dart';
 import '../allTabs/settings/settings_screen.dart';
 import '../allTabs/settings/settings_view_model.dart';
-import '../../crm/presentation/pre_app/pre_app_view_model.dart';
 import 'tab_bar_view_model.dart';
 
 final connectionProvider =
@@ -63,11 +63,8 @@ class _TabBarScreenState extends State<TabBarScreen>
             BottomNavigationBarItem(
               icon: Image.asset(dailyPrec),
               activeIcon: Image.asset(dailyPrec, color: secondaryColor),
-              label: context
-                      .read<TabBarViewModel>(tabBarViewModelProvider)
-                      .isMaintenance
-                  ? "daily services".localized()
-                  : 'Daily Proc.'.localized(),
+              label: "Daily appointments".localized()
+                  ,
             ),
             BottomNavigationBarItem(
               icon: SizedBox(
@@ -82,7 +79,7 @@ class _TabBarScreenState extends State<TabBarScreen>
                     serviceRequestIcon,
                     color: secondaryColor,
                   )),
-              label: 'all service request'.localized(),
+              label: 'service request'.localized(),
             ),
             BottomNavigationBarItem(
               icon: Image.asset(settings),

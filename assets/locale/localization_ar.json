@@ -176,7 +176,7 @@
     "device timing": "توقيت الجهاز",
     "counter timing": "توقيت العداد",
     "you arrived": "لقد وصلت وجهتك !!",
-    "all service request": "كل طلبات الخدمة",
+    "service request": "طلبات الخدمة",
     "Delivery and Receive": "تسليم و استلام",
     "Deliver": "تسليم",
     "Receive": "استلام",
@@ -206,7 +206,11 @@
     "service request details":"تفاصيل طلب الخدمة",
     "piece num":"رقم القطعة",
     "piece name":"إسم القطعة",
-    "required service":"الخدمة المطلوبة"
+    "required service":"الخدمة المطلوبة",
+    "sign empty":"لا يوجد توقيع للعميل ان كان يرفض التوقيع يرجى وضع علامة بالمكان المخصص لرفض التوقيع ",
+    "refuse to sign":"يرفض التوقيع",
+    "Daily appointments":"المواعيد اليومية"
+
 
 
 

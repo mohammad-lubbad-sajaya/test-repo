@@ -5,6 +5,7 @@ import '../../../../core/services/extentions.dart';
 import '../../../../core/services/routing/navigation_service.dart';
 import '../../../../core/services/routing/routes.dart';
 import '../../../../core/services/service_locator/dependency_injection.dart';
+import '../../../../core/utils/app_widgets/check_box.dart';
 import '../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../core/utils/common_widgets/change_language_view.dart';
 import '../../../../core/utils/common_widgets/custom_app_text_field.dart';
@@ -158,51 +159,15 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              InkWell(
-                                                child: Container(
-                                                  height: 18,
-                                                  width: 18,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: secondaryColor,
-                                                          width: 1.3),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  child: isRememberMe
-                                                      ? Center(
-                                                          child: Icon(
-                                                            Icons.check,
-                                                            color: isDark
-                                                                ? backGroundColor
-                                                                : primaryColor,
-                                                            size: 15,
-                                                          ),
-                                                        )
-                                                      : Container(),
-                                                ),
-                                                onTap: () {
-                                                  ref
-                                                      .read(isRememberMeProvider
-                                                          .state)
-                                                      .state = !isRememberMe;
-                                                  loginViewModel
-                                                      .checkRememberMe(
-                                                          !isRememberMe);
-                                                },
-                                              ),
-                                              const SizedBox(width: 5),
-                                              customTextApp(
-                                                color: isDark
-                                                    ? backGroundColor
-                                                    : Colors.black,
-                                                text: "Remember me".localized(),
-                                                size: 15,
-                                              ),
-                                            ],
-                                          ),
+                                          buildCheckBoxView(value:isRememberMe,isDark:isDark,onTap:() {
+                                                ref
+                                                    .read(isRememberMeProvider
+                                                        .state)
+                                                    .state = !isRememberMe;
+                                                loginViewModel
+                                                    .checkRememberMe(
+                                                        !isRememberMe);
+                                              },),
                                           InkWell(
                                             child: customTextApp(
                                               color: isDark
@@ -300,4 +265,6 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
       ),
     );
   }
+
+  
 }

@@ -1,8 +1,9 @@
+import 'dart:io' show File;
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'dart:io' show File;
 
 /// voice recorder sheet
 class VoiceRecorderSheet extends StatefulWidget {
