@@ -5,6 +5,8 @@ class ServiceRequest{
   String serviceType;
   String serviceStatus;
   String address;
+  double latitude;
+  double longitude;
 
   ServiceRequest({
     required this.bondNo,
@@ -13,5 +15,7 @@ class ServiceRequest{
     required this.date,
     required this.serviceStatus,
     required this.serviceType,
+    required this.latitude,
+    required this.longitude
   });
 }

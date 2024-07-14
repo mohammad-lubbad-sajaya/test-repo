@@ -38,11 +38,7 @@ class _AllProcScreenState extends State<AllProcScreen> {
         viewModel.context = context;
         viewModel.getMain();
       });
-    } else {
-      viewModel = context.read(allServicesRequestviewModel);
-      viewModel?.context = context;
-      viewModel?.initServices();
-    }
+    } 
   }
 
   @override

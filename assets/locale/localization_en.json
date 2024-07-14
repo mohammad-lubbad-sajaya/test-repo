@@ -72,7 +72,7 @@
   "entered data is not complete": "entered data is not complete",
   "New procedure added": "New procedure added:",
   "Linked Vouchers": "Linked Vouchers",
-  "Notes :": "Notes :",
+  "Notes :": "Notes",
   "Date": "Date",
   "Status": "Status",
   "The procedure will be saved, do you want to continue": "The procedure will be saved, do you want to continue",
@@ -207,9 +207,14 @@
   "piece name": "Piece name",
   "required service": "Required service",
   "service request details": "Service request details",
-  "sign empty": "Customer signature is empty please fill it or check refusing checkbox",
-  "refuse to sign": "Refuse to sign",
+  "sign empty": "Customer signature is empty please fill it or check skip checkbox",
+  "skip": "Skip",
   "Daily appointments": "Daily appointments",
   "want to check in": "Do you want to check in",
-  "time spent": "Time spent"
+  "time spent": "Time spent",
+  "arrived to": "You arrived do you want to check in  ",
+  "signature screen": "Signature screens",
+  "report": "Report",
+  "min":"Minute"
+
 }

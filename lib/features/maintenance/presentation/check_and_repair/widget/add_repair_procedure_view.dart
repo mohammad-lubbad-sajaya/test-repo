@@ -146,19 +146,29 @@ class AddRepairProcedureView extends StatelessWidget {
                   .read(procedurePlaceViewModelProvider)
                   .changeIsFromCheckAndRepair(true);
               _viewModel.checkOut();
+              if (_viewModel.minutesSpent == 0 ||
+                  _viewModel.checkedInServiceID !=
+                      _viewModel.currentBondNumber) {
+                //Navigator.pop(context);
+                sl<NavigationService>().navigateTo(procedurePlaceScreen);
+
+                return;
+              }
               showConfirmationDialog(
                   context: context,
                   title: "time spent".localized(),
-                  content: (_viewModel.minutesSpent/60).toString(),
+                  content: (_viewModel.minutesSpent).toStringAsFixed(2) + " "+"min".localized(),
                   actions: [
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);
-                           sl<NavigationService>().navigateTo(procedurePlaceScreen);
+                          sl<NavigationService>()
+                              .navigateTo(procedurePlaceScreen);
+                              _viewModel.clearTime();
+                          
                         },
                         child: Text("ok".localized()))
                   ]);
-             
             },
           ),
           const SizedBox(

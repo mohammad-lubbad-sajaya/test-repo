@@ -3,7 +3,6 @@ import 'package:trust_location/trust_location.dart';
 
 import '../../../features/crm/data/models/procedure.dart';
 import '../../../features/crm/data/models/service_request.dart';
-import '../../../features/crm/presentation/procedure_place/procedure_place_view_model.dart';
 import '../../../features/maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../../services/app_translations/app_translations.dart';
 import '../../services/extentions.dart';
@@ -157,15 +156,7 @@ appCard({
                         ),
                         customTextApp(
                           color: isDark ? backGroundColor : Colors.black,
-                          text: (context!
-                                          .read(procedurePlaceViewModelProvider)
-                                          .getDistance(
-                                              custlat: 35.930359,
-                                              custlong: 31.963158,
-                                              currentLat: 35.916667,
-                                              currentLong: 31.966667)! /
-                                      1000)
-                                  .toStringAsFixed(2) +
+                          text: 1.6.toString() +
                               " KM",
                           size: 15,
                           maxLine: null,
@@ -213,6 +204,7 @@ appCard({
                         email: "dev.f@sajaya.com",
                         context: context!,
                         phone: "+962785026812",
+                        bondNO: servObj.bondNo,
                         latLongPosition:
                             LatLongPosition("31.963158", "35.930359"))
                   ],

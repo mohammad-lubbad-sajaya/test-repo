@@ -5,9 +5,11 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:sajaya_general_app/core/services/extentions.dart';
 import 'package:signature/signature.dart';
 
-import '../widgets/pdf_view.dart';
+import '../../check_and_repair/view_model/check_repair_view_model.dart';
+import '../../shared_views/pdf_view.dart';
 
 final deliveryAndReceiveViewModel =
     ChangeNotifierProvider.autoDispose((ref) => DeliveryAndReceiveViewModel());
@@ -31,6 +33,7 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
   String serialNumber = '';
   String notes = '';
   String receivedBy = '';
+  String customerName = '';
   int tabIndex = 0;
   File? pdfFile;
   bool isLoading = false;
@@ -47,6 +50,11 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
 
   changeLoadingState() {
     isLoading = !isLoading;
+    notifyListeners();
+  }
+
+  setCustomerName(String name) {
+    customerName = name;
     notifyListeners();
   }
 
@@ -75,7 +83,7 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  generatePDF(Uint8List ?signature, BuildContext context) async {
+  Future<void> generatePDF(Uint8List? signature, BuildContext context) async {
     changeLoadingState();
     final pdf = pw.Document();
 
@@ -92,7 +100,10 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
               pw.SizedBox(height: 50),
               pw.Text(nameTextController.text),
               pw.SizedBox(height: 20),
-            signature==null?pw.Container():  pw.Image(pw.MemoryImage(signature), width: 200, height: 100),
+              signature == null
+                  ? pw.Container()
+                  : pw.Image(pw.MemoryImage(signature),
+                      width: 200, height: 100),
             ],
           );
         },
@@ -103,12 +114,15 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
     pdfFile = File("${output.path}/Receipt.pdf");
     await pdfFile?.writeAsBytes(await pdf.save()).then((value) {
       changeLoadingState();
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => PdfViewScreen(file: value),
         ),
+        (route) => false,
       );
+      
+      context.read(checkAndRepairViewModel).disposeData();
     });
   }
 }

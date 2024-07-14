@@ -122,20 +122,23 @@ class HomeWidgets {
                   element.date.year == DateTime.now().year)
               .length,
           itemBuilder: (BuildContext context, int index) {
+            final _object = allServicesModel.filteredServicesRequestsList
+                .where((element) =>
+                    element.date.day == DateTime.now().day &&
+                    element.date.year == DateTime.now().year)
+                .toList()[index];
             return serviceRequestSlidable(
               context: context,
               isDark: context.read(settingsViewModelProvider).isDark,
-              obj: allServicesModel.filteredServicesRequestsList
-                  .where((element) =>
-                      element.date.day == DateTime.now().day &&
-                      element.date.year == DateTime.now().year)
-                  .toList()[index],
+              obj: _object,
               ontap: () {
                 sl<NavigationService>().navigateTo(serviceInfoScreen);
               },
               deliveryAndCollectionFun: (p0) {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const DeliveryFormScreen(),
+                  builder: (context) => DeliveryFormScreen(
+                    customerName: _object.clientName,
+                  ),
                 ));
               },
               editFunc: (context) {},

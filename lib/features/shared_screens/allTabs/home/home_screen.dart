@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/utils/app_widgets/floating_action_button.dart';
+import '../all_proc/view_models/all_services_requests_view_model.dart';
 import 'widgets/home_widgets.dart';
 import '../../tab_bar/tab_bar_view_model.dart';
 import '../../../../core/services/extentions.dart';
@@ -43,6 +44,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         final viewModel = context.read(homeViewModelProvider);
         viewModel.context = context;
         viewModel.getMain();
+      } else {
+        final viewModel = context.read(allServicesRequestviewModel);
+        viewModel.context = context;
+        viewModel.initServices();
       }
     });
   }

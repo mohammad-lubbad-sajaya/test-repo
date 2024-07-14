@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:sajaya_general_app/features/maintenance/presentation/shared_views/signature_screen.dart';
 
 import '../../../../../core/services/configrations/general_configrations.dart';
 import '../../../../../core/services/extentions.dart';
@@ -20,7 +21,7 @@ meetingView({
   required BuildContext context,
   required bool isDark,
   required ProcedurePlaceViewModel viewModel,
- 
+  
 }) {
   return Container(
     padding: const EdgeInsets.symmetric(
@@ -48,7 +49,8 @@ meetingView({
                   ? CrossAxisAlignment.start
                   : CrossAxisAlignment.center,
               children: [
-                if (!viewModel.isEditProcedure &&!viewModel.isFromCheckAndRepair&&
+                if (!viewModel.isEditProcedure &&
+                    !viewModel.isFromCheckAndRepair &&
                     !viewModel.isTimerFinished) ...[
                   customRowApp(
                     isDark: isDark,
@@ -114,8 +116,8 @@ meetingView({
                   ),
                 ],
 
-                if (!viewModel.isEditProcedure&&!viewModel.isFromCheckAndRepair) ...[
-                 
+                if (!viewModel.isEditProcedure &&
+                    !viewModel.isFromCheckAndRepair) ...[
                   addNewCheckBox(
                     isDark: isDark,
                     horizontal: 0,
@@ -242,15 +244,23 @@ meetingView({
                   ],
                 ),
                 const SizedBox(height: 20),
-                if (viewModel.isTimerFinished || viewModel.isEditProcedure||viewModel.isFromCheckAndRepair) ...[
+                if (viewModel.isTimerFinished ||
+                    viewModel.isEditProcedure ||
+                    viewModel.isFromCheckAndRepair) ...[
                   saveAndCancelButtons(
                     context,
                     viewModel.isLoadingAdress,
                     onSave: () {
-                      if(viewModel.isFromCheckAndRepair){
-                        Navigator.pop(context);
-                      }else{
-                      viewModel.save();
+                      if (viewModel.isFromCheckAndRepair) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignatureScreen(
+                               isCheckAndRepair: true,
+                              ),
+                            ));
+                      } else {
+                        viewModel.save();
                       }
                     },
                     onCancel: () {

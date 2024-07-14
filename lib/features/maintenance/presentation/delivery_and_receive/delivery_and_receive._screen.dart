@@ -21,8 +21,9 @@ import '../../../crm/presentation/procedure_place/widgets/meeting_view.dart';
 import 'view_models/delivery_and_receive_view_model.dart';
 
 class DeliveryFormScreen extends StatefulWidget {
-  const DeliveryFormScreen({super.key, this.isReceived = false});
+  const DeliveryFormScreen({super.key, this.isReceived = false,required this.customerName});
   final bool isReceived;
+  final String customerName;
 
   @override
   _DeliveryFormScreenState createState() => _DeliveryFormScreenState();
@@ -37,6 +38,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final _viewModel = context.read(deliveryAndReceiveViewModel);
       await _viewModel.initTabController(this, widget.isReceived ? 1 : 0);
+      _viewModel.setCustomerName(widget.customerName);
       if (widget.isReceived) {
         _viewModel.changeSelectedEquipmentType(_viewModel.equipments.first);
         _viewModel.changeSelectedAccessory1(_viewModel.accessory.first);
@@ -143,7 +145,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                             ],
                             ..._getImageView(),
                             if (_viewModel.tabIndex == 0) ...[
-                              customTextField('Notes '.localized(), (p0) {},
+                              customTextField('Notes'.localized(), (p0) {},
                                   maxLines: 3,
                                   focusNode: _viewModel.notesFocusNode,
                                   enabled: !(widget.isReceived &&

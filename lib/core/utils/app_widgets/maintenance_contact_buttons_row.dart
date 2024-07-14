@@ -18,6 +18,7 @@ class MaintenanceContactButtonsRow {
   Widget contactButtonsRow({
     required String email,
     required String phone,
+    required int bondNO,
     required BuildContext context,
     required LatLongPosition latLongPosition,
   }) {
@@ -51,7 +52,7 @@ class MaintenanceContactButtonsRow {
               context: context,
               isDark: context.read(settingsViewModelProvider).isDark,
               onAccept: () {
-                context.read(checkAndRepairViewModel).checkIn();
+                context.read(checkAndRepairViewModel).checkIn(bondNO);
                 Navigator.pop(context);
              sl<NavigationService>().navigateTo(checkAndRepair);
               },

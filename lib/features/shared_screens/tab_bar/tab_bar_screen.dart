@@ -16,6 +16,7 @@ import '../../../core/utils/theme/app_colors.dart';
 import '../../crm/presentation/pre_app/pre_app_view_model.dart';
 import '../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../allTabs/all_proc/all_proc_screen.dart';
+import '../allTabs/all_proc/view_models/all_services_requests_view_model.dart';
 import '../allTabs/home/home_screen.dart';
 import '../allTabs/inquiry/pre_inquiry_screen/pre_inquiry_screen.dart';
 import '../allTabs/settings/settings_screen.dart';
@@ -54,17 +55,22 @@ class _TabBarScreenState extends State<TabBarScreen>
         context
             .read(settingsViewModelProvider)
             .getCachedDistanceAndRemindMinures();
+      } else {
+        final viewModel = context.read(allServicesRequestviewModel);
+        viewModel.context = context;
+        viewModel.initServices();
+        context
+            .read<TabBarViewModel>(tabBarViewModelProvider)
+            .startLocationUpdates(context);
       }
-              context.read(checkAndRepairViewModel).fillCheckAndRepairsList();
-
+      context.read(checkAndRepairViewModel).fillCheckAndRepairsList();
     });
     items = context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance
         ? [
             BottomNavigationBarItem(
               icon: Image.asset(dailyPrec),
               activeIcon: Image.asset(dailyPrec, color: secondaryColor),
-              label: "Daily appointments".localized()
-                  ,
+              label: "Daily appointments".localized(),
             ),
             BottomNavigationBarItem(
               icon: SizedBox(

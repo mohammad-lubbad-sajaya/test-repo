@@ -7,6 +7,6 @@ class GeneralConfigurations {
   GeneralConfigurations._private();
 
   // TODO: CHANGE THIS TO FALSE BEFORE UPLOAD For security purposes no logs or prints
-  bool isDebug =false;
+  bool isDebug =true;
   
 }

@@ -150,6 +150,7 @@ class AllProcedurWidgets {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DeliveryFormScreen(
                     isReceived: index == 1,
+                    customerName:allServicesRequestviewModel.getServiceRequestObject(index).clientName ,
                   ),
                 ));
               },

@@ -16,6 +16,8 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
   void initServices() {
     servicesRequestsList = [
       ServiceRequest(
+        latitude:37.4219983 ,
+        longitude:-122.084 ,
           bondNo: 655,
           clientName: "عملاء مركز الصيانة",
           address: "العبدلي",
@@ -23,6 +25,8 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
           serviceStatus: "جاهز للتسليم",
           serviceType: "طلب صيانة"),
       ServiceRequest(
+          latitude:31.950780 ,
+        longitude:36.979506 ,
           bondNo: 542,
           address: "ضاحية الرشيد",
           clientName: "شركة المستقبل",
@@ -30,6 +34,8 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
           serviceStatus: "غير جاهز",
           serviceType: "طلب صيانة"),
       ServiceRequest(
+          latitude:32.950550 ,
+        longitude:39.979506 ,
           bondNo: 965,
           address: "خلدا",
           clientName: "عملاء مركز الصيانة",
@@ -38,6 +44,7 @@ class AllServicesRequestsViewModel extends ChangeNotifier {
           serviceType: "طلب صيانة"),
     ];
     filteredServicesRequestsList = servicesRequestsList;
+    notifyListeners();
   }
 
   void filterList(String searchText) {

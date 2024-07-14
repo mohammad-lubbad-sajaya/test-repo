@@ -14,6 +14,7 @@ class CheckAndRepairViewModel extends ChangeNotifier {
   String? selectedCause;
   String? selectedCorruptedItem;
   String? selectedAlternateItem;
+  int? checkedInServiceID;
   DateTime bondDate = DateTime.now();
   bool isNotEditiable = false;
   DateTime? checkInTime;
@@ -110,8 +111,9 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  checkIn() {
+  checkIn(int id) {
     checkInTime = DateTime.now();
+    checkedInServiceID = id;
     notifyListeners();
   }
 
@@ -120,6 +122,7 @@ class CheckAndRepairViewModel extends ChangeNotifier {
       return;
     }
     minutesSpent = DateTime.now().difference(checkInTime!).inMinutes;
+
     notifyListeners();
   }
 
@@ -153,9 +156,16 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  disposeData() {
+  clearTime() {
     checkInTime = null;
     minutesSpent = 0;
+  }
+
+  disposeData({bool isFromCheckout = false}) {
+    if (isFromCheckout) {
+      checkInTime = null;
+      minutesSpent = 0;
+    }
     changeEditablity(false);
     changeAction(null);
     changeAlternateItem(null);
@@ -164,6 +174,13 @@ class CheckAndRepairViewModel extends ChangeNotifier {
     changeCorruptedItem(null);
     changeServiceLocation(null);
     changeServiceType(null);
+    changeBondNumber(0);
+    caseDetailTextCtrl.text = "";
+    actionDetailTextCtrl.text = "";
+    causeDetailTextCtrl.text = "";
+    corruptedItemDetailTextCtrl.text = "";
+    alternateItemDetailTextCtrl.text = "";
+    notesTextCtrl.text = "";
     notifyListeners();
   }
 }

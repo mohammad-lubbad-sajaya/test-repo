@@ -63,6 +63,8 @@ class _CheckAndRepairScreenState extends State<CheckAndRepairScreen> {
   }
 
   _onPopScreen(bool didPop) {
+    if(!widget.isShowPrevProcedure){
     context.read(checkAndRepairViewModel).disposeData();
+    }
   }
 }

@@ -72,7 +72,7 @@
     "entered data is not complete": "البيانات المدخلة ليست كاملة",
     "New procedure added": "تم اضافة اجراء رقم :",
     "Linked Vouchers": "السندات المرتبطة",
-    "Notes :": "الملاحظات :",
+    "Notes :": "الملاحظات",
     "Date": "التاريخ",
     "Status": "الحالة",
     "The procedure will be saved, do you want to continue": "سيتم حفظ هذا الإجراء، هل تريد الاستمرار",
@@ -207,11 +207,17 @@
     "piece num":"رقم القطعة",
     "piece name":"إسم القطعة",
     "required service":"الخدمة المطلوبة",
-    "sign empty":"لا يوجد توقيع للعميل ان كان يرفض التوقيع يرجى وضع علامة بالمكان المخصص لرفض التوقيع ",
-    "refuse to sign":"يرفض التوقيع",
+    "sign empty":"خانة التوقيع فارغة يرجى اضافة توقيع للعميل او ضغط تخطي للإكمال",
+    "skip":"تخطي",
     "Daily appointments":"المواعيد اليومية",
     "want to check in":"هل تريد تسجيل الوصول",
-    "time spent":"الوقت المقضي"
+    "time spent":"الوقت المقضي",
+    "arrived to":"لقد وصلت الى وجهتك هل تريد تسجيل الدخول",
+    "signature screen":"صفحة التوقيع",
+    "report": "تقرير",
+    "min":"دقيقة"
+
+
 
 
 
