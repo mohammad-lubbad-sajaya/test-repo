@@ -54,133 +54,128 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Scaffold(
-          appBar: mainAppbar(
-            context: context,
-            isHideLogOut: true,
-            text: "Delivery and Receive".localized(),
-          ),
-          body: Consumer(builder: (context, ref, child) {
-            final _viewModel = ref.watch(deliveryAndReceiveViewModel);
-            return _viewModel.tabController == null
-                ? Container()
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            _buildTabBar(_viewModel),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            _buildDatePicker(
-                                ref,
-                                (widget.isReceived &&
-                                    _viewModel.tabIndex == 0)),
-                            maintenanceDropDown(
-                              isIgnore:
-                                  widget.isReceived && _viewModel.tabIndex == 0,
-                              'device type'.localized(),
-                              _viewModel.selectedEquipmentType,
-                              _viewModel.equipments,
-                              (String? newValue) {
-                                _viewModel
-                                    .changeSelectedEquipmentType(newValue!);
-                              },
-                            ),
-                            maintenanceDropDown(
-                                isIgnore: widget.isReceived &&
-                                    _viewModel.tabIndex == 0,
-                                'Supplement'.localized(),
-                                _viewModel.selectedAccessory1,
-                                _viewModel.accessory, (String? newValue) {
-                              _viewModel.changeSelectedAccessory1(newValue!);
-                            }),
-                            maintenanceDropDown(
-                                isIgnore: widget.isReceived &&
-                                    _viewModel.tabIndex == 0,
-                                _viewModel.tabIndex == 0
-                                    ? "Receive it".localized()
-                                    : 'hand it over'.localized(),
-                                _viewModel.workerName,
-                                _viewModel.workers, (String? newValue) {
-                              _viewModel.changeWorkerName(newValue!);
-                            }),
-                            customTextField('piece'.localized(), (p0) {},
-                                focusNode: _viewModel.pieceFocusNode,
-                                nextFocusNode: _viewModel.serialNumFocusNode,
-                                context: context,
-                                enabled: !(widget.isReceived &&
-                                    _viewModel.tabIndex == 0),
-                                controller: _viewModel.pieceTextController),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: mainAppbar(
+          context: context,
+          isHideLogOut: true,
+          text: "Delivery and Receive".localized(),
+        ),
+        body: Consumer(builder: (context, ref, child) {
+          final _viewModel = ref.watch(deliveryAndReceiveViewModel);
+          return _viewModel.tabController == null
+              ? Container()
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buildTabBar(_viewModel),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buildDatePicker(
+                              ref,
+                              (widget.isReceived &&
+                                  _viewModel.tabIndex == 0)),
+                          maintenanceDropDown(
+                            isIgnore:
+                                widget.isReceived && _viewModel.tabIndex == 0,
+                            'device type'.localized(),
+                            _viewModel.selectedEquipmentType,
+                            _viewModel.equipments,
+                            (String? newValue) {
+                              _viewModel
+                                  .changeSelectedEquipmentType(newValue!);
+                            },
+                          ),
+                          maintenanceDropDown(
+                              isIgnore: widget.isReceived &&
+                                  _viewModel.tabIndex == 0,
+                              'Supplement'.localized(),
+                              _viewModel.selectedAccessory1,
+                              _viewModel.accessory, (String? newValue) {
+                            _viewModel.changeSelectedAccessory1(newValue!);
+                          }),
+                          maintenanceDropDown(
+                              isIgnore: widget.isReceived &&
+                                  _viewModel.tabIndex == 0,
+                              _viewModel.tabIndex == 0
+                                  ? "Receive it".localized()
+                                  : 'hand it over'.localized(),
+                              _viewModel.workerName,
+                              _viewModel.workers, (String? newValue) {
+                            _viewModel.changeWorkerName(newValue!);
+                          }),
+                          customTextField('piece'.localized(), (p0) {},
+                              focusNode: _viewModel.pieceFocusNode,
+                              nextFocusNode: _viewModel.serialNumFocusNode,
+                              context: context,
+                              enabled: !(widget.isReceived &&
+                                  _viewModel.tabIndex == 0),
+                              controller: _viewModel.pieceTextController),
+                          customTextField(
+                              'serial number'.localized(), (p0) {},
+                              focusNode: _viewModel.serialNumFocusNode,
+                              nextFocusNode: _viewModel.nameFocusNode,
+                              enabled: !(widget.isReceived &&
+                                  _viewModel.tabIndex == 0),
+                              context: context,
+                              controller: _viewModel.serialNumTextController),
+                          if (_viewModel.tabIndex == 1) ...[
                             customTextField(
-                                'serial number'.localized(), (p0) {},
-                                focusNode: _viewModel.serialNumFocusNode,
-                                nextFocusNode: _viewModel.nameFocusNode,
+                                'The recipient'.localized(), (p0) {},
+                                focusNode: _viewModel.nameFocusNode,
+                                nextFocusNode: _viewModel.notesFocusNode,
                                 enabled: !(widget.isReceived &&
                                     _viewModel.tabIndex == 0),
                                 context: context,
-                                controller: _viewModel.serialNumTextController),
-                            if (_viewModel.tabIndex == 1) ...[
-                              customTextField(
-                                  'The recipient'.localized(), (p0) {},
-                                  focusNode: _viewModel.nameFocusNode,
-                                  nextFocusNode: _viewModel.notesFocusNode,
-                                  enabled: !(widget.isReceived &&
-                                      _viewModel.tabIndex == 0),
-                                  context: context,
-                                  controller: _viewModel.nameTextController),
-                            ],
-                            ..._getImageView(),
-                            if (_viewModel.tabIndex == 0) ...[
-                              customTextField('Notes'.localized(), (p0) {},
-                                  maxLines: 3,
-                                  focusNode: _viewModel.notesFocusNode,
-                                  enabled: !(widget.isReceived &&
-                                      _viewModel.tabIndex == 0),
-                                  context: context,
-                                  controller: _viewModel.noteTextControllere),
-                            ],
-
-                            const SizedBox(height: 20),
-
-                            //  _buildSubmitButton(),
-                            if (!(widget.isReceived &&
-                                _viewModel.tabIndex == 0))
-                              saveAndCancelButtons(
-                                context,
-                                _viewModel.isLoading,
-                                onCancel: () {
-                                  Navigator.pop(context);
-                                },
-                                onSave: () async {
-                                  if (_viewModel.tabIndex == 0) {
-                                    Navigator.pop(context);
-                                  } else {
-                                    sl<NavigationService>()
-                                        .navigateTo(signatureScreen);
-                                  }
-                                },
-                              )
+                                controller: _viewModel.nameTextController),
                           ],
-                        ),
+                          ..._getImageView(),
+                          if (_viewModel.tabIndex == 0) ...[
+                            customTextField('Notes'.localized(), (p0) {},
+                                maxLines: 3,
+                                focusNode: _viewModel.notesFocusNode,
+                                enabled: !(widget.isReceived &&
+                                    _viewModel.tabIndex == 0),
+                                context: context,
+                                controller: _viewModel.noteTextControllere),
+                          ],
+    
+                          const SizedBox(height: 20),
+    
+                          //  _buildSubmitButton(),
+                          if (!(widget.isReceived &&
+                              _viewModel.tabIndex == 0))
+                            saveAndCancelButtons(
+                              context,
+                              _viewModel.isLoading,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onSave: () async {
+                              
+                                  sl<NavigationService>()
+                                      .navigateTo(signatureScreen);
+                                
+                              },
+                            )
+                        ],
                       ),
                     ),
-                  );
-          }),
-        ),
+                  ),
+                );
+        }),
       ),
     );
   }

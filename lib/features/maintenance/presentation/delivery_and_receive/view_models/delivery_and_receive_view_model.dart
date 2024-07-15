@@ -20,6 +20,7 @@ class DeliveryAndReceiveViewModel extends ChangeNotifier {
   final serialNumTextController = TextEditingController();
   final nameTextController = TextEditingController();
   final noteTextControllere = TextEditingController();
+  final signatureNoteTextControllere = TextEditingController();
   final pieceFocusNode = FocusNode();
   final serialNumFocusNode = FocusNode();
   final nameFocusNode = FocusNode();

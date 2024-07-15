@@ -8,8 +8,10 @@ import 'package:sizer/sizer.dart';
 import '../../../../core/services/extentions.dart';
 import '../../../../core/utils/app_widgets/check_box.dart';
 import '../../../../core/utils/app_widgets/custom_app_text.dart';
+import '../../../../core/utils/app_widgets/custom_text_field.dart';
 import '../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../core/utils/common_widgets/error_dialog.dart';
+import '../../../../core/utils/common_widgets/show_confirmation_dialog.dart';
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../../crm/presentation/main_app_bar.dart';
 import '../../../shared_screens/allTabs/settings/settings_view_model.dart';
@@ -94,6 +96,13 @@ class _SignatureScreenState extends State<SignatureScreen>
                     value: _viewModel.isChecked,
                     onTap: () => _viewModel.onCheck(!_viewModel.isChecked),
                     title: "skip".localized()),
+                if (_viewModel.isChecked) ...[
+                  customTextField('Notes'.localized(), (p0) {},
+                      maxLines: 3,
+                      focusNode: _viewModel.notesFocusNode,
+                      context: context,
+                      controller: _viewModel.signatureNoteTextControllere),
+                ],
                 const SizedBox(
                   height: 10,
                 ),
@@ -107,6 +116,7 @@ class _SignatureScreenState extends State<SignatureScreen>
                       !_viewModel.isChecked) {
                     showErrorDialog(message: "sign empty".localized());
                   } else {
+                    _handleCheckOut(ref);
                     final _signeture =
                         await _viewModel.signatureController.toPngBytes();
                     await _viewModel.generatePDF(_signeture, context);
@@ -237,5 +247,32 @@ class _SignatureScreenState extends State<SignatureScreen>
                 viewModel.selectedAccessory1!),
       ],
     ]);
+  }
+
+  void _handleCheckOut(WidgetRef ref) {
+    final _checkReoairModel = ref.watch(checkAndRepairViewModel);
+    if (widget.isCheckAndRepair) {
+      _checkReoairModel.checkOut();
+      if (_checkReoairModel.minutesSpent == 0 ||
+          _checkReoairModel.checkedInServiceID !=
+              _checkReoairModel.currentBondNumber) {
+        return;
+      }
+      showConfirmationDialog(
+          context: context,
+          title: "time spent".localized(),
+          content: (_checkReoairModel.minutesSpent).toStringAsFixed(2) +
+              " " +
+              "min".localized(),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+
+                  _checkReoairModel.clearTime();
+                },
+                child: Text("ok".localized()))
+          ]);
+    }
   }
 }

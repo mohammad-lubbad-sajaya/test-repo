@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sajaya_general_app/core/utils/common_widgets/show_confirmation_dialog.dart';
-
 import '../../../../../core/services/extentions.dart';
 import '../../../../../core/services/routing/navigation_service.dart';
 import '../../../../../core/services/routing/routes.dart';
@@ -146,29 +144,8 @@ class AddRepairProcedureView extends StatelessWidget {
                   .read(procedurePlaceViewModelProvider)
                   .changeIsFromCheckAndRepair(true);
               _viewModel.checkOut();
-              if (_viewModel.minutesSpent == 0 ||
-                  _viewModel.checkedInServiceID !=
-                      _viewModel.currentBondNumber) {
-                //Navigator.pop(context);
-                sl<NavigationService>().navigateTo(procedurePlaceScreen);
 
-                return;
-              }
-              showConfirmationDialog(
-                  context: context,
-                  title: "time spent".localized(),
-                  content: (_viewModel.minutesSpent).toStringAsFixed(2) + " "+"min".localized(),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          sl<NavigationService>()
-                              .navigateTo(procedurePlaceScreen);
-                              _viewModel.clearTime();
-                          
-                        },
-                        child: Text("ok".localized()))
-                  ]);
+              sl<NavigationService>().navigateTo(procedurePlaceScreen);
             },
           ),
           const SizedBox(
