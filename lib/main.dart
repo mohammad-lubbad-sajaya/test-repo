@@ -31,7 +31,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late AppTranslationsDelegate _appTranslationsDelegate;
 
-
   @override
   void initState() {
     super.initState();
@@ -40,14 +39,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        ref.watch(settingsViewModelProvider).getTheme();
-        return Sizer(
-          builder:(context, orientation, deviceType) =>  MaterialApp(
+    return Consumer(builder: (context, ref, child) {
+      ref.watch(settingsViewModelProvider).getTheme();
+      return Sizer(
+        builder: (context, orientation, deviceType) => MaterialApp(
           title: 'Sajaya',
           debugShowCheckedModeBanner: false,
-          
           localizationsDelegates: [
             _appTranslationsDelegate,
             GlobalMaterialLocalizations.delegate,
@@ -61,16 +58,14 @@ class _MyAppState extends State<MyApp> {
           ],
           theme: ThemeData(
             useMaterial3: false,
-            
             colorScheme: ColorScheme.fromSwatch(
               accentColor: primaryColor
                   .withOpacity(0.1), // but now it should be declared like this
             ),
             primaryColor: primaryColor,
             inputDecorationTheme: const InputDecorationTheme(
-                floatingLabelStyle: TextStyle(color: secondaryColor),
-          ),
-           
+              floatingLabelStyle: TextStyle(color: secondaryColor),
+            ),
             secondaryHeaderColor: secondaryColor,
             fontFamily: isEnglish() ? 'Poppins' : "NotoKufiArabic",
             visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -95,12 +90,14 @@ class _MyAppState extends State<MyApp> {
               ),
               titleSpacing: 15,
               backgroundColor: ref.watch(
-                    settingsViewModelProvider.select((value) => value.isDark))
-                ? darkModeBackGround
-                : Colors.white,
-              iconTheme:  IconThemeData(
-                color:ref.watch(
-                    settingsViewModelProvider.select((value) => value.isDark))?backGroundColor: Colors.black,
+                      settingsViewModelProvider.select((value) => value.isDark))
+                  ? darkModeBackGround
+                  : Colors.white,
+              iconTheme: IconThemeData(
+                color: ref.watch(settingsViewModelProvider
+                        .select((value) => value.isDark))
+                    ? backGroundColor
+                    : Colors.black,
               ),
             ),
           ),
@@ -115,20 +112,18 @@ class _MyAppState extends State<MyApp> {
           navigatorKey: sl<NavigationService>().navigatorKey,
           initialRoute: preAppScreen,
           onGenerateRoute: router.Router.generateRoute,
-                ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 
   void initLocale() {
-
     String? lang = sl<LocalRepo>().getLanguage();
     _appTranslationsDelegate = AppTranslationsDelegate(
       locale: lang == null ? null : Locale(lang, ''),
     );
     application.onLocaleChanged = onLocaleChange;
-  } 
+  }
 
   void onLocaleChange(Locale locale) {
     sl<Dio>().options.headers.addAll({'lang': locale.languageCode});

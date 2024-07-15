@@ -27,7 +27,7 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                sl<NavigationService>().navigateTo(tabBarScreen);
+                sl<NavigationService>().navigateToAndReplace(tabBarScreen);
               },
               icon:const Icon(Icons.close))
         ],
