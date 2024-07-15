@@ -19,7 +19,7 @@ class TabBarViewModel with ChangeNotifier {
   int currenttabBarIndex = 0;
   bool isMockedLocation = false;
   bool isEmulator = false;
-  bool isMaintenance = true;
+  bool isMaintenance = false;
   final selectedIndex = StateProvider<int>((ref) => 0);
   final dailyBadgeCount = StateProvider<int>((ref) => 0);
   final allProcBadgeCount = StateProvider<int>((ref) => 0);
