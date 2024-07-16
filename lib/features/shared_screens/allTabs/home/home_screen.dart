@@ -3,19 +3,15 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/utils/app_widgets/floating_action_button.dart';
-import '../all_proc/view_models/all_services_requests_view_model.dart';
-import 'widgets/home_widgets.dart';
-import '../../tab_bar/tab_bar_view_model.dart';
-import '../../../../core/services/extentions.dart';
 
 import '../../../../core/services/configrations/general_configrations.dart';
+import '../../../../core/services/extentions.dart';
 import '../../../../core/services/routing/navigation_service.dart';
 import '../../../../core/services/routing/routes.dart';
 import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../core/utils/app_widgets/drop_down_button.dart';
-
+import '../../../../core/utils/app_widgets/floating_action_button.dart';
 import '../../../../core/utils/app_widgets/search_procedures.dart';
 import '../../../../core/utils/common_widgets/no_connection_widget.dart';
 import '../../../../core/utils/constants/images.dart';
@@ -25,7 +21,10 @@ import '../../../crm/presentation/main_app_bar.dart';
 import '../../../crm/presentation/procedure_information/procedure_information_view_model.dart';
 import '../../../crm/presentation/procedure_place/procedure_place_view_model.dart';
 import '../../tab_bar/tab_bar_screen.dart';
+import '../../tab_bar/tab_bar_view_model.dart';
+import '../all_proc/view_models/all_services_requests_view_model.dart';
 import 'home_view_model.dart';
+import 'widgets/home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

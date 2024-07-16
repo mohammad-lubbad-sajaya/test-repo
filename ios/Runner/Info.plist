@@ -2,10 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Access to photos is required to select images from your gallery.</string>
+
+<key>NSMicrophoneUsageDescription</key>
+<string>We need to access to the microphone to record audio file</string>
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Allow Sajaya to access your current location. This will enable us to calculate the distance between your current location and a destination point</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Allow Sajaya to access your current location. This will enable us to calculate the distance between your current location and a destination point</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Sajaya General App</string>
+	<string>Sajaya</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +24,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>sajaya_general_app</string>
+	<string>sajaya</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,9 +52,28 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+
+	 <key>NSCameraUsageDescription</key>
+     <string>We need access to your camera to take photos and videos.</string>
+
+  	<key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your camera to take photos and videos.</string>
+
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone to record audio.</string>
+
 </dict>
 </plist>

@@ -1,4 +1,6 @@
 
+import '../../domain/repository interfaces/repo_interface.dart';
+import '../data source/remote_data_source_interface.dart';
 import '../models/check_user.dart';
 import '../models/client_information.dart';
 import '../models/country.dart';
@@ -13,9 +15,6 @@ import '../models/representative.dart';
 import '../models/user_company.dart';
 import '../models/user_token.dart';
 import '../models/vouchers.dart';
-
-import '../../domain/repository interfaces/repo_interface.dart';
-import '../data source/remote_data_source_interface.dart';
 
 class RepoImplementation implements RepoInterface {
   final RemoteDataSourceInterFace remoteDataSource;

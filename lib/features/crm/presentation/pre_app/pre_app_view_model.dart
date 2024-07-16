@@ -21,11 +21,11 @@ import '../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../core/utils/common_widgets/show_snack_bar.dart';
 import '../../../../core/utils/constants/cache_keys.dart';
 import '../../../../core/utils/methods/shared_methods.dart';
+import '../../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
+import '../../../shared_screens/allTabs/home/home_view_model.dart';
 import '../../data/models/error_res.dart';
 import '../../data/models/procedure.dart';
 import '../../data/models/user_token.dart';
-import '../../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
-import '../../../shared_screens/allTabs/home/home_view_model.dart';
 import '../procedure_information/procedure_information_view_model.dart';
 import '../procedure_place/procedure_place_view_model.dart';
 

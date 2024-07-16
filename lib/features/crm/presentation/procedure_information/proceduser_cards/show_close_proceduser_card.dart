@@ -3,15 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/services/app_translations/app_translations.dart';
 import '../../../../../core/services/extentions.dart';
-import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/app_widgets/custom_row_app.dart';
+import '../../../../../core/utils/app_widgets/custom_text_field.dart';
 import '../../../../../core/utils/app_widgets/drop_horizontal_down_button.dart';
-import '../../../../../core/utils/common_widgets/custom_app_text_field.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
 import '../../../data/models/procedure.dart';
 import '../procedure_information_view_model.dart';
-
 
 class ShowCloseProcedureCard extends StatefulWidget {
   const ShowCloseProcedureCard({
@@ -21,7 +19,7 @@ class ShowCloseProcedureCard extends StatefulWidget {
   });
 
   final Procedure? obj;
-final bool isDark;
+  final bool isDark;
   @override
   State<ShowCloseProcedureCard> createState() => _ShowCloseProcedureCardState();
 }
@@ -33,9 +31,9 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
       builder: (context, ref, _) {
         final viewModel = ref.watch(procInfoViewModelProvider);
         return Container(
-          decoration:  BoxDecoration(
-            color:widget.isDark? darkCardColor:Colors.white,
-            borderRadius:const  BorderRadius.all(Radius.circular(14)),
+          decoration: BoxDecoration(
+            color: widget.isDark ? darkCardColor : Colors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -60,29 +58,25 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
                 ),
                 if (widget.obj?.eventId != null) ...[
                   customRowApp(
-                                        isDark: widget.isDark,
-
+                    isDark: widget.isDark,
                     text: "Proc No".localized(),
                     subText: widget.obj?.eventId?.toString(),
                   ),
                 ],
                 customRowApp(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   text: "User".localized(),
                   subText: widget.obj?.enteredByUser,
                 ),
                 customRowApp(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   text: "Repres".localized(),
                   subText: isEnglish()
                       ? widget.obj?.representiveNameE
                       : widget.obj?.representiveNameA,
                 ),
                 customRowApp(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   text: "Cust".localized(),
                   subText: isEnglish()
                       ? widget.obj?.custNameE
@@ -92,22 +86,19 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
                   imageWidth: 16,
                 ),
                 customRowApp(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   text: "Address".localized(),
                   subText: isEnglish()
                       ? widget.obj?.addressNameE
                       : widget.obj?.addressNameA,
                 ),
                 customRowApp(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   text: "Contact".localized(),
                   subText: widget.obj?.contactPerson,
                 ),
                 dropDownHorizontalButton(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   isBold: true,
                   selectedColor: Colors.black,
                   hintText: "Type".localized(),
@@ -118,8 +109,7 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
                   },
                 ),
                 dropDownHorizontalButton(
-                                      isDark: widget.isDark,
-
+                  isDark: widget.isDark,
                   isBold: true,
                   selectedColor: Colors.black,
                   hintText: "Nature".localized(),
@@ -129,43 +119,31 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
                     viewModel.setSelectedNature(value);
                   },
                 ),
-                customRowApp(
-                                      isDark: widget.isDark,
-
-                  isBold: true,
-                  keyboardType: TextInputType.number,
-                  isTextField: true,
-                  text: "Duration".localized(),
-                  subText:
-                      widget.obj?.eventDuration?.toInt().toString() ?? "60",
-                  onChanged: viewModel.durationText,
+                customTextField(
+                  "Duration".localized(),
+                  viewModel.durationText,
+                  context: context,
                   maxLength: 7,
+                  controller: TextEditingController(
+                      text: widget.obj?.eventDuration?.toInt().toString() ??
+                          "60"),
+                  isDark: widget.isDark,
+                  enabled: true,
+                  keyboardType: TextInputType.number,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    customTextApp(
-                      color: widget.isDark?backGroundColor:Colors.black,
-                      text: "Desc".localized(),
-                      size: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(height: 10),
-                    customAppTextField(
-                      bgColor: widget.isDark?darkDialogsColor:textFieldBgColor,
-                      textColor:widget.isDark?backGroundColor:Colors.black ,
-                      isExpand: true,
-                      textController: TextEditingController(
-                        text: widget.obj?.eventDesc,
-                      ),
-                      contentHorizontalPadding: 12,
-                      fontSize: 12,
-                      //initialValue: widget.obj?.eventDesc,
-                      hintText: "".localized(),
-                      onChanged: viewModel.noteText,
-                      maxLength: 500,
-                    ),
-                  ],
+                customTextField(
+                  bgColor: widget.isDark ? darkDialogsColor : textFieldBgColor,
+                  "Desc".localized(),
+                  viewModel.noteText,
+                  context: context,
+                  maxLength: 500,
+                  controller: TextEditingController(
+                    text: widget.obj?.eventDesc,
+                  ),
+                  isDark: widget.isDark,
+                  enabled: true,
+                  keyboardType: TextInputType.number,
+                  maxLines: 7,
                 ),
               ],
             ),

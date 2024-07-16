@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sajaya_general_app/core/utils/common_widgets/show_confirmation_dialog.dart';
+import '../../../../../core/utils/app_widgets/drop_horizontal_down_button.dart';
+import '../../../../../core/utils/common_widgets/show_confirmation_dialog.dart';
 
 import '../../../../../core/services/extentions.dart';
 import '../../../../../core/services/routing/navigation_service.dart';
@@ -8,9 +9,9 @@ import '../../../../../core/services/routing/routes.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
 import '../../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../../core/utils/app_widgets/custom_text_field.dart';
-import '../../../../../core/utils/app_widgets/maintenance_dropdown.dart';
 import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../../core/utils/constants/images.dart';
+import '../../../../../core/utils/methods/convert_to_dropdownobj_list.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
 import '../../../../crm/presentation/procedure_information/procedure_information_view_model.dart';
 import '../../../../crm/presentation/procedure_place/procedure_place_view_model.dart';
@@ -42,25 +43,26 @@ class AddRepairProcedureView extends StatelessWidget {
             imageWidth: 9,
           ),
           _buildDatePicker(ref, context, true),
-          maintenanceDropDown(
+          dropDownHorizontalButton(
               isIgnore: _viewModel.isNotEditiable,
-              'service type'.localized(),
-              _viewModel.selectedServiceType,
-              _viewModel.serviceTypes, (String? newValue) {
-            _viewModel.changeServiceType(newValue!);
-          }),
-          maintenanceDropDown(
+              hintText: 'service type'.localized(),
+              selectedItem: _viewModel.selectedServiceType,
+              items: convertToDropdownObj(_viewModel.serviceTypes),
+              didSelectItem: (String? newValue) {
+                _viewModel.changeServiceType(newValue!);
+              }),
+          dropDownHorizontalButton(
               isIgnore: _viewModel.isNotEditiable,
-              'service location'.localized(),
-              _viewModel.selectedServiceLocation,
-              _viewModel.serviceLocations, (String? newValue) {
+             hintText:  'service location'.localized(),
+             selectedItem: _viewModel.selectedServiceLocation,
+             items:convertToDropdownObj(_viewModel.serviceLocations),didSelectItem: (String? newValue) {
             _viewModel.changeServiceLocation(newValue!);
           }),
-          maintenanceDropDown(
+          dropDownHorizontalButton(
               isIgnore: _viewModel.isNotEditiable,
-              'case'.localized(),
-              _viewModel.selectedCase,
-              _viewModel.caseList, (String? newValue) {
+             hintText: 'case'.localized(),
+             selectedItem: _viewModel.selectedCase,
+            items: convertToDropdownObj(_viewModel.caseList),didSelectItem:(String? newValue) {
             _viewModel.changeCase(newValue!);
           }),
           customTextField(
@@ -69,11 +71,11 @@ class AddRepairProcedureView extends StatelessWidget {
               (p0) {},
               context: context,
               controller: _viewModel.caseDetailTextCtrl),
-          maintenanceDropDown(
-              'action'.localized(),
-              _viewModel.selectedAction,
+          dropDownHorizontalButton(
+            hintText:   'action'.localized(),
+             selectedItem:  _viewModel.selectedAction,
               isIgnore: _viewModel.isNotEditiable,
-              _viewModel.actionList, (String? newValue) {
+            items: convertToDropdownObj(_viewModel.actionList),didSelectItem:(String? newValue) {
             _viewModel.changeAction(newValue!);
           }),
           customTextField(
@@ -82,11 +84,11 @@ class AddRepairProcedureView extends StatelessWidget {
               (p0) {},
               context: context,
               controller: _viewModel.actionDetailTextCtrl),
-          maintenanceDropDown(
-              'cause'.localized(),
-              _viewModel.selectedCause,
+          dropDownHorizontalButton(
+            hintText:'cause'.localized(),
+            selectedItem: _viewModel.selectedCause,
               isIgnore: _viewModel.isNotEditiable,
-              _viewModel.causeList, (String? newValue) {
+             items:convertToDropdownObj(_viewModel.causeList),didSelectItem:(String? newValue) {
             _viewModel.changeCause(newValue!);
           }),
           customTextField(
@@ -95,11 +97,11 @@ class AddRepairProcedureView extends StatelessWidget {
               (p0) {},
               context: context,
               controller: _viewModel.causeDetailTextCtrl),
-          maintenanceDropDown(
-              'corrupted item'.localized(),
-              _viewModel.selectedCorruptedItem,
+          dropDownHorizontalButton(
+             hintText: 'corrupted item'.localized(),
+            selectedItem:  _viewModel.selectedCorruptedItem,
               isIgnore: _viewModel.isNotEditiable,
-              _viewModel.corruptedItemList, (String? newValue) {
+            items: convertToDropdownObj(_viewModel.corruptedItemList),didSelectItem:(String? newValue) {
             _viewModel.changeCorruptedItem(newValue!);
           }),
           customTextField(
@@ -108,11 +110,11 @@ class AddRepairProcedureView extends StatelessWidget {
               (p0) {},
               context: context,
               controller: _viewModel.corruptedItemDetailTextCtrl),
-          maintenanceDropDown(
-              'alternate item'.localized(),
-              _viewModel.selectedAlternateItem,
+          dropDownHorizontalButton(
+             hintText: 'alternate item'.localized(),
+             selectedItem: _viewModel.selectedAlternateItem,
               isIgnore: _viewModel.isNotEditiable,
-              _viewModel.alternateItemList, (String? newValue) {
+              items: convertToDropdownObj(_viewModel.alternateItemList),didSelectItem:(String? newValue) {
             _viewModel.changeAlternateItem(newValue!);
           }),
           customTextField(
@@ -157,15 +159,16 @@ class AddRepairProcedureView extends StatelessWidget {
               showConfirmationDialog(
                   context: context,
                   title: "time spent".localized(),
-                  content: (_viewModel.minutesSpent).toStringAsFixed(2) + " "+"min".localized(),
+                  content: (_viewModel.minutesSpent).toStringAsFixed(2) +
+                      " " +
+                      "min".localized(),
                   actions: [
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                           sl<NavigationService>()
                               .navigateTo(procedurePlaceScreen);
-                              _viewModel.clearTime();
-                          
+                          _viewModel.clearTime();
                         },
                         child: Text("ok".localized()))
                   ]);

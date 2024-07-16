@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:sajaya_general_app/core/services/routing/navigation_service.dart';
-import 'package:sajaya_general_app/core/services/routing/routes.dart';
-import 'package:sajaya_general_app/core/services/service_locator/dependency_injection.dart';
+import '../../../../core/services/routing/navigation_service.dart';
+import '../../../../core/services/routing/routes.dart';
+import '../../../../core/services/service_locator/dependency_injection.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/services/extentions.dart';
+import '../../../../../core/utils/app_widgets/custom_text_field.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
 
 import '../../../../../core/services/app_translations/app_translations.dart';
 import '../../../../../core/services/local_repo/local_user_repository.dart';
 import '../../../../../core/services/service_locator/dependency_injection.dart';
-import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../../core/utils/app_widgets/drop_horizontal_down_button.dart';
-import '../../../../../core/utils/common_widgets/custom_app_text_field.dart';
 import '../../../../../core/utils/common_widgets/show_confirmation_dialog.dart';
 import '../../../../../core/utils/constants/images.dart';
 import '../../../data/models/procedure.dart';
@@ -17,7 +16,6 @@ import '../../../../shared_screens/allTabs/settings/settings_view_model.dart';
 import '../../bottom_sheet_search/bottom_sheet_search.dart';
 import '../../bottom_sheet_search/bottom_sheet_search_view_model.dart';
 import '../procedure_information_view_model.dart';
-
 
 class ShowEditableProcedureCard extends StatefulWidget {
   const ShowEditableProcedureCard({
@@ -82,7 +80,7 @@ class _ShowEditableProcedureCardState extends State<ShowEditableProcedureCard> {
                   subText: widget.obj?.enteredByUser ??
                       sl<LocalUserRepo>().getLoggedUser()?.userName,
                 ),
-             //   maintenanceDropDown( "Repres".localized(), viewModel.,  viewModel.representativeDropDownList, (p0) { }),
+                //   maintenanceDropDown( "Repres".localized(), viewModel.,  viewModel.representativeDropDownList, (p0) { }),
                 dropDownHorizontalButton(
                   isDark: widget.isDark,
                   isBold: true,
@@ -110,21 +108,22 @@ class _ShowEditableProcedureCardState extends State<ShowEditableProcedureCard> {
                   },
                   onTap: () {
                     if (isEdit == ProcInfoStatusTypes.addNew) {
-                      final isDark=ref.watch(settingsViewModelProvider).isDark;
+                      final isDark =
+                          ref.watch(settingsViewModelProvider).isDark;
                       final bottomSheetViewModel =
                           ref.watch(bottomSheetSearchViewModelProvider);
-                      
+
                       bottomSheetViewModel
                           .isWalkinChangeValue(viewModel.isWalkin);
 
                       showModalBottomSheet(
-                        
                         showDragHandle: true,
                         context: context,
                         isScrollControlled: true,
                         isDismissible: true,
                         //expand: false,
-                        backgroundColor:isDark?darkModeBackGround: textFieldBgColor,
+                        backgroundColor:
+                            isDark ? darkModeBackGround : textFieldBgColor,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
@@ -219,42 +218,35 @@ class _ShowEditableProcedureCardState extends State<ShowEditableProcedureCard> {
                     viewModel.setSelectedNature(value);
                   },
                 ),
-                customRowApp(
-                  isDark: widget.isDark,
-                  isBold: true,
-                  isTextField: true,
-                  keyboardType: TextInputType.number,
-                  text: "Duration".localized(),
-                  subText: viewModel.durationValue,
-                  onChanged: viewModel.durationText,
+                customTextField(
+                  "Duration".localized(),
+                  viewModel.durationText,
+                  context: context,
                   maxLength: 7,
+                  controller:
+                      TextEditingController(text: viewModel.durationValue),
+                  isDark: widget.isDark,
+                  enabled: true,
+                  keyboardType: TextInputType.number,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    customTextApp(
-                      color: widget.isDark ? backGroundColor : Colors.black,
-                      text: "Desc".localized(),
-                      size: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(height: 10),
-                    customAppTextField(
-                      bgColor: widget.isDark ? darkDialogsColor : textFieldBgColor,
-                      textColor: widget
-                      .isDark ?backGroundColor: Colors.black,
-                      isExpand: true,
-                      textController: TextEditingController(
-                        text: viewModel.noteValue,
-                      ),
-                      contentHorizontalPadding: 12,
-                      fontSize: 12,
-                      hintText: "".localized(),
-                      onChanged: viewModel.noteText,
-                      maxLength: 500,
-                    ),
-                  ],
+
+                customTextField(
+                  bgColor: widget.isDark ? darkDialogsColor : textFieldBgColor,
+                  "Desc".localized(),
+                 viewModel.noteText,
+                  context: context,
+                  maxLength: 500,
+                  controller:
+                     TextEditingController(
+                    text: viewModel.noteValue,
+                  ),
+                  isDark: widget.isDark,
+                  enabled: true,
+                  keyboardType: TextInputType.number,
+                  maxLines: 7,
+                  
                 ),
+               
               ],
             ),
           ),

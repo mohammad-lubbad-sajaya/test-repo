@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import 'package:just_audio/just_audio.dart';
-import 'package:sajaya_general_app/features/shared_screens/tab_bar/tab_bar_view_model.dart';
+import '../../../shared_screens/tab_bar/tab_bar_view_model.dart';
 import '../../../../core/services/extentions.dart';
 import '../../domain/usecases/crm_usecases.dart';
 

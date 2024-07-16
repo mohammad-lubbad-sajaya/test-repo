@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/methods/convert_to_dropdownobj_list.dart';
 
 import '../../../../core/services/extentions.dart';
 import '../../../../core/services/routing/navigation_service.dart';
@@ -8,7 +9,7 @@ import '../../../../core/services/service_locator/dependency_injection.dart';
 
 import '../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../core/utils/app_widgets/custom_text_field.dart';
-import '../../../../core/utils/app_widgets/maintenance_dropdown.dart';
+import '../../../../core/utils/app_widgets/drop_horizontal_down_button.dart';
 import '../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../core/utils/constants/images.dart';
 import '../../../../core/utils/theme/app_colors.dart';
@@ -21,7 +22,8 @@ import '../../../crm/presentation/procedure_place/widgets/meeting_view.dart';
 import 'view_models/delivery_and_receive_view_model.dart';
 
 class DeliveryFormScreen extends StatefulWidget {
-  const DeliveryFormScreen({super.key, this.isReceived = false,required this.customerName});
+  const DeliveryFormScreen(
+      {super.key, this.isReceived = false, required this.customerName});
   final bool isReceived;
   final String customerName;
 
@@ -89,35 +91,40 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                                 ref,
                                 (widget.isReceived &&
                                     _viewModel.tabIndex == 0)),
-                            maintenanceDropDown(
+                            dropDownHorizontalButton(
                               isIgnore:
                                   widget.isReceived && _viewModel.tabIndex == 0,
-                              'device type'.localized(),
-                              _viewModel.selectedEquipmentType,
-                              _viewModel.equipments,
-                              (String? newValue) {
+                              hintText: 'device type'.localized(),
+                              selectedItem: _viewModel.selectedEquipmentType,
+                              items:
+                                  convertToDropdownObj(_viewModel.equipments),
+                              didSelectItem: (String? newValue) {
                                 _viewModel
                                     .changeSelectedEquipmentType(newValue!);
                               },
                             ),
-                            maintenanceDropDown(
+                            dropDownHorizontalButton(
                                 isIgnore: widget.isReceived &&
                                     _viewModel.tabIndex == 0,
-                                'Supplement'.localized(),
-                                _viewModel.selectedAccessory1,
-                                _viewModel.accessory, (String? newValue) {
-                              _viewModel.changeSelectedAccessory1(newValue!);
-                            }),
-                            maintenanceDropDown(
+                                hintText: 'Supplement'.localized(),
+                                selectedItem: _viewModel.selectedAccessory1,
+                                items:
+                                    convertToDropdownObj(_viewModel.accessory),
+                                didSelectItem: (String? newValue) {
+                                  _viewModel
+                                      .changeSelectedAccessory1(newValue!);
+                                }),
+                            dropDownHorizontalButton(
                                 isIgnore: widget.isReceived &&
                                     _viewModel.tabIndex == 0,
-                                _viewModel.tabIndex == 0
+                                hintText: _viewModel.tabIndex == 0
                                     ? "Receive it".localized()
                                     : 'hand it over'.localized(),
-                                _viewModel.workerName,
-                                _viewModel.workers, (String? newValue) {
-                              _viewModel.changeWorkerName(newValue!);
-                            }),
+                                selectedItem: _viewModel.workerName,
+                                items: convertToDropdownObj(_viewModel.workers),
+                                didSelectItem: (String? newValue) {
+                                  _viewModel.changeWorkerName(newValue!);
+                                }),
                             customTextField('piece'.localized(), (p0) {},
                                 focusNode: _viewModel.pieceFocusNode,
                                 nextFocusNode: _viewModel.serialNumFocusNode,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sajaya_general_app/core/utils/app_widgets/check_repairs_proc_card.dart';
-import 'package:sajaya_general_app/features/maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
+import '../../../../core/utils/app_widgets/check_repairs_proc_card.dart';
+import '../check_and_repair/view_model/check_repair_view_model.dart';
 import 'package:signature/signature.dart';
 import 'package:sizer/sizer.dart';
 

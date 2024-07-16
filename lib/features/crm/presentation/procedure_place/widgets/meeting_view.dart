@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
-import 'package:sajaya_general_app/features/maintenance/presentation/shared_views/signature_screen.dart';
+import '../../../../maintenance/presentation/shared_views/signature_screen.dart';
 
 import '../../../../../core/services/configrations/general_configrations.dart';
 import '../../../../../core/services/extentions.dart';

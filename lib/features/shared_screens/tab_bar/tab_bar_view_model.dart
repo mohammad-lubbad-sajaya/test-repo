@@ -4,11 +4,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:sajaya_general_app/core/services/extentions.dart';
-import 'package:sajaya_general_app/core/utils/common_widgets/show_confirmation_dialog.dart';
-import 'package:sajaya_general_app/features/crm/presentation/procedure_place/procedure_place_view_model.dart';
-import 'package:sajaya_general_app/features/maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
-import 'package:sajaya_general_app/features/shared_screens/allTabs/all_proc/view_models/all_services_requests_view_model.dart';
+import '../../../core/services/extentions.dart';
+import '../../../core/utils/common_widgets/show_confirmation_dialog.dart';
+import '../../crm/presentation/procedure_place/procedure_place_view_model.dart';
+import '../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
+import '../allTabs/all_proc/view_models/all_services_requests_view_model.dart';
 
 import '../../../core/services/configrations/general_configrations.dart';
 
