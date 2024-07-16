@@ -68,6 +68,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
         ),
         body: Consumer(builder: (context, ref, child) {
           final _viewModel = ref.watch(deliveryAndReceiveViewModel);
+          final _isDark = ref.watch(settingsViewModelProvider).isDark;
           return _viewModel.tabController == null
               ? Container()
               : SingleChildScrollView(
@@ -85,85 +86,91 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                           const SizedBox(
                             height: 20,
                           ),
-                          _buildDatePicker(
-                              ref,
-                              (widget.isReceived &&
-                                  _viewModel.tabIndex == 0)),
-                                  dropDownHorizontalButton(
+                          _buildDatePicker(ref,
+                              (widget.isReceived && _viewModel.tabIndex == 0)),
+                          dropDownHorizontalButton(
+                            isDark: _isDark,
+                            isIgnore:
+                                widget.isReceived && _viewModel.tabIndex == 0,
+                            hintText: 'device type'.localized(),
+                            selectedItem: _viewModel.selectedEquipmentType,
+                            items: convertToDropdownObj(_viewModel.equipments),
+                            didSelectItem: (String? newValue) {
+                              _viewModel.changeSelectedEquipmentType(newValue!);
+                            },
+                          ),
+                          dropDownHorizontalButton(
+                              isDark: _isDark,
                               isIgnore:
                                   widget.isReceived && _viewModel.tabIndex == 0,
-                              hintText: 'device type'.localized(),
-                              selectedItem: _viewModel.selectedEquipmentType,
-                              items:
-                                  convertToDropdownObj(_viewModel.equipments),
+                              hintText: 'Supplement'.localized(),
+                              selectedItem: _viewModel.selectedAccessory1,
+                              items: convertToDropdownObj(_viewModel.accessory),
                               didSelectItem: (String? newValue) {
-                                _viewModel
-                                    .changeSelectedEquipmentType(newValue!);
-                              },
-                            ),
-                            dropDownHorizontalButton(
-                                isIgnore: widget.isReceived &&
-                                    _viewModel.tabIndex == 0,
-                                hintText: 'Supplement'.localized(),
-                                selectedItem: _viewModel.selectedAccessory1,
-                                items:
-                                    convertToDropdownObj(_viewModel.accessory),
-                                didSelectItem: (String? newValue) {
-                                  _viewModel
-                                      .changeSelectedAccessory1(newValue!);
-                                }),
-                            dropDownHorizontalButton(
-                                isIgnore: widget.isReceived &&
-                                    _viewModel.tabIndex == 0,
-                                hintText: _viewModel.tabIndex == 0
-                                    ? "Receive it".localized()
-                                    : 'hand it over'.localized(),
-                                selectedItem: _viewModel.workerName,
-                                items: convertToDropdownObj(_viewModel.workers),
-                                didSelectItem: (String? newValue) {
-                                  _viewModel.changeWorkerName(newValue!);
-                                }),
-                            customTextField('piece'.localized(), (p0) {},
-                                focusNode: _viewModel.pieceFocusNode,
-                                nextFocusNode: _viewModel.serialNumFocusNode,
-                                context: context,
-                                enabled: !(widget.isReceived &&
-                                    _viewModel.tabIndex == 0),
-                                controller: _viewModel.pieceTextController),
+                                _viewModel.changeSelectedAccessory1(newValue!);
+                              }),
+                          dropDownHorizontalButton(
+                              isDark: _isDark,
+                              isIgnore:
+                                  widget.isReceived && _viewModel.tabIndex == 0,
+                              hintText: _viewModel.tabIndex == 0
+                                  ? "Receive it".localized()
+                                  : 'hand it over'.localized(),
+                              selectedItem: _viewModel.workerName,
+                              items: convertToDropdownObj(_viewModel.workers),
+                              didSelectItem: (String? newValue) {
+                                _viewModel.changeWorkerName(newValue!);
+                              }),
+                          customTextField(
+                              isDark: _isDark,
+                              'piece'.localized(),
+                              (p0) {},
+                              focusNode: _viewModel.pieceFocusNode,
+                              nextFocusNode: _viewModel.serialNumFocusNode,
+                              context: context,
+                              enabled: !(widget.isReceived &&
+                                  _viewModel.tabIndex == 0),
+                              controller: _viewModel.pieceTextController),
+                          customTextField(
+                              isDark: _isDark,
+                              'serial number'.localized(),
+                              (p0) {},
+                              focusNode: _viewModel.serialNumFocusNode,
+                              nextFocusNode: _viewModel.nameFocusNode,
+                              enabled: !(widget.isReceived &&
+                                  _viewModel.tabIndex == 0),
+                              context: context,
+                              controller: _viewModel.serialNumTextController),
+                          if (_viewModel.tabIndex == 1) ...[
                             customTextField(
-                                'serial number'.localized(), (p0) {},
-                                focusNode: _viewModel.serialNumFocusNode,
-                                nextFocusNode: _viewModel.nameFocusNode,
+                                isDark: _isDark,
+                                'The recipient'.localized(),
+                                (p0) {},
+                                focusNode: _viewModel.nameFocusNode,
+                                nextFocusNode: _viewModel.notesFocusNode,
                                 enabled: !(widget.isReceived &&
                                     _viewModel.tabIndex == 0),
                                 context: context,
-                                controller: _viewModel.serialNumTextController),
-                            if (_viewModel.tabIndex == 1) ...[
-                              customTextField(
-                                  'The recipient'.localized(), (p0) {},
-                                  focusNode: _viewModel.nameFocusNode,
-                                  nextFocusNode: _viewModel.notesFocusNode,
-                                  enabled: !(widget.isReceived &&
-                                      _viewModel.tabIndex == 0),
-                                  context: context,
-                                  controller: _viewModel.nameTextController),
-                            ],
-                            ..._getImageView(),
-                            if (_viewModel.tabIndex == 0) ...[
-                              customTextField('Notes'.localized(), (p0) {},
-                                  maxLines: 3,
-                                  focusNode: _viewModel.notesFocusNode,
-                                  enabled: !(widget.isReceived &&
-                                      _viewModel.tabIndex == 0),
-                                  context: context,
-                                  controller: _viewModel.noteTextControllere),
-                            ],
+                                controller: _viewModel.nameTextController),
+                          ],
+                          ..._getImageView(),
+                          if (_viewModel.tabIndex == 0) ...[
+                            customTextField(
+                                isDark: _isDark,
+                                'Notes'.localized(),
+                                (p0) {},
+                                maxLines: 3,
+                                focusNode: _viewModel.notesFocusNode,
+                                enabled: !(widget.isReceived &&
+                                    _viewModel.tabIndex == 0),
+                                context: context,
+                                controller: _viewModel.noteTextControllere),
+                          ],
 
-                            const SizedBox(height: 20),
-    
+                          const SizedBox(height: 20),
+
                           //  _buildSubmitButton(),
-                          if (!(widget.isReceived &&
-                              _viewModel.tabIndex == 0))
+                          if (!(widget.isReceived && _viewModel.tabIndex == 0))
                             saveAndCancelButtons(
                               context,
                               _viewModel.isLoading,
@@ -171,10 +178,8 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                                 Navigator.pop(context);
                               },
                               onSave: () async {
-                              
-                                  sl<NavigationService>()
-                                      .navigateTo(signatureScreen);
-                                
+                                sl<NavigationService>()
+                                    .navigateTo(signatureScreen);
                               },
                             )
                         ],
@@ -204,7 +209,9 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                       fontSize: 13,
                       color: _viewModel.tabController!.index == 0
                           ? Colors.white
-                          : Colors.black)),
+                          : context.read(settingsViewModelProvider).isDark
+                              ? backGroundColor
+                              : Colors.black)),
             ),
           ),
           Container(
@@ -219,7 +226,9 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                     fontSize: 13,
                     color: _viewModel.tabController!.index == 1
                         ? Colors.white
-                        : Colors.black),
+                        : context.read(settingsViewModelProvider).isDark
+                              ? backGroundColor
+                              : Colors.black),
               ),
             ),
           ),
@@ -288,7 +297,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
       const SizedBox(
         height: 10,
       ),
-      selectedImagesListView(ProcedurePlaceViewModel(), false),
+      selectedImagesListView(ProcedurePlaceViewModel(), context.read(settingsViewModelProvider).isDark),
       const SizedBox(
         height: 10,
       ),

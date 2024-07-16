@@ -114,7 +114,7 @@ class AllProcedurWidgets {
                     allServicesRequestviewModel.filterIndex == 0 ? 1 : 0);
               },
               child: SizedBox(
-                width: 100,
+                width: 120,
                 child: Card(
                   color: secondaryColor,
                   shape: RoundedRectangleBorder(

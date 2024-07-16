@@ -43,6 +43,7 @@ class AddRepairProcedureView extends StatelessWidget {
           ),
           _buildDatePicker(ref, context, true),
           dropDownHorizontalButton(
+            isDark: isDark,
               isIgnore: _viewModel.isNotEditiable,
               hintText: 'service type'.localized(),
               selectedItem: _viewModel.selectedServiceType,
@@ -51,6 +52,7 @@ class AddRepairProcedureView extends StatelessWidget {
                 _viewModel.changeServiceType(newValue!);
               }),
           dropDownHorizontalButton(
+            isDark: isDark,
               isIgnore: _viewModel.isNotEditiable,
              hintText:  'service location'.localized(),
              selectedItem: _viewModel.selectedServiceLocation,
@@ -58,6 +60,7 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeServiceLocation(newValue!);
           }),
           dropDownHorizontalButton(
+            isDark: isDark,
               isIgnore: _viewModel.isNotEditiable,
              hintText: 'case'.localized(),
              selectedItem: _viewModel.selectedCase,
@@ -65,12 +68,14 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeCase(newValue!);
           }),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'case'.localized() + " " + "details".localized(),
               (p0) {},
               context: context,
               controller: _viewModel.caseDetailTextCtrl),
           dropDownHorizontalButton(
+            isDark: isDark,
             hintText:   'action'.localized(),
              selectedItem:  _viewModel.selectedAction,
               isIgnore: _viewModel.isNotEditiable,
@@ -78,12 +83,14 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeAction(newValue!);
           }),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'action'.localized() + " " + "details".localized(),
               (p0) {},
               context: context,
               controller: _viewModel.actionDetailTextCtrl),
           dropDownHorizontalButton(
+            isDark: isDark,
             hintText:'cause'.localized(),
             selectedItem: _viewModel.selectedCause,
               isIgnore: _viewModel.isNotEditiable,
@@ -91,12 +98,14 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeCause(newValue!);
           }),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'cause'.localized() + " " + "details".localized(),
               (p0) {},
               context: context,
               controller: _viewModel.causeDetailTextCtrl),
           dropDownHorizontalButton(
+            isDark: isDark,
              hintText: 'corrupted item'.localized(),
             selectedItem:  _viewModel.selectedCorruptedItem,
               isIgnore: _viewModel.isNotEditiable,
@@ -104,12 +113,14 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeCorruptedItem(newValue!);
           }),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'corrupted item'.localized() + " " + "details".localized(),
               (p0) {},
               context: context,
               controller: _viewModel.corruptedItemDetailTextCtrl),
           dropDownHorizontalButton(
+            isDark: isDark,
              hintText: 'alternate item'.localized(),
              selectedItem: _viewModel.selectedAlternateItem,
               isIgnore: _viewModel.isNotEditiable,
@@ -117,6 +128,7 @@ class AddRepairProcedureView extends StatelessWidget {
             _viewModel.changeAlternateItem(newValue!);
           }),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'alternate item'.localized() + " " + "details".localized(),
               (p0) {},
@@ -127,6 +139,7 @@ class AddRepairProcedureView extends StatelessWidget {
           _buildDatePicker(ref, context, _viewModel.isNotEditiable,
               label: "finish date".localized()),
           customTextField(
+            isDark: isDark,
               enabled: !_viewModel.isNotEditiable,
               'Notes :'.localized(),
               (p0) {},

@@ -97,7 +97,9 @@ class _SignatureScreenState extends State<SignatureScreen>
                     onTap: () => _viewModel.onCheck(!_viewModel.isChecked),
                     title: "skip".localized()),
                 if (_viewModel.isChecked) ...[
-                  customTextField('Notes'.localized(), (p0) {},
+                  customTextField(
+                    isDark: _isDark,
+                    'Notes'.localized(), (p0) {},
                       maxLines: 3,
                       focusNode: _viewModel.notesFocusNode,
                       context: context,

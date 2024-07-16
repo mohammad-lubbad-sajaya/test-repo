@@ -12,7 +12,7 @@ Widget customTextField(String label, void Function(String)? onChanged,
     TextInputType? keyboardType = TextInputType.text,
     TextEditingController? controller,
     bool enabled = true,
-    bool isDark=false,
+    required bool isDark,
     }) {
   return Container(
     margin: const EdgeInsets.symmetric(vertical: 5),

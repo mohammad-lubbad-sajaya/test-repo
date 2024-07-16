@@ -18,7 +18,7 @@ Widget buildCheckBoxView(
             width: 20,
             decoration: BoxDecoration(
               color: value?secondaryColor:null,
-              border: Border.all(color:value? secondaryColor:Colors.black, width: 1.3),
+              border: Border.all(color:value? secondaryColor:isDark?backGroundColor: Colors.black, width: 1.3),
                 borderRadius: BorderRadius.circular(4)),
             child: value
                 ? const Center(

@@ -10,7 +10,7 @@ import "custom_app_text.dart";
     return SizedBox(
       width: 100.w,
       child: Card(
-                color: Colors.grey[200],
+                color:_isDark?darkDialogsColor: Colors.grey[200],
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
