@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:sajaya_general_app/features/shared_screens/allTabs/settings/settings_view_model.dart';
+import '../../../../../core/utils/app_widgets/custom_text_field.dart';
 import '../../../../maintenance/presentation/shared_views/signature_screen.dart';
 
 import '../../../../../core/services/configrations/general_configrations.dart';
@@ -11,7 +13,6 @@ import '../../../../../core/utils/app_widgets/custom_app_text.dart';
 import '../../../../../core/utils/app_widgets/custom_row_app.dart';
 import '../../../../../core/utils/app_widgets/save_and_cancel_buttons.dart';
 import '../../../../../core/utils/common_widgets/audio_player/audio_player_screen.dart';
-import '../../../../../core/utils/common_widgets/custom_app_text_field.dart';
 import '../../../../../core/utils/common_widgets/voice_recorder_sheet.dart';
 import '../../../../../core/utils/theme/app_colors.dart';
 import '../../procedure_information/procedure_information_screen.dart';
@@ -21,7 +22,6 @@ meetingView({
   required BuildContext context,
   required bool isDark,
   required ProcedurePlaceViewModel viewModel,
-  
 }) {
   return Container(
     padding: const EdgeInsets.symmetric(
@@ -52,15 +52,17 @@ meetingView({
                 if (!viewModel.isEditProcedure &&
                     !viewModel.isFromCheckAndRepair &&
                     !viewModel.isTimerFinished) ...[
-                  customRowApp(
-                    isDark: isDark,
-                    isBold: true,
-                    isTextField: true,
+                  customTextField(
+                    "Duration".localized(),
+                    viewModel.durationText,
+                    context: context,
+                    maxLength: 7,
+                    controller: TextEditingController(
+                      text: viewModel.durationValue,
+                    ),
+                    isDark: context.read(settingsViewModelProvider).isDark,
+                    enabled: true,
                     keyboardType: TextInputType.number,
-                    text: "Duration".localized(),
-                    subText: viewModel
-                        .durationValue, //"${int.parse(viewModel.durationValue ?? "0")}",
-                    onChanged: viewModel.durationText,
                   ),
                   const SizedBox(height: 20),
                   Container(
@@ -220,25 +222,18 @@ meetingView({
                     selectedImagesListView(viewModel, isDark),
                     if (viewModel.isTimerFinished) ...[
                       const SizedBox(height: 20),
-                      customTextApp(
-                        color: isDark ? backGroundColor : Colors.black,
-                        text: "Desc".localized(),
-                        size: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const SizedBox(height: 10),
-                      customAppTextField(
-                        textColor: isDark ? backGroundColor : Colors.black,
+                      customTextField(
                         bgColor: isDark ? darkDialogsColor : textFieldBgColor,
-                        isExpand: true,
-                        textController: TextEditingController(
+                        "Desc".localized(),
+                        viewModel.noteText,
+                        context: context,
+                        maxLength: 500,
+                        controller: TextEditingController(
                           text: viewModel.noteValue,
                         ),
-                        contentHorizontalPadding: 12,
-                        fontSize: 12,
-                        hintText: "".localized(),
-                        onChanged: viewModel.noteText,
-                        maxLength: 500,
+                        isDark: isDark,
+                        enabled: true,
+                        maxLines: 7,
                       ),
                     ]
                   ],
@@ -256,7 +251,7 @@ meetingView({
                             context,
                             MaterialPageRoute(
                               builder: (context) => const SignatureScreen(
-                               isCheckAndRepair: true,
+                                isCheckAndRepair: true,
                               ),
                             ));
                       } else {

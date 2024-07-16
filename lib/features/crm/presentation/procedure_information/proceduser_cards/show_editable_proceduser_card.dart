@@ -242,7 +242,6 @@ class _ShowEditableProcedureCardState extends State<ShowEditableProcedureCard> {
                   ),
                   isDark: widget.isDark,
                   enabled: true,
-                  keyboardType: TextInputType.number,
                   maxLines: 7,
                   
                 ),

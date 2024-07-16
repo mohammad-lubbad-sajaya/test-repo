@@ -142,7 +142,6 @@ class _ShowCloseProcedureCardState extends State<ShowCloseProcedureCard> {
                   ),
                   isDark: widget.isDark,
                   enabled: true,
-                  keyboardType: TextInputType.number,
                   maxLines: 7,
                 ),
               ],

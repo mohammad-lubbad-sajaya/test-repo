@@ -40,7 +40,7 @@ class MaintenanceContactButtonsRow {
           await launchUrl(emailLaunchUri);
         }),
         _buildContactbutton(
-            Icons.location_on,
+            FontAwesomeIcons.mapLocation,
             () => _openGoogleMaps(
                 latitude: double.parse(latLongPosition.latitude ?? ""),
                 longitude: double.parse(latLongPosition.longitude ?? ""))),

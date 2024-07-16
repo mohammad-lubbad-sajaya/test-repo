@@ -56,42 +56,40 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Scaffold(
-          appBar: mainAppbar(
-            context: context,
-            isHideLogOut: true,
-            text: "Delivery and Receive".localized(),
-          ),
-          body: Consumer(builder: (context, ref, child) {
-            final _viewModel = ref.watch(deliveryAndReceiveViewModel);
-            return _viewModel.tabController == null
-                ? Container()
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            _buildTabBar(_viewModel),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            _buildDatePicker(
-                                ref,
-                                (widget.isReceived &&
-                                    _viewModel.tabIndex == 0)),
-                            dropDownHorizontalButton(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: mainAppbar(
+          context: context,
+          isHideLogOut: true,
+          text: "Delivery and Receive".localized(),
+        ),
+        body: Consumer(builder: (context, ref, child) {
+          final _viewModel = ref.watch(deliveryAndReceiveViewModel);
+          return _viewModel.tabController == null
+              ? Container()
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buildTabBar(_viewModel),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buildDatePicker(
+                              ref,
+                              (widget.isReceived &&
+                                  _viewModel.tabIndex == 0)),
+                                  dropDownHorizontalButton(
                               isIgnore:
                                   widget.isReceived && _viewModel.tabIndex == 0,
                               hintText: 'device type'.localized(),
@@ -162,32 +160,29 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                             ],
 
                             const SizedBox(height: 20),
-
-                            //  _buildSubmitButton(),
-                            if (!(widget.isReceived &&
-                                _viewModel.tabIndex == 0))
-                              saveAndCancelButtons(
-                                context,
-                                _viewModel.isLoading,
-                                onCancel: () {
-                                  Navigator.pop(context);
-                                },
-                                onSave: () async {
-                                  if (_viewModel.tabIndex == 0) {
-                                    Navigator.pop(context);
-                                  } else {
-                                    sl<NavigationService>()
-                                        .navigateTo(signatureScreen);
-                                  }
-                                },
-                              )
-                          ],
-                        ),
+    
+                          //  _buildSubmitButton(),
+                          if (!(widget.isReceived &&
+                              _viewModel.tabIndex == 0))
+                            saveAndCancelButtons(
+                              context,
+                              _viewModel.isLoading,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onSave: () async {
+                              
+                                  sl<NavigationService>()
+                                      .navigateTo(signatureScreen);
+                                
+                              },
+                            )
+                        ],
                       ),
                     ),
-                  );
-          }),
-        ),
+                  ),
+                );
+        }),
       ),
     );
   }
