@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/crm/presentation/pre_app/pre_app_screen.dart';
+import '../../../features/shared_screens/pre_app/pre_app_screen.dart';
 import '../../../features/crm/presentation/procedure_information/procedure_information_screen.dart';
 import '../../../features/crm/presentation/procedure_information/vouchers/vouchers_screen.dart';
 import '../../../features/crm/presentation/procedure_place/procedure_place_screen.dart';

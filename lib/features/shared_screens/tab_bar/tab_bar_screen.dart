@@ -13,7 +13,7 @@ import '../../../core/utils/common_widgets/show_snack_bar.dart';
 import '../../../core/utils/constants/images.dart';
 import '../../../core/utils/methods/shared_methods.dart';
 import '../../../core/utils/theme/app_colors.dart';
-import '../../crm/presentation/pre_app/pre_app_view_model.dart';
+import '../pre_app/pre_app_view_model.dart';
 import '../../maintenance/presentation/check_and_repair/view_model/check_repair_view_model.dart';
 import '../allTabs/all_proc/all_proc_screen.dart';
 import '../allTabs/all_proc/view_models/all_services_requests_view_model.dart';
@@ -38,7 +38,6 @@ class TabBarScreen extends StatefulWidget {
 class _TabBarScreenState extends State<TabBarScreen>
     with WidgetsBindingObserver {
   List<BottomNavigationBarItem> items = [];
-
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -46,10 +45,9 @@ class _TabBarScreenState extends State<TabBarScreen>
     super.initState();
     SharedMethods().checkLocationMocking(context);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!context
-          .read<TabBarViewModel>(tabBarViewModelProvider)
-          .isMaintenance) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+      
+      if (!context.read(tabBarViewModelProvider).isMaintenance) {
         _connectionListener();
 
         context
@@ -65,7 +63,7 @@ class _TabBarScreenState extends State<TabBarScreen>
       }
       context.read(checkAndRepairViewModel).fillCheckAndRepairsList();
     });
-    items = context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance
+    items =context.read(tabBarViewModelProvider).isMaintenance
         ? [
             BottomNavigationBarItem(
               icon: Image.asset(dailyPrec),
@@ -250,9 +248,7 @@ class _TabBarScreenState extends State<TabBarScreen>
       case 1:
         return const AllProcScreen();
       case 2:
-        return context
-                .read<TabBarViewModel>(tabBarViewModelProvider)
-                .isMaintenance
+        return context.read(tabBarViewModelProvider).isMaintenance
             ? const SettingsScreen()
             : const PreInquiryScreen();
       case 3:

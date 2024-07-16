@@ -8,4 +8,5 @@ class CacheKeys{
   String remindMinutes="REMIND_IN_MINUTES";
   String isDark="IS_DARK";
   String startTime="START_TIME";
+  String getIsMaintenance="IS_MAINTENANCE";
 }

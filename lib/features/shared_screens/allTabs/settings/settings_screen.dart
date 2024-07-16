@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:numberpicker/numberpicker.dart';
+
 import 'package:wheel_slider/wheel_slider.dart';
 
 import '../../../../core/services/app_translations/app_translations.dart';
@@ -45,6 +47,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: appTitle(
             text: "Settings".localized(),
+            onTap: () async {
+//               if (_counter < 4) {
+//                 _counter++;
+//               } else {
+//                 final _model = context.read(tabBarViewModelProvider);
+//                 _model.changegetIsMaintenance(!await _model.getIsMaintenance());
+//                 _model.resetTabBarIndex();
+// showSnackBar("Maintenance mode is on now ");
+//       sl<LocalRepo>().logout();
+//                 Timer(Duration(seconds: 2), () {
+//                   sl<NavigationService>().navigateToAndRemove(preAppScreen);
+//                 });
+//               }
+//               setState(() {});
+            },
             isDark: context.read(settingsViewModelProvider).isDark),
       ),
       body: Consumer(
@@ -132,7 +149,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       settingsViewModel.setTheme();
                                       final _tabViewModel =
                                           ref.watch(tabBarViewModelProvider);
-                                     _tabViewModel.updateScreen();
+                                      _tabViewModel.updateScreen();
 
                                       setState(() {});
                                     },
@@ -148,9 +165,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     totalCount: 30,
                                     initValue:
                                         settingsViewModel.distanceinMeter,
-                                    unSelectedNumberStyle:  TextStyle(
+                                    unSelectedNumberStyle: TextStyle(
                                       fontSize: 10.0,
-                                      color:  settingsViewModel.isDark
+                                      color: settingsViewModel.isDark
                                           ? backGroundColor
                                           : null,
                                     ),
@@ -200,7 +217,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     imageMatchTextDirection: true,
                                     hideSeparator: true,
                                     onTap: () {
-                                      context.read(homeViewModelProvider).resetProcedures();
+                                      context
+                                          .read(homeViewModelProvider)
+                                          .resetProcedures();
                                       sl<LocalRepo>().logout();
                                     },
                                   ),

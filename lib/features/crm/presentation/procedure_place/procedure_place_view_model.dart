@@ -143,7 +143,7 @@ class ProcedurePlaceViewModel extends ChangeNotifier {
   }
 
   Future getMain() async {
-    if(!context.read(tabBarViewModelProvider).isMaintenance){
+    if(! context.read(tabBarViewModelProvider).isMaintenance){
     startLocationUpdates();
     await getCountries();
     await getCustomerAddresses();

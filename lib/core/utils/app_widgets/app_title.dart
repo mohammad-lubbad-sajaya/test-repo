@@ -7,11 +7,14 @@ import 'custom_app_text.dart';
 
 Widget appTitle({
   required String text,
-  required bool isDark
+  required bool isDark,
+  void Function()? onTap
 }) =>
     Row(
       children: [
-        Image.asset(smallLogo, width: 32),
+        InkWell(
+          onTap:onTap,
+          child: Image.asset(smallLogo, width: 32)),
         const SizedBox(width: 15),
         customTextApp(
           color:isDark?lineColor:Colors.black ,

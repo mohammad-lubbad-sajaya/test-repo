@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/services/extentions.dart';
-import '../../../../core/utils/constants/images.dart';
+import '../../../core/services/extentions.dart';
+import '../../../core/utils/constants/images.dart';
 import 'pre_app_view_model.dart';
 
 
@@ -20,8 +20,9 @@ class _PreAppScreenState extends State<PreAppScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read(preAppViewModelProvider).getMain();
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+        context.read(preAppViewModelProvider).getMain();
+
     });
   }
 

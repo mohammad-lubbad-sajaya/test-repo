@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!context.read(tabBarViewModelProvider.notifier).isMaintenance) {
+      if (! context.read(tabBarViewModelProvider.notifier).isMaintenance) {
         final viewModel = context.read(homeViewModelProvider);
         viewModel.context = context;
         viewModel.getMain();
@@ -90,18 +90,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     var procInfoViewModel = context.read(procInfoViewModelProvider);
-    final _isMaintenance = context.read(tabBarViewModelProvider).isMaintenance;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         appBar: mainAppbar(
-            text: _isMaintenance
+            text:context.read(tabBarViewModelProvider.notifier).isMaintenance
                 ? "daily services".localized()
                 : "Open daily procedures".localized(),
             context: context),
-        floatingActionButton: _isMaintenance
+        floatingActionButton: context.read(tabBarViewModelProvider.notifier).isMaintenance
             ? Container()
             : floatingActionButton(
                 onPressed: () {
@@ -153,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               ConnectivityResult.none.name) ...[
                             const NoConnectionWidget()
                           ],
-                          if (_isMaintenance)
+                          if (context.read(tabBarViewModelProvider.notifier).isMaintenance)
                             ...HomeWidgets().getMaintenanceContent(
                                 context: context, ref: ref)
                           else

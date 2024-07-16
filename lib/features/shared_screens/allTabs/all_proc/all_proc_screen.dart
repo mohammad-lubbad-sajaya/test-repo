@@ -25,20 +25,20 @@ class AllProcScreen extends StatefulWidget {
 }
 
 class _AllProcScreenState extends State<AllProcScreen> {
-  bool _isMaintenance = false;
   AllServicesRequestsViewModel? viewModel;
   @override
   void initState() {
     super.initState();
-    _isMaintenance =
-        context.read<TabBarViewModel>(tabBarViewModelProvider).isMaintenance;
-    if (!_isMaintenance) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!context
+          .read<TabBarViewModel>(tabBarViewModelProvider)
+          .isMaintenance) {
         final viewModel = context.read(allProcModelProvider);
         viewModel.context = context;
         viewModel.getMain();
-      });
-    } 
+      }
+    });
   }
 
   @override
@@ -57,11 +57,15 @@ class _AllProcScreenState extends State<AllProcScreen> {
           },
           child: Scaffold(
             appBar: mainAppbar(
-                text: _isMaintenance
+                text: context
+                        .read<TabBarViewModel>(tabBarViewModelProvider)
+                        .isMaintenance
                     ? "service request".localized()
                     : "All Opened Procedures".localized(),
                 context: context),
-            floatingActionButton: _isMaintenance
+            floatingActionButton: context
+                    .read<TabBarViewModel>(tabBarViewModelProvider)
+                    .isMaintenance
                 ? Container()
                 : floatingActionButton(
                     onPressed: () {
@@ -91,10 +95,16 @@ class _AllProcScreenState extends State<AllProcScreen> {
                             ),
                           ],
                           showSearchProcedures(
-                            onChanged: _isMaintenance
+                            onChanged: context
+                                    .read<TabBarViewModel>(
+                                        tabBarViewModelProvider)
+                                    .isMaintenance
                                 ? viewModel?.filterList
                                 : allProcViewModel.filterList,
-                            textController: _isMaintenance
+                            textController: context
+                                    .read<TabBarViewModel>(
+                                        tabBarViewModelProvider)
+                                    .isMaintenance
                                 ? viewModel?.textController
                                 : allProcViewModel.textController,
                             suffixIcon:
@@ -102,12 +112,17 @@ class _AllProcScreenState extends State<AllProcScreen> {
                                     ? null
                                     : Image.asset(claerIcon),
                             suffixIconAction: () {
-                              _isMaintenance
+                              context
+                                      .read<TabBarViewModel>(
+                                          tabBarViewModelProvider)
+                                      .isMaintenance
                                   ? viewModel?.clearSearch()
                                   : allProcViewModel.clearSearch();
                             },
                           ),
-                          if (_isMaintenance)
+                          if (context
+                              .read<TabBarViewModel>(tabBarViewModelProvider)
+                              .isMaintenance)
                             ...AllProcedurWidgets().getMaintenanceContent(
                                 allServicesRequestviewModel:
                                     ref.watch(allServicesRequestviewModel),

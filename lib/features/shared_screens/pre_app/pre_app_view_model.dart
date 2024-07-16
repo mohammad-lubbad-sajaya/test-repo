@@ -12,22 +12,22 @@ import 'package:sajaya_general_app/core/services/extentions.dart';
 import 'package:sajaya_general_app/features/crm/domain/usecases/crm_usecases.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/services/configrations/general_configrations.dart';
-import '../../../../core/services/local_repo/local_repository.dart';
-import '../../../../core/services/local_repo/local_user_repository.dart';
-import '../../../../core/services/routing/navigation_service.dart';
-import '../../../../core/services/routing/routes.dart';
-import '../../../../core/services/service_locator/dependency_injection.dart';
-import '../../../../core/utils/common_widgets/show_snack_bar.dart';
-import '../../../../core/utils/constants/cache_keys.dart';
-import '../../../../core/utils/methods/shared_methods.dart';
-import '../../../shared_screens/allTabs/all_proc/view_models/all_proc_view_model.dart';
-import '../../../shared_screens/allTabs/home/home_view_model.dart';
-import '../../data/models/error_res.dart';
-import '../../data/models/procedure.dart';
-import '../../data/models/user_token.dart';
-import '../procedure_information/procedure_information_view_model.dart';
-import '../procedure_place/procedure_place_view_model.dart';
+import '../../../core/services/configrations/general_configrations.dart';
+import '../../../core/services/local_repo/local_repository.dart';
+import '../../../core/services/local_repo/local_user_repository.dart';
+import '../../../core/services/routing/navigation_service.dart';
+import '../../../core/services/routing/routes.dart';
+import '../../../core/services/service_locator/dependency_injection.dart';
+import '../../../core/utils/common_widgets/show_snack_bar.dart';
+import '../../../core/utils/constants/cache_keys.dart';
+import '../../../core/utils/methods/shared_methods.dart';
+import '../allTabs/all_proc/view_models/all_proc_view_model.dart';
+import '../allTabs/home/home_view_model.dart';
+import '../../crm/data/models/error_res.dart';
+import '../../crm/data/models/procedure.dart';
+import '../../crm/data/models/user_token.dart';
+import '../../crm/presentation/procedure_information/procedure_information_view_model.dart';
+import '../../crm/presentation/procedure_place/procedure_place_view_model.dart';
 
 
 final preAppViewModelProvider =
