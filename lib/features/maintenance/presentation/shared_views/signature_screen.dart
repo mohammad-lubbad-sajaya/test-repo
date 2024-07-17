@@ -254,7 +254,7 @@ class _SignatureScreenState extends State<SignatureScreen>
     ]);
   }
 
-  void _handleCheckOut(WidgetRef ref) {
+  void _handleCheckOut(WidgetRef ref) async{
     final _checkReoairModel = ref.watch(checkAndRepairViewModel);
     final _viewModel = ref.watch(deliveryAndReceiveViewModel);
     if (widget.isCheckAndRepair) {
@@ -262,7 +262,11 @@ class _SignatureScreenState extends State<SignatureScreen>
       if (_checkReoairModel.minutesSpent == 0 ||
           _checkReoairModel.checkedInServiceID !=
               _checkReoairModel.currentBondNumber) {
-        return;
+                 final _signeture =
+                      await _viewModel.signatureController.toPngBytes();
+                  await _viewModel.generatePDF(_signeture, context);
+                  _checkReoairModel.clearTime();
+                  return;
       }
       showConfirmationDialog(
           context: context,

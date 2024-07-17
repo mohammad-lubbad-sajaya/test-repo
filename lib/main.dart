@@ -33,12 +33,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+
     super.initState();
     initLocale();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Consumer(builder: (context, ref, child) {
       ref.watch(settingsViewModelProvider).getTheme();
       return Sizer(

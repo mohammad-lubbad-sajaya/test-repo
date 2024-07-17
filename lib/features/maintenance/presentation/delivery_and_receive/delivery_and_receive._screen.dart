@@ -157,7 +157,7 @@ class _DeliveryFormScreenState extends State<DeliveryFormScreen>
                           if (_viewModel.tabIndex == 0) ...[
                             customTextField(
                                 isDark: _isDark,
-                                'Notes'.localized(),
+                                'Notes :'.localized(),
                                 (p0) {},
                                 maxLines: 3,
                                 focusNode: _viewModel.notesFocusNode,
