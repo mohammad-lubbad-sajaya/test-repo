@@ -232,6 +232,9 @@ class RemoteDataSourceImplementation extends RemoteDataSourceInterFace {
         options: Options(headers: {}),
         data: jsonEncode(data),
       );
+      if(GeneralConfigurations().isDebug){
+        log(response.data.toString());
+      }
       return UserToken.fromJson(response.data);
     } on Exception catch (e) {
       handleDioError(e);
@@ -315,7 +318,9 @@ class RemoteDataSourceImplementation extends RemoteDataSourceInterFace {
         }),
         data: jsonEncode(data),
       );
-
+      if (GeneralConfigurations().isDebug) {
+        log(response.data.toString());
+      }
       return ClientInformation.fromJson(response.data);
     } on Exception catch (e) {
       handleDioError(e);
@@ -467,10 +472,10 @@ class RemoteDataSourceImplementation extends RemoteDataSourceInterFace {
 
   @override
   Future<List<Procedure>?> getCustomerProcedures(
-      {required Map<String, dynamic> data})async {
-  if(GeneralConfigurations().isDebug){
+      {required Map<String, dynamic> data}) async {
+    if (GeneralConfigurations().isDebug) {
       log(data.toString());
-   }
+    }
     try {
       Response response = await client.post(
         sl<Endpoints>().geCustomerProcedures,
@@ -479,9 +484,9 @@ class RemoteDataSourceImplementation extends RemoteDataSourceInterFace {
         }),
         data: jsonEncode(data),
       );
-if(GeneralConfigurations().isDebug){
-  log(response.data.toString());
-}
+      if (GeneralConfigurations().isDebug) {
+        log(response.data.toString());
+      }
       List<Procedure> list =
           response.data.map<Procedure>((x) => Procedure.fromJson(x)).toList();
 
@@ -879,9 +884,9 @@ if(GeneralConfigurations().isDebug){
   }
 
   @override
-  Future<int?> updateEvent({required Map<String, dynamic> data})async {
-   if(GeneralConfigurations().isDebug){
-    log(data.toString());
+  Future<int?> updateEvent({required Map<String, dynamic> data}) async {
+    if (GeneralConfigurations().isDebug) {
+      log(data.toString());
     }
     final _connectionName = await getConnectionState();
 
@@ -891,14 +896,14 @@ if(GeneralConfigurations().isDebug){
         return 0;
       }
       Response response = await client.post(
-       sl< Endpoints>().editEvent,
+        sl<Endpoints>().editEvent,
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: "application/json",
         }),
         data: jsonEncode(data),
       );
-      if(GeneralConfigurations().isDebug){
-      log("this is the update  event response data : ${response.statusCode}======>${response.data}");
+      if (GeneralConfigurations().isDebug) {
+        log("this is the update  event response data : ${response.statusCode}======>${response.data}");
       }
 
       if (response.statusCode! >= 200 && response.statusCode! < 400) {
@@ -909,22 +914,23 @@ if(GeneralConfigurations().isDebug){
       }
       return response.data;
     } on Exception catch (e) {
-       if(GeneralConfigurations().isDebug){
-      log("this is the update  event response data : ${e.toString()}======>");
-       }
+      if (GeneralConfigurations().isDebug) {
+        log("this is the update  event response data : ${e.toString()}======>");
+      }
       SharedMethods()
           .deleteCachedProcedure(jsonEncode(data), CacheKeys().editEvent);
- if(GeneralConfigurations().isDebug){
-      log(e.toString());
- }
+      if (GeneralConfigurations().isDebug) {
+        log(e.toString());
+      }
       handleDioError(e);
       return null;
     }
   }
 
   @override
-  Future<int?> updateVouchers({required List<Map<String, dynamic>> data})async {
-  try {
+  Future<int?> updateVouchers(
+      {required List<Map<String, dynamic>> data}) async {
+    try {
       Response response = await client.post(
         sl<Endpoints>().updateVouchers,
         options: Options(headers: {
@@ -940,8 +946,9 @@ if(GeneralConfigurations().isDebug){
   }
 
   @override
-  Future<FileResponse?> uploadFileChunk({required Map<String, dynamic> data}) async{
-   Response? response;
+  Future<FileResponse?> uploadFileChunk(
+      {required Map<String, dynamic> data}) async {
+    Response? response;
     //First Step of Saving Files
     try {
       final _connection = await getConnectionState();
@@ -957,9 +964,9 @@ if(GeneralConfigurations().isDebug){
           data: jsonEncode(data),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 400) {
-           if(GeneralConfigurations().isDebug){
-          log("===========uplode=======files chunks===============response====${response.statusCode}");
-           }
+          if (GeneralConfigurations().isDebug) {
+            log("===========uplode=======files chunks===============response====${response.statusCode}");
+          }
           SharedMethods().deleteCachedProcedure(
               jsonEncode(data), CacheKeys().cachedFilesChunksList);
         }
@@ -968,9 +975,9 @@ if(GeneralConfigurations().isDebug){
         return _file;
       }
     } on Exception catch (e) {
-       if(GeneralConfigurations().isDebug){
-      log("===========uplode=======files chunks=${response?.statusMessage}==============response====${e.toString()}");
-       }
+      if (GeneralConfigurations().isDebug) {
+        log("===========uplode=======files chunks=${response?.statusMessage}==============response====${e.toString()}");
+      }
       SharedMethods().deleteCachedProcedure(
           jsonEncode(data), CacheKeys().cachedFilesChunksList);
       handleDioError(e);
